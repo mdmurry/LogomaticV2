@@ -1,0 +1,349 @@
+   1              		.file	"partition.c"
+   2              		.text
+   3              	.Ltext0:
+   4              		.cfi_sections	.debug_frame
+   5              		.align	2
+   6              		.global	partition_open
+   8              	partition_open:
+   9              	.LFB0:
+  10              		.file 1 "../lib/partition.c"
+   1:../lib/partition.c **** 
+   2:../lib/partition.c **** /*
+   3:../lib/partition.c ****  * Copyright (c) 2006-2011 by Roland Riegel <feedback@roland-riegel.de>
+   4:../lib/partition.c ****  *
+   5:../lib/partition.c ****  * This file is free software; you can redistribute it and/or modify
+   6:../lib/partition.c ****  * it under the terms of either the GNU General Public License version 2
+   7:../lib/partition.c ****  * or the GNU Lesser General Public License version 2.1, both as
+   8:../lib/partition.c ****  * published by the Free Software Foundation.
+   9:../lib/partition.c ****  */
+  10:../lib/partition.c **** 
+  11:../lib/partition.c **** #include "byteordering.h"
+  12:../lib/partition.c **** #include "partition.h"
+  13:../lib/partition.c **** #include "partition_config.h"
+  14:../lib/partition.c **** #include "sd-reader_config.h"
+  15:../lib/partition.c **** 
+  16:../lib/partition.c **** #include <string.h>
+  17:../lib/partition.c **** 
+  18:../lib/partition.c **** #if USE_DYNAMIC_MEMORY
+  19:../lib/partition.c ****     #include <stdlib.h>
+  20:../lib/partition.c **** #endif
+  21:../lib/partition.c **** 
+  22:../lib/partition.c **** /**
+  23:../lib/partition.c ****  * \addtogroup partition Partition table support
+  24:../lib/partition.c ****  *
+  25:../lib/partition.c ****  * Support for reading partition tables and access to partitions.
+  26:../lib/partition.c ****  *
+  27:../lib/partition.c ****  * @{
+  28:../lib/partition.c ****  */
+  29:../lib/partition.c **** /**
+  30:../lib/partition.c ****  * \file
+  31:../lib/partition.c ****  * Partition table implementation (license: GPLv2 or LGPLv2.1)
+  32:../lib/partition.c ****  *
+  33:../lib/partition.c ****  * \author Roland Riegel
+  34:../lib/partition.c ****  */
+  35:../lib/partition.c **** 
+  36:../lib/partition.c **** /**
+  37:../lib/partition.c ****  * \addtogroup partition_config Configuration of partition table support
+  38:../lib/partition.c ****  * Preprocessor defines to configure the partition support.
+  39:../lib/partition.c ****  */
+  40:../lib/partition.c **** 
+  41:../lib/partition.c **** #if !USE_DYNAMIC_MEMORY
+  42:../lib/partition.c **** static struct partition_struct partition_handles[PARTITION_COUNT];
+  43:../lib/partition.c **** #endif
+  44:../lib/partition.c **** 
+  45:../lib/partition.c **** /**
+  46:../lib/partition.c ****  * Opens a partition.
+  47:../lib/partition.c ****  *
+  48:../lib/partition.c ****  * Opens a partition by its index number and returns a partition
+  49:../lib/partition.c ****  * handle which describes the opened partition.
+  50:../lib/partition.c ****  *
+  51:../lib/partition.c ****  * \note This function does not support extended partitions.
+  52:../lib/partition.c ****  *
+  53:../lib/partition.c ****  * \param[in] device_read A function pointer which is used to read from the disk.
+  54:../lib/partition.c ****  * \param[in] device_read_interval A function pointer which is used to read in constant intervals f
+  55:../lib/partition.c ****  * \param[in] device_write A function pointer which is used to write to the disk.
+  56:../lib/partition.c ****  * \param[in] device_write_interval A function pointer which is used to write a data stream to disk
+  57:../lib/partition.c ****  * \param[in] index The index of the partition which should be opened, range 0 to 3.
+  58:../lib/partition.c ****  *                  A negative value is allowed as well. In this case, the partition opened is
+  59:../lib/partition.c ****  *                  not checked for existance, begins at offset zero, has a length of zero
+  60:../lib/partition.c ****  *                  and is of an unknown type. Use this in case you want to open the whole device
+  61:../lib/partition.c ****  *                  as a single partition (e.g. for "super floppy" use).
+  62:../lib/partition.c ****  * \returns 0 on failure, a partition descriptor on success.
+  63:../lib/partition.c ****  * \see partition_close
+  64:../lib/partition.c ****  */
+  65:../lib/partition.c **** struct partition_struct* partition_open(device_read_t device_read, device_read_interval_t device_re
+  66:../lib/partition.c **** {
+  11              		.loc 1 66 0
+  12              		.cfi_startproc
+  13              		@ Function supports interworking.
+  14              		@ args = 4, pretend = 0, frame = 16
+  15              		@ frame_needed = 0, uses_anonymous_args = 0
+  16              	.LVL0:
+  17 0000 FF452DE9 		stmfd	sp!, {r0, r1, r2, r3, r4, r5, r6, r7, r8, sl, lr}
+  18              	.LCFI0:
+  19              		.cfi_def_cfa_offset 44
+  20              		.cfi_offset 0, -44
+  21              		.cfi_offset 1, -40
+  22              		.cfi_offset 2, -36
+  23              		.cfi_offset 3, -32
+  24              		.cfi_offset 4, -28
+  25              		.cfi_offset 5, -24
+  26              		.cfi_offset 6, -20
+  27              		.cfi_offset 7, -16
+  28              		.cfi_offset 8, -12
+  29              		.cfi_offset 10, -8
+  30              		.cfi_offset 14, -4
+  67:../lib/partition.c ****     struct partition_struct* new_partition = 0;
+  68:../lib/partition.c ****     uint8_t buffer[0x10];
+  69:../lib/partition.c **** 
+  70:../lib/partition.c ****     if(!device_read || !device_read_interval || index >= 4)
+  31              		.loc 1 70 0
+  32 0004 000050E3 		cmp	r0, #0
+  33 0008 00005113 		cmpne	r1, #0
+  66:../lib/partition.c ****     struct partition_struct* new_partition = 0;
+  34              		.loc 1 66 0
+  35 000c 02A0A0E1 		mov	sl, r2
+  36 0010 0380A0E1 		mov	r8, r3
+  37 0014 DC52DDE1 		ldrsb	r5, [sp, #44]
+  38              		.loc 1 70 0
+  39 0018 0170A0E1 		mov	r7, r1
+  40 001c 0060A0E1 		mov	r6, r0
+  41 0020 0100001A 		bne	.L2
+  42              	.LVL1:
+  43              	.L4:
+  71:../lib/partition.c ****         return 0;
+  44              		.loc 1 71 0
+  45 0024 0000A0E3 		mov	r0, #0
+  46 0028 2C0000EA 		b	.L16
+  47              	.LVL2:
+  48              	.L2:
+  70:../lib/partition.c ****         return 0;
+  49              		.loc 1 70 0 discriminator 1
+  50 002c 030055E3 		cmp	r5, #3
+  51 0030 FBFFFFCA 		bgt	.L4
+  72:../lib/partition.c **** 
+  73:../lib/partition.c ****     if(index >= 0)
+  52              		.loc 1 73 0
+  53 0034 000055E3 		cmp	r5, #0
+  54 0038 040000AA 		bge	.L5
+  55              	.LVL3:
+  56              	.L7:
+  74:../lib/partition.c ****     {
+  75:../lib/partition.c ****         /* read specified partition table index */
+  76:../lib/partition.c ****         if(!device_read(0x01be + index * 0x10, buffer, sizeof(buffer)))
+  77:../lib/partition.c ****             return 0;
+  78:../lib/partition.c **** 
+  79:../lib/partition.c ****         /* abort on empty partition entry */
+  80:../lib/partition.c ****         if(buffer[4] == 0x00)
+  81:../lib/partition.c ****             return 0;
+  82:../lib/partition.c ****     }
+  83:../lib/partition.c **** 
+  84:../lib/partition.c ****     /* allocate partition descriptor */
+  85:../lib/partition.c **** #if USE_DYNAMIC_MEMORY
+  86:../lib/partition.c ****     new_partition = malloc(sizeof(*new_partition));
+  87:../lib/partition.c ****     if(!new_partition)
+  88:../lib/partition.c ****         return 0;
+  89:../lib/partition.c **** #else
+  90:../lib/partition.c ****     new_partition = partition_handles;
+  91:../lib/partition.c ****     uint8_t i;
+  92:../lib/partition.c ****     for(i = 0; i < PARTITION_COUNT; ++i)
+  93:../lib/partition.c ****     {
+  94:../lib/partition.c ****         if(new_partition->type == PARTITION_TYPE_FREE)
+  57              		.loc 1 94 0
+  58 003c A8409FE5 		ldr	r4, .L19
+  59 0040 1010D4E5 		ldrb	r1, [r4, #16]	@ zero_extendqisi2
+  60 0044 000051E3 		cmp	r1, #0
+  61 0048 F5FFFF1A 		bne	.L4
+  62 004c 1B0000EA 		b	.L6
+  63              	.LVL4:
+  64              	.L5:
+  76:../lib/partition.c ****             return 0;
+  65              		.loc 1 76 0
+  66 0050 0532A0E1 		mov	r3, r5, asl #4
+  67              	.LVL5:
+  68 0054 6F3F83E2 		add	r3, r3, #444
+  69 0058 023083E2 		add	r3, r3, #2
+  70 005c 0300A0E1 		mov	r0, r3
+  71              	.LVL6:
+  72 0060 C31FA0E1 		mov	r1, r3, asr #31
+  73              	.LVL7:
+  74 0064 0D20A0E1 		mov	r2, sp
+  75              	.LVL8:
+  76 0068 1030A0E3 		mov	r3, #16
+  77 006c 0FE0A0E1 		mov	lr, pc
+  78 0070 16FF2FE1 		bx	r6
+  79              	.LVL9:
+  80 0074 000050E3 		cmp	r0, #0
+  81 0078 E9FFFF0A 		beq	.L4
+  80:../lib/partition.c ****             return 0;
+  82              		.loc 1 80 0
+  83 007c 0430DDE5 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+  84 0080 000053E3 		cmp	r3, #0
+  85 0084 ECFFFF1A 		bne	.L7
+  86 0088 E5FFFFEA 		b	.L4
+  87              	.LVL10:
+  88              	.L8:
+  95:../lib/partition.c ****             break;
+  96:../lib/partition.c **** 
+  97:../lib/partition.c ****         ++new_partition;
+  98:../lib/partition.c ****     }
+  99:../lib/partition.c ****     if(i >= PARTITION_COUNT)
+ 100:../lib/partition.c ****         return 0;
+ 101:../lib/partition.c **** #endif
+ 102:../lib/partition.c **** 
+ 103:../lib/partition.c ****     memset(new_partition, 0, sizeof(*new_partition));
+ 104:../lib/partition.c **** 
+ 105:../lib/partition.c ****     /* fill partition descriptor */
+ 106:../lib/partition.c ****     new_partition->device_read = device_read;
+ 107:../lib/partition.c ****     new_partition->device_read_interval = device_read_interval;
+ 108:../lib/partition.c ****     new_partition->device_write = device_write;
+ 109:../lib/partition.c ****     new_partition->device_write_interval = device_write_interval;
+ 110:../lib/partition.c **** 
+ 111:../lib/partition.c ****     if(index >= 0)
+ 112:../lib/partition.c ****     {
+ 113:../lib/partition.c ****         new_partition->type = buffer[4];
+  89              		.loc 1 113 0
+  90 008c 0430DDE5 		ldrb	r3, [sp, #4]	@ zero_extendqisi2
+ 114:../lib/partition.c ****         new_partition->offset = read32(&buffer[8]);
+  91              		.loc 1 114 0
+  92 0090 08008DE2 		add	r0, sp, #8
+ 113:../lib/partition.c ****         new_partition->offset = read32(&buffer[8]);
+  93              		.loc 1 113 0
+  94 0094 1030C4E5 		strb	r3, [r4, #16]
+  95              		.loc 1 114 0
+  96 0098 FEFFFFEB 		bl	read32
+  97              	.LVL11:
+  98 009c 140084E5 		str	r0, [r4, #20]
+ 115:../lib/partition.c ****         new_partition->length = read32(&buffer[12]);
+  99              		.loc 1 115 0
+ 100 00a0 0C008DE2 		add	r0, sp, #12
+ 101 00a4 FEFFFFEB 		bl	read32
+ 102              	.LVL12:
+ 103 00a8 180084E5 		str	r0, [r4, #24]
+ 104 00ac 010000EA 		b	.L18
+ 105              	.L17:
+ 116:../lib/partition.c ****     }
+ 117:../lib/partition.c ****     else
+ 118:../lib/partition.c ****     {
+ 119:../lib/partition.c ****         new_partition->type = 0xff;
+ 106              		.loc 1 119 0
+ 107 00b0 0030E0E3 		mvn	r3, #0
+ 108 00b4 1030C4E5 		strb	r3, [r4, #16]
+ 109              	.L18:
+ 110 00b8 0400A0E1 		mov	r0, r4
+ 111 00bc 070000EA 		b	.L16
+ 112              	.L6:
+ 103:../lib/partition.c **** 
+ 113              		.loc 1 103 0
+ 114 00c0 0400A0E1 		mov	r0, r4
+ 115 00c4 1C20A0E3 		mov	r2, #28
+ 116 00c8 FEFFFFEB 		bl	memset
+ 117              	.LVL13:
+ 111:../lib/partition.c ****     {
+ 118              		.loc 1 111 0
+ 119 00cc 000055E3 		cmp	r5, #0
+ 108:../lib/partition.c ****     new_partition->device_write_interval = device_write_interval;
+ 120              		.loc 1 108 0
+ 121 00d0 C00484E8 		stmia	r4, {r6, r7, sl}
+ 109:../lib/partition.c **** 
+ 122              		.loc 1 109 0
+ 123 00d4 0C8084E5 		str	r8, [r4, #12]
+ 111:../lib/partition.c ****     {
+ 124              		.loc 1 111 0
+ 125 00d8 EBFFFFAA 		bge	.L8
+ 126 00dc F3FFFFEA 		b	.L17
+ 127              	.LVL14:
+ 128              	.L16:
+ 120:../lib/partition.c ****     }
+ 121:../lib/partition.c **** 
+ 122:../lib/partition.c ****     return new_partition;
+ 123:../lib/partition.c **** }
+ 129              		.loc 1 123 0
+ 130 00e0 10D08DE2 		add	sp, sp, #16
+ 131 00e4 F045BDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, sl, lr}
+ 132 00e8 1EFF2FE1 		bx	lr
+ 133              	.L20:
+ 134              		.align	2
+ 135              	.L19:
+ 136 00ec 00000000 		.word	.LANCHOR0
+ 137              		.cfi_endproc
+ 138              	.LFE0:
+ 140              		.align	2
+ 141              		.global	partition_close
+ 143              	partition_close:
+ 144              	.LFB1:
+ 124:../lib/partition.c **** 
+ 125:../lib/partition.c **** /**
+ 126:../lib/partition.c ****  * Closes a partition.
+ 127:../lib/partition.c ****  *
+ 128:../lib/partition.c ****  * This function destroys a partition descriptor which was
+ 129:../lib/partition.c ****  * previously obtained from a call to partition_open().
+ 130:../lib/partition.c ****  * When this function returns, the given descriptor will be
+ 131:../lib/partition.c ****  * invalid.
+ 132:../lib/partition.c ****  *
+ 133:../lib/partition.c ****  * \param[in] partition The partition descriptor to destroy.
+ 134:../lib/partition.c ****  * \returns 0 on failure, 1 on success.
+ 135:../lib/partition.c ****  * \see partition_open
+ 136:../lib/partition.c ****  */
+ 137:../lib/partition.c **** uint8_t partition_close(struct partition_struct* partition)
+ 138:../lib/partition.c **** {
+ 145              		.loc 1 138 0
+ 146              		.cfi_startproc
+ 147              		@ Function supports interworking.
+ 148              		@ args = 0, pretend = 0, frame = 0
+ 149              		@ frame_needed = 0, uses_anonymous_args = 0
+ 150              		@ link register save eliminated.
+ 151              	.LVL15:
+ 139:../lib/partition.c ****     if(!partition)
+ 152              		.loc 1 139 0
+ 153 00f0 000050E3 		cmp	r0, #0
+ 140:../lib/partition.c ****         return 0;
+ 141:../lib/partition.c **** 
+ 142:../lib/partition.c ****     /* destroy partition descriptor */
+ 143:../lib/partition.c **** #if USE_DYNAMIC_MEMORY
+ 144:../lib/partition.c ****     free(partition);
+ 145:../lib/partition.c **** #else
+ 146:../lib/partition.c ****     partition->type = PARTITION_TYPE_FREE;
+ 154              		.loc 1 146 0
+ 155 00f4 0030A013 		movne	r3, #0
+ 156 00f8 1030C015 		strneb	r3, [r0, #16]
+ 147:../lib/partition.c **** #endif
+ 148:../lib/partition.c **** 
+ 149:../lib/partition.c ****     return 1;
+ 157              		.loc 1 149 0
+ 158 00fc 0100A013 		movne	r0, #1
+ 159              	.LVL16:
+ 150:../lib/partition.c **** }
+ 160              		.loc 1 150 0
+ 161 0100 1EFF2FE1 		bx	lr
+ 162              		.cfi_endproc
+ 163              	.LFE1:
+ 165              		.bss
+ 166              		.align	2
+ 167              		.set	.LANCHOR0,. + 0
+ 170              	partition_handles:
+ 171 0000 00000000 		.space	28
+ 171      00000000 
+ 171      00000000 
+ 171      00000000 
+ 171      00000000 
+ 172              		.text
+ 173              	.Letext0:
+ 174              		.file 2 "/opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/include/stdint.h"
+ 175              		.file 3 "../lib/sd_raw_config.h"
+ 176              		.file 4 "../lib/partition.h"
+ 177              		.file 5 "../lib/byteordering.h"
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 partition.c
+/var/folders/Jn/Jn5nG78rFb8fju5EIf+vh++++TM/-Tmp-//cc385i3u.s:5      .text:0000000000000000 $a
+/var/folders/Jn/Jn5nG78rFb8fju5EIf+vh++++TM/-Tmp-//cc385i3u.s:8      .text:0000000000000000 partition_open
+/var/folders/Jn/Jn5nG78rFb8fju5EIf+vh++++TM/-Tmp-//cc385i3u.s:136    .text:00000000000000ec $d
+/var/folders/Jn/Jn5nG78rFb8fju5EIf+vh++++TM/-Tmp-//cc385i3u.s:140    .text:00000000000000f0 $a
+/var/folders/Jn/Jn5nG78rFb8fju5EIf+vh++++TM/-Tmp-//cc385i3u.s:143    .text:00000000000000f0 partition_close
+/var/folders/Jn/Jn5nG78rFb8fju5EIf+vh++++TM/-Tmp-//cc385i3u.s:166    .bss:0000000000000000 $d
+/var/folders/Jn/Jn5nG78rFb8fju5EIf+vh++++TM/-Tmp-//cc385i3u.s:170    .bss:0000000000000000 partition_handles
+                     .debug_frame:0000000000000010 $d
+
+UNDEFINED SYMBOLS
+read32
+memset

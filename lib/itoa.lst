@@ -1,0 +1,136 @@
+   1              		.file	"itoa.c"
+   2              		.text
+   3              	.Ltext0:
+   4              		.cfi_sections	.debug_frame
+   5              		.global	__divsi3
+   6              		.global	__modsi3
+   7              		.align	2
+   8              		.global	convert
+  10              	convert:
+  11              	.LFB0:
+  12              		.file 1 "../lib/itoa.c"
+   1:../lib/itoa.c **** /*
+   2:../lib/itoa.c **** Print integers in a given base 2-16 (default 10)
+   3:../lib/itoa.c **** */
+   4:../lib/itoa.c **** //#include <stdio.h>
+   5:../lib/itoa.c **** //#include <stdlib.h>
+   6:../lib/itoa.c **** 
+   7:../lib/itoa.c **** int convert(int n, int b, char str[], int i) {
+  13              		.loc 1 7 0
+  14              		.cfi_startproc
+  15              		@ Function supports interworking.
+  16              		@ args = 0, pretend = 0, frame = 0
+  17              		@ frame_needed = 0, uses_anonymous_args = 0
+  18              	.LVL0:
+  19 0000 F0402DE9 		stmfd	sp!, {r4, r5, r6, r7, lr}
+  20              	.LCFI0:
+  21              		.cfi_def_cfa_offset 20
+  22              		.cfi_offset 4, -20
+  23              		.cfi_offset 5, -16
+  24              		.cfi_offset 6, -12
+  25              		.cfi_offset 7, -8
+  26              		.cfi_offset 14, -4
+  27              		.loc 1 7 0
+  28 0004 0070A0E1 		mov	r7, r0
+  29 0008 0160A0E1 		mov	r6, r1
+  30 000c 0250A0E1 		mov	r5, r2
+  31 0010 0340A0E1 		mov	r4, r3
+   8:../lib/itoa.c **** 	if (n/b > 0)
+  32              		.loc 1 8 0
+  33 0014 FEFFFFEB 		bl	__divsi3
+  34              	.LVL1:
+  35 0018 000050E3 		cmp	r0, #0
+  36 001c 040000DA 		ble	.L2
+   9:../lib/itoa.c **** 		i = convert(n/b, b, str, i);
+  37              		.loc 1 9 0
+  38 0020 0430A0E1 		mov	r3, r4
+  39 0024 0610A0E1 		mov	r1, r6
+  40 0028 0520A0E1 		mov	r2, r5
+  41 002c FEFFFFEB 		bl	convert
+  42              	.LVL2:
+  43 0030 0040A0E1 		mov	r4, r0
+  44              	.LVL3:
+  45              	.L2:
+  10:../lib/itoa.c **** 	str[i++] = "0123456789ABCDEF"[n%b];
+  46              		.loc 1 10 0
+  47 0034 0700A0E1 		mov	r0, r7
+  48 0038 0610A0E1 		mov	r1, r6
+  49 003c FEFFFFEB 		bl	__modsi3
+  50              	.LVL4:
+  51 0040 10309FE5 		ldr	r3, .L3
+  52 0044 0030D3E7 		ldrb	r3, [r3, r0]	@ zero_extendqisi2
+  11:../lib/itoa.c **** 	return i;
+  12:../lib/itoa.c **** }
+  53              		.loc 1 12 0
+  54 0048 010084E2 		add	r0, r4, #1
+  10:../lib/itoa.c **** 	str[i++] = "0123456789ABCDEF"[n%b];
+  55              		.loc 1 10 0
+  56 004c 0430C5E7 		strb	r3, [r5, r4]
+  57              	.LVL5:
+  58              		.loc 1 12 0
+  59 0050 F040BDE8 		ldmfd	sp!, {r4, r5, r6, r7, lr}
+  60 0054 1EFF2FE1 		bx	lr
+  61              	.L4:
+  62              		.align	2
+  63              	.L3:
+  64 0058 00000000 		.word	.LC0
+  65              		.cfi_endproc
+  66              	.LFE0:
+  68              		.align	2
+  69              		.global	itoa
+  71              	itoa:
+  72              	.LFB1:
+  13:../lib/itoa.c **** 
+  14:../lib/itoa.c **** int itoa(int n, int b, char str[]) {
+  73              		.loc 1 14 0
+  74              		.cfi_startproc
+  75              		@ Function supports interworking.
+  76              		@ args = 0, pretend = 0, frame = 0
+  77              		@ frame_needed = 0, uses_anonymous_args = 0
+  78              	.LVL6:
+  79 005c 10402DE9 		stmfd	sp!, {r4, lr}
+  80              	.LCFI1:
+  81              		.cfi_def_cfa_offset 8
+  82              		.cfi_offset 4, -8
+  83              		.cfi_offset 14, -4
+  15:../lib/itoa.c **** 	int i = convert(n, b, str, 0);
+  84              		.loc 1 15 0
+  85 0060 0030A0E3 		mov	r3, #0
+  14:../lib/itoa.c **** 	int i = convert(n, b, str, 0);
+  86              		.loc 1 14 0
+  87 0064 0240A0E1 		mov	r4, r2
+  88              		.loc 1 15 0
+  89 0068 FEFFFFEB 		bl	convert
+  90              	.LVL7:
+  16:../lib/itoa.c **** 	str[i] = '\0';
+  91              		.loc 1 16 0
+  92 006c 0020A0E3 		mov	r2, #0
+  93 0070 0020C4E7 		strb	r2, [r4, r0]
+  17:../lib/itoa.c **** 	return i;
+  18:../lib/itoa.c **** }
+  94              		.loc 1 18 0
+  95 0074 1040BDE8 		ldmfd	sp!, {r4, lr}
+  96 0078 1EFF2FE1 		bx	lr
+  97              		.cfi_endproc
+  98              	.LFE1:
+ 100              		.section	.rodata.str1.1,"aMS",%progbits,1
+ 101              	.LC0:
+ 102 0000 30313233 		.ascii	"0123456789ABCDEF\000"
+ 102      34353637 
+ 102      38394142 
+ 102      43444546 
+ 102      00
+ 103              		.text
+ 104              	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 itoa.c
+/var/folders/Jn/Jn5nG78rFb8fju5EIf+vh++++TM/-Tmp-//ccgiHyC8.s:7      .text:0000000000000000 $a
+/var/folders/Jn/Jn5nG78rFb8fju5EIf+vh++++TM/-Tmp-//ccgiHyC8.s:10     .text:0000000000000000 convert
+/var/folders/Jn/Jn5nG78rFb8fju5EIf+vh++++TM/-Tmp-//ccgiHyC8.s:64     .text:0000000000000058 $d
+/var/folders/Jn/Jn5nG78rFb8fju5EIf+vh++++TM/-Tmp-//ccgiHyC8.s:68     .text:000000000000005c $a
+/var/folders/Jn/Jn5nG78rFb8fju5EIf+vh++++TM/-Tmp-//ccgiHyC8.s:71     .text:000000000000005c itoa
+                     .debug_frame:0000000000000010 $d
+
+UNDEFINED SYMBOLS
+__divsi3
+__modsi3

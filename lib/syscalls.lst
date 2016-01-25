@@ -1,0 +1,318 @@
+   1              		.file	"syscalls.c"
+   2              		.text
+   3              	.Ltext0:
+   4              		.cfi_sections	.debug_frame
+   5              		.align	2
+   6              		.global	_read_r
+   8              	_read_r:
+   9              	.LFB0:
+  10              		.file 1 "../lib/syscalls.c"
+   1:../lib/syscalls.c **** /***********************************************************************/
+   2:../lib/syscalls.c **** /*                                                                     */
+   3:../lib/syscalls.c **** /*  SYSCALLS.C:  System Calls Remapping                                */
+   4:../lib/syscalls.c **** /*  most of this is from newlib-lpc and a Keil-demo                    */
+   5:../lib/syscalls.c **** /*                                                                     */
+   6:../lib/syscalls.c **** /*  these are "reentrant functions" as needed by                       */
+   7:../lib/syscalls.c **** /*  the WinARM-newlib-config, see newlib-manual                        */
+   8:../lib/syscalls.c **** /*  collected and modified by Martin Thomas                            */
+   9:../lib/syscalls.c **** /*  TODO: some more work has to be done on this                        */
+  10:../lib/syscalls.c **** /***********************************************************************/
+  11:../lib/syscalls.c **** 
+  12:../lib/syscalls.c **** #include <stdlib.h>
+  13:../lib/syscalls.c **** #include <reent.h>
+  14:../lib/syscalls.c **** #include <sys/stat.h>
+  15:../lib/syscalls.c **** //#include "uart.h"
+  16:../lib/syscalls.c **** 
+  17:../lib/syscalls.c **** _ssize_t _read_r(
+  18:../lib/syscalls.c ****     struct _reent *r, 
+  19:../lib/syscalls.c ****     int file, 
+  20:../lib/syscalls.c ****     void *ptr, 
+  21:../lib/syscalls.c ****     size_t len)
+  22:../lib/syscalls.c **** {
+  11              		.loc 1 22 0
+  12              		.cfi_startproc
+  13              		@ Function supports interworking.
+  14              		@ args = 0, pretend = 0, frame = 0
+  15              		@ frame_needed = 0, uses_anonymous_args = 0
+  16              		@ link register save eliminated.
+  17              	.LVL0:
+  23:../lib/syscalls.c **** /*	
+  24:../lib/syscalls.c **** 	char c;
+  25:../lib/syscalls.c **** 	int  i;
+  26:../lib/syscalls.c **** 	unsigned char *p;
+  27:../lib/syscalls.c **** 	
+  28:../lib/syscalls.c **** 	p = (unsigned char*)ptr;
+  29:../lib/syscalls.c **** 	
+  30:../lib/syscalls.c **** 	for (i = 0; i < len; i++) {
+  31:../lib/syscalls.c **** 		// c = uart0Getch();
+  32:../lib/syscalls.c **** 		c = uart0GetchW();
+  33:../lib/syscalls.c **** 		if (c == 0x0D) {
+  34:../lib/syscalls.c **** 			*p='\0';
+  35:../lib/syscalls.c **** 			break;
+  36:../lib/syscalls.c **** 		}
+  37:../lib/syscalls.c **** 		*p++ = c;
+  38:../lib/syscalls.c **** 		uart0Putch(c);
+  39:../lib/syscalls.c **** 	}
+  40:../lib/syscalls.c **** */
+  41:../lib/syscalls.c **** //	return len - i;
+  42:../lib/syscalls.c **** 	return 0;
+  43:../lib/syscalls.c **** }
+  18              		.loc 1 43 0
+  19 0000 0000A0E3 		mov	r0, #0
+  20              	.LVL1:
+  21 0004 1EFF2FE1 		bx	lr
+  22              		.cfi_endproc
+  23              	.LFE0:
+  25              		.align	2
+  26              		.global	_write_r
+  28              	_write_r:
+  29              	.LFB1:
+  44:../lib/syscalls.c **** 
+  45:../lib/syscalls.c **** _ssize_t _write_r (
+  46:../lib/syscalls.c ****     struct _reent *r, 
+  47:../lib/syscalls.c ****     int file, 
+  48:../lib/syscalls.c ****     const void *ptr, 
+  49:../lib/syscalls.c ****     size_t len)
+  50:../lib/syscalls.c **** {
+  30              		.loc 1 50 0
+  31              		.cfi_startproc
+  32              		@ Function supports interworking.
+  33              		@ args = 0, pretend = 0, frame = 0
+  34              		@ frame_needed = 0, uses_anonymous_args = 0
+  35              		@ link register save eliminated.
+  36              	.LVL2:
+  51:../lib/syscalls.c **** /*
+  52:../lib/syscalls.c **** 	int i;
+  53:../lib/syscalls.c **** 	const unsigned char *p;
+  54:../lib/syscalls.c **** 	
+  55:../lib/syscalls.c **** 	p = (const unsigned char*) ptr;
+  56:../lib/syscalls.c **** 	
+  57:../lib/syscalls.c **** 	for (i = 0; i < len; i++) {
+  58:../lib/syscalls.c **** 		if (*p == '\n' ) uart0Putch('\r');
+  59:../lib/syscalls.c **** 		uart0Putch(*p++);
+  60:../lib/syscalls.c **** 	}
+  61:../lib/syscalls.c **** */
+  62:../lib/syscalls.c **** 	return len;
+  63:../lib/syscalls.c **** }
+  37              		.loc 1 63 0
+  38 0008 0300A0E1 		mov	r0, r3
+  39              	.LVL3:
+  40 000c 1EFF2FE1 		bx	lr
+  41              		.cfi_endproc
+  42              	.LFE1:
+  44              		.align	2
+  45              		.global	_close_r
+  47              	_close_r:
+  48              	.LFB2:
+  64:../lib/syscalls.c **** 
+  65:../lib/syscalls.c **** int _close_r(
+  66:../lib/syscalls.c ****     struct _reent *r, 
+  67:../lib/syscalls.c ****     int file)
+  68:../lib/syscalls.c **** {
+  49              		.loc 1 68 0
+  50              		.cfi_startproc
+  51              		@ Function supports interworking.
+  52              		@ args = 0, pretend = 0, frame = 0
+  53              		@ frame_needed = 0, uses_anonymous_args = 0
+  54              		@ link register save eliminated.
+  55              	.LVL4:
+  69:../lib/syscalls.c **** 	return 0;
+  70:../lib/syscalls.c **** }
+  56              		.loc 1 70 0
+  57 0010 0000A0E3 		mov	r0, #0
+  58              	.LVL5:
+  59 0014 1EFF2FE1 		bx	lr
+  60              		.cfi_endproc
+  61              	.LFE2:
+  63              		.align	2
+  64              		.global	_lseek_r
+  66              	_lseek_r:
+  67              	.LFB3:
+  71:../lib/syscalls.c **** 
+  72:../lib/syscalls.c **** _off_t _lseek_r(
+  73:../lib/syscalls.c ****     struct _reent *r, 
+  74:../lib/syscalls.c ****     int file, 
+  75:../lib/syscalls.c ****     _off_t ptr, 
+  76:../lib/syscalls.c ****     int dir)
+  77:../lib/syscalls.c **** {
+  68              		.loc 1 77 0
+  69              		.cfi_startproc
+  70              		@ Function supports interworking.
+  71              		@ args = 0, pretend = 0, frame = 0
+  72              		@ frame_needed = 0, uses_anonymous_args = 0
+  73              		@ link register save eliminated.
+  74              	.LVL6:
+  78:../lib/syscalls.c **** 	return (_off_t)0;	/*  Always indicate we are at file beginning.	*/
+  79:../lib/syscalls.c **** }
+  75              		.loc 1 79 0
+  76 0018 0000A0E3 		mov	r0, #0
+  77              	.LVL7:
+  78 001c 1EFF2FE1 		bx	lr
+  79              		.cfi_endproc
+  80              	.LFE3:
+  82              		.align	2
+  83              		.global	_fstat_r
+  85              	_fstat_r:
+  86              	.LFB4:
+  80:../lib/syscalls.c **** 
+  81:../lib/syscalls.c **** 
+  82:../lib/syscalls.c **** int _fstat_r(
+  83:../lib/syscalls.c ****     struct _reent *r, 
+  84:../lib/syscalls.c ****     int file, 
+  85:../lib/syscalls.c ****     struct stat *st)
+  86:../lib/syscalls.c **** {
+  87              		.loc 1 86 0
+  88              		.cfi_startproc
+  89              		@ Function supports interworking.
+  90              		@ args = 0, pretend = 0, frame = 0
+  91              		@ frame_needed = 0, uses_anonymous_args = 0
+  92              		@ link register save eliminated.
+  93              	.LVL8:
+  87:../lib/syscalls.c **** 	/*  Always set as character device.				*/
+  88:../lib/syscalls.c **** 	st->st_mode = S_IFCHR;	
+  94              		.loc 1 88 0
+  95 0020 023AA0E3 		mov	r3, #8192
+  96 0024 043082E5 		str	r3, [r2, #4]
+  89:../lib/syscalls.c **** 		/* assigned to strong type with implicit 	*/
+  90:../lib/syscalls.c **** 		/* signed/unsigned conversion.  Required by 	*/
+  91:../lib/syscalls.c **** 		/* newlib.					*/
+  92:../lib/syscalls.c **** 
+  93:../lib/syscalls.c **** 	return 0;
+  94:../lib/syscalls.c **** }
+  97              		.loc 1 94 0
+  98 0028 0000A0E3 		mov	r0, #0
+  99              	.LVL9:
+ 100 002c 1EFF2FE1 		bx	lr
+ 101              		.cfi_endproc
+ 102              	.LFE4:
+ 104              		.align	2
+ 105              		.global	isatty
+ 107              	isatty:
+ 108              	.LFB5:
+  95:../lib/syscalls.c **** 
+  96:../lib/syscalls.c **** int isatty(int file); /* avoid warning */
+  97:../lib/syscalls.c **** 
+  98:../lib/syscalls.c **** int isatty(int file)
+  99:../lib/syscalls.c **** {
+ 109              		.loc 1 99 0
+ 110              		.cfi_startproc
+ 111              		@ Function supports interworking.
+ 112              		@ args = 0, pretend = 0, frame = 0
+ 113              		@ frame_needed = 0, uses_anonymous_args = 0
+ 114              		@ link register save eliminated.
+ 115              	.LVL10:
+ 100:../lib/syscalls.c **** 	return 1;
+ 101:../lib/syscalls.c **** }
+ 116              		.loc 1 101 0
+ 117 0030 0100A0E3 		mov	r0, #1
+ 118              	.LVL11:
+ 119 0034 1EFF2FE1 		bx	lr
+ 120              		.cfi_endproc
+ 121              	.LFE5:
+ 123              		.align	2
+ 124              		.global	_sbrk_r
+ 126              	_sbrk_r:
+ 127              	.LFB6:
+ 102:../lib/syscalls.c **** 
+ 103:../lib/syscalls.c **** #if 0
+ 104:../lib/syscalls.c **** static void _exit (int n) {
+ 105:../lib/syscalls.c **** label:  goto label; /* endless loop */
+ 106:../lib/syscalls.c **** }
+ 107:../lib/syscalls.c **** #endif 
+ 108:../lib/syscalls.c **** 
+ 109:../lib/syscalls.c **** /* "malloc clue function" */
+ 110:../lib/syscalls.c **** 
+ 111:../lib/syscalls.c **** 	/**** Locally used variables. ****/
+ 112:../lib/syscalls.c **** extern char end[];              /*  end is set in the linker command 	*/
+ 113:../lib/syscalls.c **** 				/* file and is the end of statically 	*/
+ 114:../lib/syscalls.c **** 				/* allocated data (thus start of heap).	*/
+ 115:../lib/syscalls.c **** 
+ 116:../lib/syscalls.c **** static char *heap_ptr;		/* Points to current end of the heap.	*/
+ 117:../lib/syscalls.c **** 
+ 118:../lib/syscalls.c **** /************************** _sbrk_r *************************************/
+ 119:../lib/syscalls.c **** /*  Support function.  Adjusts end of heap to provide more memory to	*/
+ 120:../lib/syscalls.c **** /* memory allocator. Simple and dumb with no sanity checks.		*/
+ 121:../lib/syscalls.c **** /*  struct _reent *r	-- re-entrancy structure, used by newlib to 	*/
+ 122:../lib/syscalls.c **** /*			support multiple threads of operation.		*/
+ 123:../lib/syscalls.c **** /*  ptrdiff_t nbytes	-- number of bytes to add.			*/
+ 124:../lib/syscalls.c **** /*  Returns pointer to start of new heap area.				*/
+ 125:../lib/syscalls.c **** /*  Note:  This implementation is not thread safe (despite taking a	*/
+ 126:../lib/syscalls.c **** /* _reent structure as a parameter).  					*/
+ 127:../lib/syscalls.c **** /*  Since _s_r is not used in the current implementation, the following	*/
+ 128:../lib/syscalls.c **** /* messages must be suppressed.						*/
+ 129:../lib/syscalls.c **** 
+ 130:../lib/syscalls.c **** void * _sbrk_r(
+ 131:../lib/syscalls.c ****     struct _reent *_s_r, 
+ 132:../lib/syscalls.c ****     ptrdiff_t nbytes)
+ 133:../lib/syscalls.c **** {
+ 128              		.loc 1 133 0
+ 129              		.cfi_startproc
+ 130              		@ Function supports interworking.
+ 131              		@ args = 0, pretend = 0, frame = 0
+ 132              		@ frame_needed = 0, uses_anonymous_args = 0
+ 133              		@ link register save eliminated.
+ 134              	.LVL12:
+ 134:../lib/syscalls.c **** 	char  *base;		/*  errno should be set to  ENOMEM on error	*/
+ 135:../lib/syscalls.c **** 
+ 136:../lib/syscalls.c **** 	if (!heap_ptr) {	/*  Initialize if first time through.		*/
+ 135              		.loc 1 136 0
+ 136 0038 1C309FE5 		ldr	r3, .L9
+ 137 003c 002093E5 		ldr	r2, [r3, #0]
+ 138 0040 000052E3 		cmp	r2, #0
+ 137:../lib/syscalls.c **** 		heap_ptr = end;
+ 139              		.loc 1 137 0
+ 140 0044 14209F05 		ldreq	r2, .L9+4
+ 141 0048 00208305 		streq	r2, [r3, #0]
+ 138:../lib/syscalls.c **** 	}
+ 139:../lib/syscalls.c **** 	base = heap_ptr;	/*  Point to end of heap.			*/
+ 142              		.loc 1 139 0
+ 143 004c 000093E5 		ldr	r0, [r3, #0]
+ 144              	.LVL13:
+ 140:../lib/syscalls.c **** 	heap_ptr += nbytes;	/*  Increase heap.				*/
+ 145              		.loc 1 140 0
+ 146 0050 011080E0 		add	r1, r0, r1
+ 147              	.LVL14:
+ 148 0054 001083E5 		str	r1, [r3, #0]
+ 141:../lib/syscalls.c **** 	
+ 142:../lib/syscalls.c **** 	return base;		/*  Return pointer to start of new heap area.	*/
+ 143:../lib/syscalls.c **** }
+ 149              		.loc 1 143 0
+ 150 0058 1EFF2FE1 		bx	lr
+ 151              	.L10:
+ 152              		.align	2
+ 153              	.L9:
+ 154 005c 00000000 		.word	.LANCHOR0
+ 155 0060 00000000 		.word	end
+ 156              		.cfi_endproc
+ 157              	.LFE6:
+ 159              		.bss
+ 160              		.align	2
+ 161              		.set	.LANCHOR0,. + 0
+ 164              	heap_ptr:
+ 165 0000 00000000 		.space	4
+ 166              		.text
+ 167              	.Letext0:
+ 168              		.file 2 "/opt/local/lib/gcc/arm-elf/4.7.3/include/stddef.h"
+ 169              		.file 3 "/opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/include/sys/lock.h"
+ 170              		.file 4 "/opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/include/sys/_types.h"
+ 171              		.file 5 "/opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/include/sys/reent.h"
+ 172              		.file 6 "/opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/include/sys/types.h"
+ 173              		.file 7 "/opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/include/sys/stat.h"
+ 174              		.file 8 "/opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/include/reent.h"
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 syscalls.c
+/var/folders/Jn/Jn5nG78rFb8fju5EIf+vh++++TM/-Tmp-//ccOHxLxf.s:5      .text:0000000000000000 $a
+/var/folders/Jn/Jn5nG78rFb8fju5EIf+vh++++TM/-Tmp-//ccOHxLxf.s:8      .text:0000000000000000 _read_r
+/var/folders/Jn/Jn5nG78rFb8fju5EIf+vh++++TM/-Tmp-//ccOHxLxf.s:28     .text:0000000000000008 _write_r
+/var/folders/Jn/Jn5nG78rFb8fju5EIf+vh++++TM/-Tmp-//ccOHxLxf.s:47     .text:0000000000000010 _close_r
+/var/folders/Jn/Jn5nG78rFb8fju5EIf+vh++++TM/-Tmp-//ccOHxLxf.s:66     .text:0000000000000018 _lseek_r
+/var/folders/Jn/Jn5nG78rFb8fju5EIf+vh++++TM/-Tmp-//ccOHxLxf.s:85     .text:0000000000000020 _fstat_r
+/var/folders/Jn/Jn5nG78rFb8fju5EIf+vh++++TM/-Tmp-//ccOHxLxf.s:107    .text:0000000000000030 isatty
+/var/folders/Jn/Jn5nG78rFb8fju5EIf+vh++++TM/-Tmp-//ccOHxLxf.s:126    .text:0000000000000038 _sbrk_r
+/var/folders/Jn/Jn5nG78rFb8fju5EIf+vh++++TM/-Tmp-//ccOHxLxf.s:154    .text:000000000000005c $d
+/var/folders/Jn/Jn5nG78rFb8fju5EIf+vh++++TM/-Tmp-//ccOHxLxf.s:160    .bss:0000000000000000 $d
+/var/folders/Jn/Jn5nG78rFb8fju5EIf+vh++++TM/-Tmp-//ccOHxLxf.s:164    .bss:0000000000000000 heap_ptr
+                     .debug_frame:0000000000000010 $d
+
+UNDEFINED SYMBOLS
+end

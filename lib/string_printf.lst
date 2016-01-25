@@ -1,0 +1,713 @@
+   1              		.file	"string_printf.c"
+   2              		.text
+   3              	.Ltext0:
+   4              		.cfi_sections	.debug_frame
+   5              		.align	2
+   6              		.global	string_printf_devopen
+   8              	string_printf_devopen:
+   9              	.LFB0:
+  10              		.file 1 "../lib/string_printf.c"
+   1:../lib/string_printf.c **** //#########################################################################
+   2:../lib/string_printf.c **** // printf.c
+   3:../lib/string_printf.c **** //
+   4:../lib/string_printf.c **** // *** printf() based on sprintf() from gcctest9.c Volker Oth
+   5:../lib/string_printf.c **** //
+   6:../lib/string_printf.c **** // *** Changes made by Holger Klabunde
+   7:../lib/string_printf.c **** // Now takes format strings from FLASH (was into RAM ! before)
+   8:../lib/string_printf.c **** // Fixed bug for %i, %I. u_val was used before it had the right value
+   9:../lib/string_printf.c **** // Added %d, %D (is same as %i, %I)
+  10:../lib/string_printf.c **** // Support for long variables %li, %ld, %Lu, %LX ....
+  11:../lib/string_printf.c **** // %x, %X now gives upper case hex characters A,B,C,D,E,F
+  12:../lib/string_printf.c **** // Output can be redirected in a single function: myputchar()
+  13:../lib/string_printf.c **** // Make printf() smaller by commenting out a few #defines
+  14:../lib/string_printf.c **** // Added some SPACE and ZERO padding %02x or % 3u up to 9 characters
+  15:../lib/string_printf.c **** //
+  16:../lib/string_printf.c **** // Todo:
+  17:../lib/string_printf.c **** // %f, %F for floating point numbers
+  18:../lib/string_printf.c **** //
+  19:../lib/string_printf.c **** // *** Changes made by Martin Thomas for the efsl debug output:
+  20:../lib/string_printf.c **** // - removed AVR "progmem"
+  21:../lib/string_printf.c **** // - added function pointer for "putchar"
+  22:../lib/string_printf.c **** // - devopen function
+  23:../lib/string_printf.c **** //
+  24:../lib/string_printf.c **** //#########################################################################
+  25:../lib/string_printf.c **** 
+  26:../lib/string_printf.c **** #include <stdarg.h>
+  27:../lib/string_printf.c **** #include <string.h>
+  28:../lib/string_printf.c **** #include "string_printf.h"
+  29:../lib/string_printf.c **** //#include "system.h" //Needed for delay_ms
+  30:../lib/string_printf.c **** 
+  31:../lib/string_printf.c **** #define SCRATCH 12  //32Bits go up to 4GB + 1 Byte for \0
+  32:../lib/string_printf.c **** 
+  33:../lib/string_printf.c **** //Spare some program space by making a comment of all not used format flag lines
+  34:../lib/string_printf.c **** #define USE_LONG    // %lx, %Lu and so on, else only 16 bit integer is allowed
+  35:../lib/string_printf.c **** //#define USE_OCTAL // %o, %O Octal output. Who needs this ?
+  36:../lib/string_printf.c **** #define USE_STRING      // %s, %S Strings as parameters
+  37:../lib/string_printf.c **** #define USE_CHAR    // %c, %C Chars as parameters
+  38:../lib/string_printf.c **** #define USE_INTEGER // %i, %I Remove this format flag. %d, %D does the same
+  39:../lib/string_printf.c **** #define USE_HEX     // %x, %X Hexadezimal output
+  40:../lib/string_printf.c **** #define USE_UPPERHEX    // %x, %X outputs A,B,C... else a,b,c...
+  41:../lib/string_printf.c **** #ifndef USE_HEX
+  42:../lib/string_printf.c ****     #undef USE_UPPERHEX    // ;)
+  43:../lib/string_printf.c **** #endif
+  44:../lib/string_printf.c **** #define USE_UPPER   // uncommenting this removes %C,%D,%I,%O,%S,%U,%X and %L..
+  45:../lib/string_printf.c **** // only lowercase format flags are used
+  46:../lib/string_printf.c **** #define PADDING         //SPACE and ZERO padding
+  47:../lib/string_printf.c **** 
+  48:../lib/string_printf.c **** 
+  49:../lib/string_printf.c **** unsigned char buffer_ptr;
+  50:../lib/string_printf.c **** 
+  51:../lib/string_printf.c **** static int (*putcharfunc)(int c);
+  52:../lib/string_printf.c **** 
+  53:../lib/string_printf.c **** void string_printf_devopen( int(*put)(int) )
+  54:../lib/string_printf.c **** {
+  11              		.loc 1 54 0
+  12              		.cfi_startproc
+  13              		@ Function supports interworking.
+  14              		@ args = 0, pretend = 0, frame = 0
+  15              		@ frame_needed = 0, uses_anonymous_args = 0
+  16              		@ link register save eliminated.
+  17              	.LVL0:
+  55:../lib/string_printf.c ****     putcharfunc = put;
+  18              		.loc 1 55 0
+  19 0000 04309FE5 		ldr	r3, .L2
+  20 0004 000083E5 		str	r0, [r3, #0]
+  21 0008 1EFF2FE1 		bx	lr
+  22              	.L3:
+  23              		.align	2
+  24              	.L2:
+  25 000c 00000000 		.word	.LANCHOR0
+  26              		.cfi_endproc
+  27              	.LFE0:
+  29              		.align	2
+  30              		.global	string_myputchar
+  32              	string_myputchar:
+  33              	.LFB1:
+  56:../lib/string_printf.c **** }
+  57:../lib/string_printf.c **** 
+  58:../lib/string_printf.c **** void string_myputchar(char* s_printf_buffer, unsigned char c)
+  59:../lib/string_printf.c **** {
+  34              		.loc 1 59 0
+  35              		.cfi_startproc
+  36              		@ Function supports interworking.
+  37              		@ args = 0, pretend = 0, frame = 0
+  38              		@ frame_needed = 0, uses_anonymous_args = 0
+  39              		@ link register save eliminated.
+  40              	.LVL1:
+  60:../lib/string_printf.c **** 	s_printf_buffer[buffer_ptr] = c;
+  41              		.loc 1 60 0
+  42 0010 14309FE5 		ldr	r3, .L5
+  43 0014 0020D3E5 		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+  44 0018 0210C0E7 		strb	r1, [r0, r2]
+  61:../lib/string_printf.c **** 	buffer_ptr++;
+  45              		.loc 1 61 0
+  46 001c 0020D3E5 		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+  47 0020 012082E2 		add	r2, r2, #1
+  48 0024 0020C3E5 		strb	r2, [r3, #0]
+  49 0028 1EFF2FE1 		bx	lr
+  50              	.L6:
+  51              		.align	2
+  52              	.L5:
+  53 002c 00000000 		.word	buffer_ptr
+  54              		.cfi_endproc
+  55              	.LFE1:
+  57              		.global	__umodsi3
+  58              		.global	__udivsi3
+  59              		.align	2
+  60              		.global	string_printf
+  62              	string_printf:
+  63              	.LFB2:
+  62:../lib/string_printf.c **** }
+  63:../lib/string_printf.c **** 
+  64:../lib/string_printf.c **** void string_printf(char* string_printf_buffer, char const *format, ...)
+  65:../lib/string_printf.c **** {
+  64              		.loc 1 65 0
+  65              		.cfi_startproc
+  66              		@ Function supports interworking.
+  67              		@ args = 4, pretend = 12, frame = 20
+  68              		@ frame_needed = 0, uses_anonymous_args = 1
+  69              	.LVL2:
+  70 0030 0E002DE9 		stmfd	sp!, {r1, r2, r3}
+  71              	.LCFI0:
+  72              		.cfi_def_cfa_offset 12
+  73              		.cfi_offset 1, -12
+  74              		.cfi_offset 2, -8
+  75              		.cfi_offset 3, -4
+  76 0034 F04F2DE9 		stmfd	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}
+  77              	.LCFI1:
+  78              		.cfi_def_cfa_offset 48
+  79              		.cfi_offset 4, -48
+  80              		.cfi_offset 5, -44
+  81              		.cfi_offset 6, -40
+  82              		.cfi_offset 7, -36
+  83              		.cfi_offset 8, -32
+  84              		.cfi_offset 9, -28
+  85              		.cfi_offset 10, -24
+  86              		.cfi_offset 11, -20
+  87              		.cfi_offset 14, -16
+  66:../lib/string_printf.c ****     unsigned char scratch[SCRATCH];
+  67:../lib/string_printf.c ****     unsigned char format_flag;
+  68:../lib/string_printf.c ****     unsigned short base;
+  69:../lib/string_printf.c ****     unsigned char *ptr;
+  70:../lib/string_printf.c ****     unsigned char issigned=0;
+  71:../lib/string_printf.c ****     va_list ap;
+  72:../lib/string_printf.c **** 	
+  73:../lib/string_printf.c **** 	buffer_ptr = 0;
+  88              		.loc 1 73 0
+  89 0038 60329FE5 		ldr	r3, .L90
+  65:../lib/string_printf.c ****     unsigned char scratch[SCRATCH];
+  90              		.loc 1 65 0
+  91 003c 14D04DE2 		sub	sp, sp, #20
+  92              	.LCFI2:
+  93              		.cfi_def_cfa_offset 68
+  94              		.loc 1 73 0
+  95 0040 00A0A0E3 		mov	sl, #0
+  96 0044 00A0C3E5 		strb	sl, [r3, #0]
+  97              	.LVL3:
+  74:../lib/string_printf.c **** 	
+  75:../lib/string_printf.c ****     #ifdef USE_LONG
+  76:../lib/string_printf.c ****         // #warning "use long"
+  77:../lib/string_printf.c ****         unsigned char islong=0;
+  78:../lib/string_printf.c ****         unsigned long u_val=0;
+  79:../lib/string_printf.c ****         long s_val=0;
+  80:../lib/string_printf.c ****     #else
+  81:../lib/string_printf.c ****         unsigned int u_val=0;
+  82:../lib/string_printf.c ****         int s_val=0;
+  83:../lib/string_printf.c ****     #endif
+  84:../lib/string_printf.c **** 
+  85:../lib/string_printf.c ****     unsigned char fill;
+  86:../lib/string_printf.c ****     unsigned char width;
+  87:../lib/string_printf.c **** 
+  88:../lib/string_printf.c ****     va_start (ap, format);
+  98              		.loc 1 88 0
+  99 0048 3C308DE2 		add	r3, sp, #60
+  65:../lib/string_printf.c ****     unsigned char scratch[SCRATCH];
+ 100              		.loc 1 65 0
+ 101 004c 0060A0E1 		mov	r6, r0
+ 102 0050 38409DE5 		ldr	r4, [sp, #56]
+ 103              		.loc 1 88 0
+ 104 0054 04308DE5 		str	r3, [sp, #4]
+ 105 0058 070000EA 		b	.L83
+ 106              	.LVL4:
+ 107              	.L10:
+  89:../lib/string_printf.c **** 
+  90:../lib/string_printf.c ****     for (;;)
+  91:../lib/string_printf.c ****     {
+  92:../lib/string_printf.c ****         while ((format_flag = *(format++)) != '%')
+  93:../lib/string_printf.c ****         {      // Until '%' or '\0'
+  94:../lib/string_printf.c ****             if (!format_flag)
+ 108              		.loc 1 94 0
+ 109 005c 000051E3 		cmp	r1, #0
+ 110 0060 0200001A 		bne	.L9
+  95:../lib/string_printf.c **** 			{
+  96:../lib/string_printf.c **** 				va_end (ap); 
+  97:../lib/string_printf.c **** 
+  98:../lib/string_printf.c **** 				string_myputchar(string_printf_buffer, '\0');
+ 111              		.loc 1 98 0
+ 112 0064 0600A0E1 		mov	r0, r6
+ 113 0068 FEFFFFEB 		bl	string_myputchar
+ 114              	.LVL5:
+ 115 006c 870000EA 		b	.L84
+ 116              	.LVL6:
+ 117              	.L9:
+  92:../lib/string_printf.c ****         {      // Until '%' or '\0'
+ 118              		.loc 1 92 0
+ 119 0070 014084E2 		add	r4, r4, #1
+ 120              	.LVL7:
+ 121              	.L87:
+  99:../lib/string_printf.c **** 				
+ 100:../lib/string_printf.c **** 				return;
+ 101:../lib/string_printf.c **** 			}
+ 102:../lib/string_printf.c ****             string_myputchar(string_printf_buffer, format_flag);
+ 122              		.loc 1 102 0
+ 123 0074 0600A0E1 		mov	r0, r6
+ 124 0078 FEFFFFEB 		bl	string_myputchar
+ 125              	.LVL8:
+ 126              	.L83:
+  92:../lib/string_printf.c ****         {      // Until '%' or '\0'
+ 127              		.loc 1 92 0 discriminator 1
+ 128 007c 0010D4E5 		ldrb	r1, [r4, #0]	@ zero_extendqisi2
+ 129              	.LVL9:
+ 130 0080 250051E3 		cmp	r1, #37
+ 131 0084 F4FFFF1A 		bne	.L10
+ 132              	.LVL10:
+ 103:../lib/string_printf.c ****         }
+ 104:../lib/string_printf.c **** 
+ 105:../lib/string_printf.c ****         issigned=0; //default unsigned
+ 106:../lib/string_printf.c ****         base = 10;
+ 107:../lib/string_printf.c **** 
+ 108:../lib/string_printf.c ****         format_flag = *format++; //get char after '%'
+ 133              		.loc 1 108 0
+ 134 0088 0110D4E5 		ldrb	r1, [r4, #1]	@ zero_extendqisi2
+ 135              	.LVL11:
+ 109:../lib/string_printf.c **** 
+ 110:../lib/string_printf.c ****         #ifdef PADDING
+ 111:../lib/string_printf.c ****             width=0; //no formatting
+ 112:../lib/string_printf.c ****             fill=0;  //no formatting
+ 113:../lib/string_printf.c ****             if(format_flag=='0' || format_flag==' ') //SPACE or ZERO padding  ?
+ 136              		.loc 1 113 0
+ 137 008c EF3001E2 		and	r3, r1, #239
+ 138 0090 200053E3 		cmp	r3, #32
+ 111:../lib/string_printf.c ****             fill=0;  //no formatting
+ 139              		.loc 1 111 0
+ 140 0094 0050A013 		movne	r5, #0
+ 108:../lib/string_printf.c **** 
+ 141              		.loc 1 108 0
+ 142 0098 02408412 		addne	r4, r4, #2
+ 143              	.LVL12:
+ 112:../lib/string_printf.c ****             if(format_flag=='0' || format_flag==' ') //SPACE or ZERO padding  ?
+ 144              		.loc 1 112 0
+ 145 009c 0580A011 		movne	r8, r5
+ 146 00a0 0B00001A 		bne	.L12
+ 147              	.LVL13:
+ 148              	.L11:
+ 114:../lib/string_printf.c ****             {
+ 115:../lib/string_printf.c ****                 fill=format_flag;
+ 116:../lib/string_printf.c ****                 format_flag = *format++; //get char after padding char
+ 149              		.loc 1 116 0
+ 150 00a4 0230D4E5 		ldrb	r3, [r4, #2]	@ zero_extendqisi2
+ 151              	.LVL14:
+ 117:../lib/string_printf.c ****                 if(format_flag>='0' && format_flag<='9')
+ 152              		.loc 1 117 0
+ 153 00a8 305043E2 		sub	r5, r3, #48
+ 154 00ac FF5005E2 		and	r5, r5, #255
+ 155 00b0 090055E3 		cmp	r5, #9
+ 118:../lib/string_printf.c ****                 {
+ 119:../lib/string_printf.c ****                     width=format_flag-'0';
+ 120:../lib/string_printf.c ****                     format_flag = *format++; //get char after width char
+ 156              		.loc 1 120 0
+ 157 00b4 0330D495 		ldrlsb	r3, [r4, #3]	@ zero_extendqisi2
+ 108:../lib/string_printf.c **** 
+ 158              		.loc 1 108 0
+ 159 00b8 0180A081 		movhi	r8, r1
+ 160 00bc 0180A091 		movls	r8, r1
+ 116:../lib/string_printf.c ****                 if(format_flag>='0' && format_flag<='9')
+ 161              		.loc 1 116 0
+ 162 00c0 03408482 		addhi	r4, r4, #3
+ 163              	.LVL15:
+ 164 00c4 0310A081 		movhi	r1, r3
+ 165              	.LVL16:
+ 111:../lib/string_printf.c ****             fill=0;  //no formatting
+ 166              		.loc 1 111 0
+ 167 00c8 0050A083 		movhi	r5, #0
+ 168              	.LVL17:
+ 169              		.loc 1 120 0
+ 170 00cc 04408492 		addls	r4, r4, #4
+ 171              	.LVL18:
+ 172 00d0 0310A091 		movls	r1, r3
+ 173              	.LVL19:
+ 174              	.L12:
+ 121:../lib/string_printf.c ****                 }
+ 122:../lib/string_printf.c ****             }
+ 123:../lib/string_printf.c ****         #endif
+ 124:../lib/string_printf.c **** 
+ 125:../lib/string_printf.c ****         #ifdef USE_LONG
+ 126:../lib/string_printf.c ****             islong=0; //default int value
+ 127:../lib/string_printf.c ****             #ifdef USE_UPPER
+ 128:../lib/string_printf.c ****             if(format_flag=='l' || format_flag=='L') //Long value
+ 175              		.loc 1 128 0
+ 176 00d4 DF3001E2 		and	r3, r1, #223
+ 177 00d8 4C0053E3 		cmp	r3, #76
+ 178              	.LVL20:
+ 129:../lib/string_printf.c ****             #else
+ 130:../lib/string_printf.c ****             if(format_flag=='l') //Long value
+ 131:../lib/string_printf.c ****             #endif
+ 132:../lib/string_printf.c ****         {
+ 133:../lib/string_printf.c ****             islong=1;
+ 134:../lib/string_printf.c ****             format_flag = *format++; //get char after 'l' or 'L'
+ 179              		.loc 1 134 0
+ 180 00dc 0110D404 		ldreqb	r1, [r4], #1	@ zero_extendqisi2
+ 181              	.LVL21:
+ 135:../lib/string_printf.c ****         }
+ 136:../lib/string_printf.c ****         #endif
+ 137:../lib/string_printf.c **** 
+ 138:../lib/string_printf.c ****         switch (format_flag)
+ 182              		.loc 1 138 0
+ 183 00e0 580051E3 		cmp	r1, #88
+ 184 00e4 6400000A 		beq	.L42
+ 185 00e8 0B00008A 		bhi	.L21
+ 186 00ec 490051E3 		cmp	r1, #73
+ 187 00f0 6400000A 		beq	.L17
+ 188 00f4 0300008A 		bhi	.L22
+ 189 00f8 430051E3 		cmp	r1, #67
+ 190 00fc 1500000A 		beq	.L16
+ 191 0100 440051E3 		cmp	r1, #68
+ 192 0104 0A0000EA 		b	.L89
+ 193              	.L22:
+ 194 0108 530051E3 		cmp	r1, #83
+ 195 010c 1600000A 		beq	.L18
+ 196 0110 550051E3 		cmp	r1, #85
+ 197 0114 D6FFFF1A 		bne	.L87
+ 198 0118 550000EA 		b	.L19
+ 199              	.L21:
+ 200 011c 690051E3 		cmp	r1, #105
+ 201 0120 5800000A 		beq	.L17
+ 202 0124 0400008A 		bhi	.L23
+ 203 0128 630051E3 		cmp	r1, #99
+ 204 012c 0900000A 		beq	.L16
+ 205 0130 640051E3 		cmp	r1, #100
+ 206              	.L89:
+ 207 0134 CEFFFF1A 		bne	.L87
+ 208 0138 520000EA 		b	.L17
+ 209              	.L23:
+ 210 013c 750051E3 		cmp	r1, #117
+ 211 0140 4B00000A 		beq	.L19
+ 212 0144 780051E3 		cmp	r1, #120
+ 213 0148 4B00000A 		beq	.L42
+ 214 014c 730051E3 		cmp	r1, #115
+ 215 0150 C7FFFF1A 		bne	.L87
+ 216 0154 040000EA 		b	.L18
+ 217              	.L16:
+ 139:../lib/string_printf.c ****         {
+ 140:../lib/string_printf.c ****             #ifdef USE_CHAR
+ 141:../lib/string_printf.c ****                 case 'c':
+ 142:../lib/string_printf.c ****                     #ifdef USE_UPPER
+ 143:../lib/string_printf.c ****                     case 'C':
+ 144:../lib/string_printf.c ****                 #endif
+ 145:../lib/string_printf.c ****                 format_flag = va_arg(ap,int);
+ 218              		.loc 1 145 0
+ 219 0158 04309DE5 		ldr	r3, [sp, #4]
+ 220 015c 042083E2 		add	r2, r3, #4
+ 221 0160 04208DE5 		str	r2, [sp, #4]
+ 222 0164 0010D3E5 		ldrb	r1, [r3, #0]	@ zero_extendqisi2
+ 223              	.LVL22:
+ 224 0168 C1FFFFEA 		b	.L87
+ 225              	.LVL23:
+ 226              	.L18:
+ 146:../lib/string_printf.c ****                 // no break -> run into default
+ 147:../lib/string_printf.c ****             #endif
+ 148:../lib/string_printf.c **** 
+ 149:../lib/string_printf.c ****             default:
+ 150:../lib/string_printf.c ****                 string_myputchar(string_printf_buffer, format_flag);
+ 151:../lib/string_printf.c ****                 continue;
+ 152:../lib/string_printf.c **** 
+ 153:../lib/string_printf.c ****                 #ifdef USE_STRING
+ 154:../lib/string_printf.c ****                     #ifdef USE_UPPER
+ 155:../lib/string_printf.c ****                     case 'S':
+ 156:../lib/string_printf.c ****                 #endif
+ 157:../lib/string_printf.c ****                 case 's':
+ 158:../lib/string_printf.c ****                 ptr = (unsigned char*)va_arg(ap,char *);
+ 227              		.loc 1 158 0
+ 228 016c 04309DE5 		ldr	r3, [sp, #4]
+  64:../lib/string_printf.c **** {
+ 229              		.loc 1 64 0
+ 230 0170 005093E5 		ldr	r5, [r3, #0]
+ 231              	.LVL24:
+ 232              		.loc 1 158 0
+ 233 0174 042083E2 		add	r2, r3, #4
+ 234 0178 04208DE5 		str	r2, [sp, #4]
+ 235              	.LVL25:
+  64:../lib/string_printf.c **** {
+ 236              		.loc 1 64 0
+ 237 017c 015045E2 		sub	r5, r5, #1
+ 238              	.LVL26:
+ 159:../lib/string_printf.c ****                 while(*ptr) 
+ 239              		.loc 1 159 0
+ 240 0180 010000EA 		b	.L25
+ 241              	.LVL27:
+ 242              	.L26:
+ 160:../lib/string_printf.c **** 				{ 
+ 161:../lib/string_printf.c **** 					string_myputchar(string_printf_buffer, *ptr); 
+ 243              		.loc 1 161 0
+ 244 0184 0600A0E1 		mov	r0, r6
+ 245 0188 FEFFFFEB 		bl	string_myputchar
+ 246              	.LVL28:
+ 247              	.L25:
+ 159:../lib/string_printf.c ****                 while(*ptr) 
+ 248              		.loc 1 159 0 discriminator 1
+ 249 018c 0110F5E5 		ldrb	r1, [r5, #1]!	@ zero_extendqisi2
+ 250 0190 000051E3 		cmp	r1, #0
+ 251 0194 FAFFFF1A 		bne	.L26
+ 252 0198 B7FFFFEA 		b	.L83
+ 253              	.LVL29:
+ 254              	.L86:
+ 162:../lib/string_printf.c **** 					ptr++; 
+ 163:../lib/string_printf.c **** 				}
+ 164:../lib/string_printf.c ****                     continue;
+ 165:../lib/string_printf.c ****                 #endif
+ 166:../lib/string_printf.c **** 
+ 167:../lib/string_printf.c ****                 #ifdef USE_OCTAL
+ 168:../lib/string_printf.c ****                     case 'o':
+ 169:../lib/string_printf.c ****                     #ifdef USE_UPPER
+ 170:../lib/string_printf.c ****                     case 'O':
+ 171:../lib/string_printf.c ****                 #endif
+ 172:../lib/string_printf.c ****                 base = 8;
+ 173:../lib/string_printf.c ****                 string_myputchar(string_printf_buffer, '0');
+ 174:../lib/string_printf.c ****                 goto CONVERSION_LOOP;
+ 175:../lib/string_printf.c ****                 #endif
+ 176:../lib/string_printf.c **** 
+ 177:../lib/string_printf.c ****                 #ifdef USE_INTEGER //don't use %i, is same as %d
+ 178:../lib/string_printf.c ****                     case 'i':
+ 179:../lib/string_printf.c ****                     #ifdef USE_UPPER
+ 180:../lib/string_printf.c ****                     case 'I':
+ 181:../lib/string_printf.c ****                 #endif
+ 182:../lib/string_printf.c ****                 #endif
+ 183:../lib/string_printf.c ****                 case 'd':
+ 184:../lib/string_printf.c ****                 #ifdef USE_UPPER
+ 185:../lib/string_printf.c ****                     case 'D':
+ 186:../lib/string_printf.c ****                 #endif
+ 187:../lib/string_printf.c ****                 issigned=1;
+ 188:../lib/string_printf.c ****                 // no break -> run into next case
+ 189:../lib/string_printf.c ****             case 'u':
+ 190:../lib/string_printf.c ****                 #ifdef USE_UPPER
+ 191:../lib/string_printf.c ****                     case 'U':
+ 192:../lib/string_printf.c ****                 #endif
+ 193:../lib/string_printf.c **** 
+ 194:../lib/string_printf.c ****                 //don't insert some case below this if USE_HEX is undefined !
+ 195:../lib/string_printf.c ****                 //or put       goto CONVERSION_LOOP;  before next case.
+ 196:../lib/string_printf.c ****                 #ifdef USE_HEX
+ 197:../lib/string_printf.c ****                     goto CONVERSION_LOOP;
+ 198:../lib/string_printf.c ****                     case 'x':
+ 199:../lib/string_printf.c ****                     #ifdef USE_UPPER
+ 200:../lib/string_printf.c ****                     case 'X':
+ 201:../lib/string_printf.c ****                 #endif
+ 202:../lib/string_printf.c ****                 base = 16;
+ 203:../lib/string_printf.c ****                 #endif
+ 204:../lib/string_printf.c **** 
+ 205:../lib/string_printf.c ****                 CONVERSION_LOOP:
+ 206:../lib/string_printf.c **** 
+ 207:../lib/string_printf.c ****                 if(issigned) //Signed types
+ 208:../lib/string_printf.c ****                 {
+ 209:../lib/string_printf.c ****                     #ifdef USE_LONG
+ 210:../lib/string_printf.c ****                         if(islong) { s_val = va_arg(ap,long); }
+ 211:../lib/string_printf.c ****                             else { s_val = va_arg(ap,int); }
+ 255              		.loc 1 211 0
+ 256 019c 042083E2 		add	r2, r3, #4
+ 257 01a0 04208DE5 		str	r2, [sp, #4]
+ 258 01a4 007093E5 		ldr	r7, [r3, #0]
+ 259              	.LVL30:
+ 212:../lib/string_printf.c ****                         #else
+ 213:../lib/string_printf.c ****                         s_val = va_arg(ap,int);
+ 214:../lib/string_printf.c ****                     #endif
+ 215:../lib/string_printf.c **** 
+ 216:../lib/string_printf.c ****                     if(s_val < 0) //Value negativ ?
+ 260              		.loc 1 216 0
+ 261 01a8 000057E3 		cmp	r7, #0
+ 217:../lib/string_printf.c ****                     {
+ 218:../lib/string_printf.c ****                         s_val = - s_val; //Make it positiv
+ 219:../lib/string_printf.c ****                         string_myputchar(string_printf_buffer, '-');    //Output sign
+ 262              		.loc 1 219 0
+ 263 01ac 0600A0B1 		movlt	r0, r6
+ 264 01b0 2D10A0B3 		movlt	r1, #45
+ 265              	.LVL31:
+ 218:../lib/string_printf.c ****                         string_myputchar(string_printf_buffer, '-');    //Output sign
+ 266              		.loc 1 218 0
+ 267 01b4 007067B2 		rsblt	r7, r7, #0
+ 268              	.LVL32:
+ 269              		.loc 1 219 0
+ 270 01b8 FEFFFFBB 		bllt	string_myputchar
+ 271              	.LVL33:
+ 272              	.L28:
+ 106:../lib/string_printf.c **** 
+ 273              		.loc 1 106 0
+ 274 01bc 0A90A0E3 		mov	r9, #10
+ 275 01c0 020000EA 		b	.L29
+ 276              	.LVL34:
+ 277              	.L85:
+ 220:../lib/string_printf.c ****                     }
+ 221:../lib/string_printf.c **** 
+ 222:../lib/string_printf.c ****                     u_val = (unsigned long)s_val;
+ 223:../lib/string_printf.c ****                 }
+ 224:../lib/string_printf.c ****                 else //Unsigned types
+ 225:../lib/string_printf.c ****                 {
+ 226:../lib/string_printf.c ****                     #ifdef USE_LONG
+ 227:../lib/string_printf.c ****                         if(islong) { u_val = va_arg(ap,unsigned long); }
+ 228:../lib/string_printf.c ****                             else { u_val = va_arg(ap,unsigned int); }
+ 278              		.loc 1 228 0
+ 279 01c4 042083E2 		add	r2, r3, #4
+ 280 01c8 04208DE5 		str	r2, [sp, #4]
+ 281 01cc 007093E5 		ldr	r7, [r3, #0]
+ 282              	.LVL35:
+ 283              	.L29:
+ 229:../lib/string_printf.c ****                         #else
+ 230:../lib/string_printf.c ****                         u_val = va_arg(ap,unsigned int);
+ 231:../lib/string_printf.c ****                     #endif
+ 232:../lib/string_printf.c ****                 }
+ 233:../lib/string_printf.c **** 
+ 234:../lib/string_printf.c ****                 ptr = scratch + SCRATCH;
+ 235:../lib/string_printf.c ****                 *--ptr = 0;
+ 284              		.loc 1 235 0
+ 285 01d0 13A0CDE5 		strb	sl, [sp, #19]
+  64:../lib/string_printf.c **** {
+ 286              		.loc 1 64 0
+ 287 01d4 12B08DE2 		add	fp, sp, #18
+ 288              	.LVL36:
+ 289              	.L32:
+ 290              	.LBB2:
+ 236:../lib/string_printf.c ****                 do
+ 237:../lib/string_printf.c ****                 {
+ 238:../lib/string_printf.c ****                     char ch = u_val % base + '0';
+ 291              		.loc 1 238 0
+ 292 01d8 0700A0E1 		mov	r0, r7
+ 293 01dc 0910A0E1 		mov	r1, r9
+ 294 01e0 FEFFFFEB 		bl	__umodsi3
+ 295              	.LVL37:
+ 296 01e4 FF0000E2 		and	r0, r0, #255
+ 297 01e8 303080E2 		add	r3, r0, #48
+ 298 01ec FF3003E2 		and	r3, r3, #255
+ 299              	.LVL38:
+ 239:../lib/string_printf.c ****                     #ifdef USE_HEX
+ 240:../lib/string_printf.c ****                         if (ch > '9')
+ 300              		.loc 1 240 0
+ 301 01f0 390053E3 		cmp	r3, #57
+ 302              	.LVL39:
+ 241:../lib/string_printf.c ****                         {
+ 242:../lib/string_printf.c ****                             ch += 'a' - '9' - 1;
+ 243:../lib/string_printf.c ****                             #ifdef USE_UPPERHEX
+ 244:../lib/string_printf.c ****                             ch-=0x20;
+ 303              		.loc 1 244 0
+ 304 01f4 37308082 		addhi	r3, r0, #55
+ 305 01f8 FF300382 		andhi	r3, r3, #255
+ 306              	.LVL40:
+ 245:../lib/string_printf.c ****                         #endif
+ 246:../lib/string_printf.c ****                     }
+ 247:../lib/string_printf.c ****                     #endif
+ 248:../lib/string_printf.c ****                     *--ptr = ch;
+ 307              		.loc 1 248 0
+ 308 01fc 0B20A0E1 		mov	r2, fp
+ 309              	.LVL41:
+ 249:../lib/string_printf.c ****                     u_val /= base;
+ 310              		.loc 1 249 0
+ 311 0200 0700A0E1 		mov	r0, r7
+ 248:../lib/string_printf.c ****                     u_val /= base;
+ 312              		.loc 1 248 0
+ 313 0204 01304BE4 		strb	r3, [fp], #-1
+ 314              		.loc 1 249 0
+ 315 0208 0910A0E1 		mov	r1, r9
+ 316 020c 00208DE5 		str	r2, [sp, #0]
+ 317 0210 FEFFFFEB 		bl	__udivsi3
+ 318              	.LVL42:
+ 250:../lib/string_printf.c **** 
+ 251:../lib/string_printf.c ****                     #ifdef PADDING
+ 252:../lib/string_printf.c ****                         if(width) width--; //calculate number of padding chars
+ 319              		.loc 1 252 0
+ 320 0214 000055E3 		cmp	r5, #0
+ 321 0218 01504512 		subne	r5, r5, #1
+ 322              	.LVL43:
+ 323 021c FF500512 		andne	r5, r5, #255
+ 324              	.LBE2:
+ 253:../lib/string_printf.c ****                     #endif
+ 254:../lib/string_printf.c ****                 }
+ 255:../lib/string_printf.c ****                 while (u_val);
+ 325              		.loc 1 255 0
+ 326 0220 000050E3 		cmp	r0, #0
+ 327              	.LBB3:
+ 249:../lib/string_printf.c **** 
+ 328              		.loc 1 249 0
+ 329 0224 0070A0E1 		mov	r7, r0
+ 330              	.LVL44:
+ 252:../lib/string_printf.c ****                     #endif
+ 331              		.loc 1 252 0
+ 332 0228 00209DE5 		ldr	r2, [sp, #0]
+ 333              	.LVL45:
+ 334              	.LBE3:
+ 335              		.loc 1 255 0
+ 336 022c E9FFFF1A 		bne	.L32
+ 337 0230 0510A0E1 		mov	r1, r5
+ 338 0234 0230A0E1 		mov	r3, r2
+ 339 0238 000000EA 		b	.L33
+ 340              	.LVL46:
+ 341              	.L34:
+ 256:../lib/string_printf.c **** 
+ 257:../lib/string_printf.c ****                 #ifdef PADDING
+ 258:../lib/string_printf.c ****                     while(width--) *--ptr = fill; //insert padding chars
+ 342              		.loc 1 258 0 discriminator 2
+ 343 023c 018063E5 		strb	r8, [r3, #-1]!
+ 344              	.LVL47:
+ 345              	.L33:
+ 346              		.loc 1 258 0 is_stmt 0 discriminator 1
+ 347 0240 015045E2 		sub	r5, r5, #1
+ 348              	.LVL48:
+ 349 0244 FF5005E2 		and	r5, r5, #255
+ 350              	.LVL49:
+ 351 0248 FF0055E3 		cmp	r5, #255
+ 352 024c FAFFFF1A 		bne	.L34
+  64:../lib/string_printf.c **** {
+ 353              		.loc 1 64 0 is_stmt 1
+ 354 0250 025061E0 		rsb	r5, r1, r2
+ 355              	.LVL50:
+ 356 0254 015045E2 		sub	r5, r5, #1
+ 357 0258 010000EA 		b	.L35
+ 358              	.LVL51:
+ 359              	.L36:
+ 259:../lib/string_printf.c ****                 #endif
+ 260:../lib/string_printf.c **** 
+ 261:../lib/string_printf.c ****                 //Add to buffer
+ 262:../lib/string_printf.c **** 				while(*ptr) 
+ 263:../lib/string_printf.c **** 				{ 
+ 264:../lib/string_printf.c **** 					string_myputchar(string_printf_buffer, *ptr); 
+ 360              		.loc 1 264 0
+ 361 025c 0600A0E1 		mov	r0, r6
+ 362 0260 FEFFFFEB 		bl	string_myputchar
+ 363              	.LVL52:
+ 364              	.L35:
+ 262:../lib/string_printf.c **** 				{ 
+ 365              		.loc 1 262 0 discriminator 1
+ 366 0264 0110F5E5 		ldrb	r1, [r5, #1]!	@ zero_extendqisi2
+ 367 0268 000051E3 		cmp	r1, #0
+ 368 026c FAFFFF1A 		bne	.L36
+ 369 0270 81FFFFEA 		b	.L83
+ 370              	.LVL53:
+ 371              	.L19:
+ 106:../lib/string_printf.c **** 
+ 372              		.loc 1 106 0
+ 373 0274 0A90A0E3 		mov	r9, #10
+ 374 0278 000000EA 		b	.L20
+ 375              	.L42:
+ 202:../lib/string_printf.c ****                 #endif
+ 376              		.loc 1 202 0
+ 377 027c 1090A0E3 		mov	r9, #16
+ 378              	.L20:
+ 379              	.LVL54:
+ 380 0280 04309DE5 		ldr	r3, [sp, #4]
+ 381 0284 CEFFFFEA 		b	.L85
+ 382              	.LVL55:
+ 383              	.L17:
+ 384 0288 04309DE5 		ldr	r3, [sp, #4]
+ 385 028c C2FFFFEA 		b	.L86
+ 386              	.LVL56:
+ 387              	.L84:
+ 265:../lib/string_printf.c **** 					ptr++; 
+ 266:../lib/string_printf.c **** 				}
+ 267:../lib/string_printf.c ****             }
+ 268:../lib/string_printf.c ****         }
+ 269:../lib/string_printf.c ****     }
+ 388              		.loc 1 269 0
+ 389 0290 14D08DE2 		add	sp, sp, #20
+ 390 0294 F04FBDE8 		ldmfd	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}
+ 391 0298 0CD08DE2 		add	sp, sp, #12
+ 392 029c 1EFF2FE1 		bx	lr
+ 393              	.L91:
+ 394              		.align	2
+ 395              	.L90:
+ 396 02a0 00000000 		.word	buffer_ptr
+ 397              		.cfi_endproc
+ 398              	.LFE2:
+ 400              		.comm	buffer_ptr,1,1
+ 401              		.bss
+ 402              		.align	2
+ 403              		.set	.LANCHOR0,. + 0
+ 406              	putcharfunc:
+ 407 0000 00000000 		.space	4
+ 408              		.text
+ 409              	.Letext0:
+ 410              		.file 2 "/opt/local/lib/gcc/arm-elf/4.7.3/include/stdarg.h"
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 string_printf.c
+/var/folders/Jn/Jn5nG78rFb8fju5EIf+vh++++TM/-Tmp-//ccZs9INe.s:5      .text:0000000000000000 $a
+/var/folders/Jn/Jn5nG78rFb8fju5EIf+vh++++TM/-Tmp-//ccZs9INe.s:8      .text:0000000000000000 string_printf_devopen
+/var/folders/Jn/Jn5nG78rFb8fju5EIf+vh++++TM/-Tmp-//ccZs9INe.s:25     .text:000000000000000c $d
+/var/folders/Jn/Jn5nG78rFb8fju5EIf+vh++++TM/-Tmp-//ccZs9INe.s:29     .text:0000000000000010 $a
+/var/folders/Jn/Jn5nG78rFb8fju5EIf+vh++++TM/-Tmp-//ccZs9INe.s:32     .text:0000000000000010 string_myputchar
+/var/folders/Jn/Jn5nG78rFb8fju5EIf+vh++++TM/-Tmp-//ccZs9INe.s:53     .text:000000000000002c $d
+                            *COM*:0000000000000001 buffer_ptr
+/var/folders/Jn/Jn5nG78rFb8fju5EIf+vh++++TM/-Tmp-//ccZs9INe.s:59     .text:0000000000000030 $a
+/var/folders/Jn/Jn5nG78rFb8fju5EIf+vh++++TM/-Tmp-//ccZs9INe.s:62     .text:0000000000000030 string_printf
+/var/folders/Jn/Jn5nG78rFb8fju5EIf+vh++++TM/-Tmp-//ccZs9INe.s:396    .text:00000000000002a0 $d
+/var/folders/Jn/Jn5nG78rFb8fju5EIf+vh++++TM/-Tmp-//ccZs9INe.s:402    .bss:0000000000000000 $d
+/var/folders/Jn/Jn5nG78rFb8fju5EIf+vh++++TM/-Tmp-//ccZs9INe.s:406    .bss:0000000000000000 putcharfunc
+                     .debug_frame:0000000000000010 $d
+
+UNDEFINED SYMBOLS
+__umodsi3
+__udivsi3
