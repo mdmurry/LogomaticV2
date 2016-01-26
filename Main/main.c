@@ -250,6 +250,13 @@ void feed(void)
 	PLLFEED=0x55;
 }
 
+/*******************************************
+* UART interrupt calls this function which
+* retrieves the arriving character that triggered
+* the interrupt and saves the character to the
+* buffer which is written to the microSD when
+* the buffer is full
+*******************************************/
 static void UART0ISR(void)
 {
 	char temp;
@@ -1041,6 +1048,7 @@ void setup_uart0(int newbaud, char want_ints)
 		U0IER = 0x00;
 	}
 }
+
 void stat(int statnum, int onoff)
 {
 	if(statnum) // Stat 1
@@ -1220,7 +1228,12 @@ void Log_init(void)
 
 }
 
-
+/***********************************************
+* Automatic UART mode
+* Each time the UART interrupt is triggered the
+* arriving character is read and added to the
+* data buffer
+************************************************/
 void mode_0(void) // Auto UART mode
 {
 	rprintf("MODE 0\n\r");
@@ -1231,6 +1244,12 @@ void mode_0(void) // Auto UART mode
 
 }
 
+/**********************************************
+* Triggered UART mode
+* Trigger is '$'
+* Logs '$' and next 99 characters or until CR/LF
+*
+***********************************************/
 void mode_1(void)
 {
 	rprintf("MODE 1\n\r");	
@@ -1241,6 +1260,11 @@ void mode_1(void)
 	mode_action();
 }
 
+/***************************************************
+* Timer Interrupt triggered ADC read mode
+* 'Frequency' for LOGCON.TXT determines frequency
+* 100 is roughly 1 trigger per second
+***************************************************/
 void mode_2(void)
 {
 	rprintf("MODE 2\n\r");	
@@ -1266,12 +1290,24 @@ void mode_2(void)
 	mode_action();
 }
 
+/********************************************************
+* All of the non-Interrupt driven work, after initial
+* configuration, going on here.
+* Control is passed here after mode (0-2 above) related
+* initialization has occurred. Program execution, other
+* than Interrupt driven code, never leaves here. This 
+* function just writes to the microSD when the buffers 
+* are full. It also checks to make sure the 'stop'
+* button hasn't been pressed which writes all buffers
+* to the microSD, lights the STAT0 & STAT1 LEDs,
+* and then is locked into an endless loop.
+********************************************************/
 void mode_action(void)
 {
 	int j;
 	while(1)
 	{
-		
+		// if the first data buffer is full, write it to the microSD
 		if(log_array1 == 1)
 		{
 			stat(0,ON);
@@ -1294,6 +1330,7 @@ void mode_action(void)
 			log_array1 = 0;
 		}
 
+		// if the second data buffer is full, write it to the microSD
 		if(log_array2 == 1)
 		{
 			stat(1,ON);
@@ -1316,10 +1353,12 @@ void mode_action(void)
 			log_array2 = 0;
 		}
 
-		if((IOPIN0 & 0x00000008) == 0) // if button pushed, log file & quit
+		// if the 'stop' button has been pressed then write everything to
+		// the microSD, turn on the STAT0 & STAT1 LEDs, and lock up
+		if((IOPIN0 & 0x00000008) == 0)
 		{
 			VICIntEnClr = 0xFFFFFFFF;
-
+			// write whatever is left in the data buffer to the microSD
 			if(RX_in < 512)
 			{
 				fat_write_file(handle, (unsigned char *)RX_array1, RX_in);
@@ -1330,6 +1369,7 @@ void mode_action(void)
 				fat_write_file(handle, (unsigned char *)RX_array2, RX_in - 512);
 				sd_raw_sync();
 			}
+			// turn on STAT0 & STAT1 and lock up in endless loop
 			while(1)
 			{
 				stat(0,ON);
@@ -1452,14 +1492,14 @@ void delay_ms(int count)
 }
 
 /********************** GetGPSDateTime *********************************
-*  Each time the UART interrupt receives a 10 or 13 (end of line - pick one
+*  Each time the UART interrupt receives a 10 or 13 (end of line - pick one)r
 * it will call this function to strip off the date & time from the NMEA
 * sentence.
 *  Consideration should be given to situations when the most frequent NMEA
 * sentence is placed across the first and second buffer. Easiest solution 
 * would be to verify NMEA sentence length and make sure counter (RX_in) is
 * past or at a full packet
-* ? knowing an end of NMEA sentence has just occured
+* ? knowing an end of NMEA sentence has just occurred
 * ? see which ADC buffer is in use
 * ? reverse through buffer to find '$' if not found, just return
 * ? otherwise see if it's GGA (time) or RMC (time, date, and active)
