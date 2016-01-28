@@ -55,20 +55,33 @@
 #define OFF	0
 #define TRUE 1
 #define FALSE 0
+#define ADC_1 1
+#define ADC_2 2
+#define ADC_3 3
+#define ADC_4 4
+#define ADC_5 5
+#define ADC_6 6
+#define ADC_7 7
+#define ADC_8 8
 
 char RX_array1[512];
 char RX_array2[512];
+char ADC_array[512];
 char log_array1 = 0;
 char log_array2 = 0;
 short RX_in = 0;
+short ADC_in = 0;
+char log_adc = 0;
 char get_frame = 0;
 
 signed int stringSize;
+signed int ADCStringSize;
 struct fat_file_struct* handle;
 struct fat_file_struct * fd;
 char stringBuf[256];
-static char gps_valid = FALSE;
-char gps_date_time[13];
+unsigned int gps_valid = FALSE;
+unsigned int log_gps = FALSE;
+
 
 // Default Settings
 static char mode = 0;
@@ -115,6 +128,9 @@ static void MODE2ISR(void); //__attribute__ ((interrupt("IRQ")));
 void FIQ_Routine(void) __attribute__ ((interrupt("FIQ")));
 void SWI_Routine(void) __attribute__ ((interrupt("SWI")));
 void UNDEF_Routine(void) __attribute__ ((interrupt("UNDEF")));
+
+void LogADC(void);
+void GetADCValue(int adc);
 
 void fat_initialize(void);
 
@@ -1095,7 +1111,7 @@ void Log_init(void)
 			}
 		}
 
-		strcpy(stringBuf, "MODE = 0\r\nASCII = N\r\nBaud = 4\r\nFrequency = 100\r\nTrigger Character = $\r\nText Frame = 100\r\nAD1.3 = N\r\nAD0.3 = N\r\nAD0.2 = N\r\nAD0.1 = N\r\nAD1.2 = N\r\nAD0.4 = N\r\nAD1.7 = N\r\nAD1.6 = N\r\nSaftey On = Y\r\n");
+		strcpy(stringBuf, "MODE = 0\r\nASCII = N\r\nBaud = 4\r\nFrequency = 100\r\nTrigger Character = $\r\nText Frame = 100\r\nAD0.3 = N\r\nAD0.2 = N\r\nAD0.1 = N\r\nAD0.4 = N\r\nAD1.7 = N\r\nAD1.6 = N\r\nAD1.2 = N\r\nAD1.3 = N\r\nSaftey On = Y\r\n");
 		stringSize = strlen(stringBuf);
 		fat_write_file(fd, (unsigned char*)stringBuf, stringSize);
 		sd_raw_sync();
@@ -1305,6 +1321,7 @@ void mode_2(void)
 void mode_action(void)
 {
 	int j;
+
 	while(1)
 	{
 		// if the first data buffer is full, write it to the microSD
@@ -1351,6 +1368,29 @@ void mode_action(void)
 			sd_raw_sync();
 			stat(1,OFF);
 			log_array2 = 0;
+			LogADC();
+		}
+		
+		// see if ADC data needs to be logged
+		if(log_adc == 1)
+		{
+			stat(0,ON);
+			
+			if(fat_write_file(handle,(unsigned char *)ADC_array,ADCStringSize) < 0)
+			{
+				while(1)
+				{
+					stat(0,ON);
+					for(j = 0; j < 500000; j++)
+					stat(0,OFF);
+					stat(1,ON);
+					for(j = 0; j < 500000; j++)
+					stat(1,OFF);
+				}
+			}
+			sd_raw_sync();
+			stat(0,OFF);
+			log_adc = 0;
 		}
 
 		// if the 'stop' button has been pressed then write everything to
@@ -1490,6 +1530,256 @@ void delay_ms(int count)
 	for(i = 0; i < count; i++)
 		asm volatile ("nop");
 }
+
+/********************** LogADC *****************************
+*  Called each time GPS data is logged to generate ADC data
+* and log it
+************************************************************/
+void LogADC(void)
+{
+	
+	// reset TMR0 interrupt
+	T0IR = 1;
+	
+	// reset ADC log buffer pointer to beginning
+	ADC_in = 0;
+
+	//ADC_1 - ad0_3
+	if(ad0_3 == 'Y')
+		GetADCValue(ADC_1);
+		
+	// ADC_2 - ad0_2
+	if(ad0_2 == 'Y')
+		GetADCValue(ADC_2);
+	
+	// ADC_3 - ad0_1
+	if(ad0_1 == 'Y')
+		GetADCValue(ADC_3);
+	
+	// ADC_4 - ad0_4
+	if(ad0_4 == 'Y')
+		GetADCValue(ADC_4);
+	
+	// ADC_5 - ad1_7
+	if(ad1_7 == 'Y')
+		GetADCValue(ADC_5);
+		
+	// ADC_6 - ad1_6
+	if(ad1_6 == 'Y')
+		GetADCValue(ADC_6);
+		
+	// ADC_7 - ad1_2
+	if(ad1_2 == 'Y')
+		GetADCValue(ADC_7);
+		
+	// ADC_8 - ad1_3
+	if(ad1_3 == 'Y')
+		GetADCValue(ADC_8);
+		
+	// if no ADC pins were chosen then write that
+	// if ADC pins were chosen there is a trailing ',' that should be
+	// removed
+	if(ADC_in == 0)	// no ADC pins were selected for reading
+	{
+		// write a warning message (ADC + GPS was chosen but not used)
+		ADC_array[ADC_in] = 'N';
+		ADC_in++;
+		ADC_array[ADC_in] = 'O';
+		ADC_in++;
+		ADC_array[ADC_in] = ' ';
+		ADC_in++;
+		ADC_array[ADC_in] = 'A';
+		ADC_in++;
+		ADC_array[ADC_in] = 'D';
+		ADC_in++;
+		ADC_array[ADC_in] = 'C ';
+		ADC_in++;
+	}
+	else
+	{
+		ADC_in--;	// back up over trailing ','
+	}
+		
+	// add CR/LF and string terminator
+	ADC_array[ADC_in] = 13;
+	ADC_in++;
+	ADC_array[ADC_in] = 10;
+	ADC_in++;
+	ADC_array[ADC_in] = 0;
+	ADC_in++;
+			
+	VICVectAddr= 0;
+	
+	// set microSD write size
+	ADCStringSize = ADC_in;
+	// set ADC logging flag
+	log_adc = 1;
+}
+
+/****************************** GetADCValue ******************************
+*	Retrieves an ADC value for the ADC pin in 'adc.'
+*************************************************************************/
+void GetADCValue(int adc)
+{
+	int temp;	// holds 16-bit ADC value (includes some flag bits)
+	int temp2;	// holds converted (necessary bit shift) ADC value
+	char temp_buff[4];	// holds ascii ADC value - needed for int -> char conversion
+	short a;	// used to convert ADC value for writing as text if NOT using ASCII
+	
+	switch (adc)
+	{
+		// AD0.3
+		case ADC_1:
+			AD0CR = 0x00020FF08; // AD0.3
+			AD0CR |= 0x01000000; // start conversion
+			while((temp & 0x80000000) == 0)	// wait for ADC to finish conversion
+			{
+				temp = AD0DR;
+			}				
+			AD0CR = 0x00000000;	// stop ADC conversion			
+			break;
+			
+		// AD0.2	
+		case ADC_2:
+			AD0CR = 0x00020FF04; // AD0.2
+			AD0CR |= 0x01000000; // start conversion
+			while((temp & 0x80000000) == 0)
+			{
+				temp = AD0DR;
+			}
+			AD0CR = 0x00000000;		
+		break;
+		
+		// AD0.1
+		case ADC_3:
+			AD0CR = 0x00020FF02; // AD0.1
+			AD0CR |= 0x01000000; // start conversion
+			while((temp & 0x80000000) == 0)
+			{
+				temp = AD0DR;
+			}
+			AD0CR = 0x00000000;		
+		break;
+		
+		// AD0.4
+		case ADC_4:
+			AD0CR = 0x00020FF10; // AD0.4
+			AD0CR |= 0x01000000; // start conversion
+			while((temp & 0x80000000) == 0)
+			{
+				temp = AD0DR;
+			}
+			AD0CR = 0x00000000;		
+		break;
+		
+		// AD1.7
+		case ADC_5:
+			AD1CR = 0x00020FF80; // AD1.7
+			AD1CR |= 0x01000000; // start conversion
+			while((temp & 0x80000000) == 0)
+			{
+				temp = AD1DR;
+			}
+			AD1CR = 0x00000000;		
+		break;
+		
+		// AD1.6
+		case ADC_6:
+			AD1CR = 0x00020FF40; // AD1.3
+			AD1CR |= 0x01000000; // start conversion
+			while((temp & 0x80000000) == 0)
+			{
+				temp = AD1DR;
+			}
+			AD1CR = 0x00000000;		
+		break;
+		
+		// AD1.2
+		case ADC_7:
+			AD1CR = 0x00020FF04; // AD1.2
+			AD1CR |= 0x01000000; // start conversion
+			while((temp & 0x80000000) == 0)
+			{
+				temp = AD1DR;
+			}
+			AD1CR = 0x00000000;
+		break;
+		
+		// AD1.3
+		case ADC_8:
+			AD1CR = 0x00020FF08; // AD1.3
+			AD1CR |= 0x01000000; // start conversion
+			while((temp & 0x80000000) == 0)
+			{
+				temp = AD1DR;
+			}
+			AD1CR = 0x00000000;	
+		break;
+		
+		// should never get here - logic error
+		default:
+			ADC_array[ADC_in] = 'e';
+			ADC_in++;
+			ADC_array[ADC_in] = 'r';
+			ADC_in++;
+			ADC_array[ADC_in] = 'r';
+			ADC_in++;
+			return;
+		break;
+	}
+	
+	//	convert ADC value - bit shift required (some bits are flags, not part
+	//  of actual ADC value) 15:6 create the 10 bit ADC value
+	temp &= 0x0000FFC0;	// strip all bits except 15:6
+	temp2 = temp / 0x00000040; // shift bit right 6 places
+
+	// convert value to characters
+	
+	if(asc == 'Y' || asc ==',')
+	{
+		itoa(temp2, 10, temp_buff);
+		if(temp_buff[0] >= 48 && temp_buff[0] <= 57)
+		{
+			ADC_array[ADC_in] = temp_buff[0];
+			ADC_in++;
+		}
+		if(temp_buff[1] >= 48 && temp_buff[1] <= 57)
+		{
+			ADC_array[ADC_in] = temp_buff[1];
+			ADC_in++;
+		}
+		if(temp_buff[2] >= 48 && temp_buff[2] <= 57)
+		{
+			ADC_array[ADC_in] = temp_buff[2];
+			ADC_in++;
+		}
+		if(temp_buff[3] >= 48 && temp_buff[3] <= 57)
+		{
+			ADC_array[ADC_in] = temp_buff[3];
+			ADC_in++;
+		}
+
+		if(asc == ',')
+		{
+			ADC_array[ADC_in] = ',';
+			ADC_in++;
+		}
+		else
+		{
+			ADC_array[ADC_in] = 0;
+			ADC_in++;
+		}
+	}
+	else if(asc == 'N')
+	{
+		a = ((short)temp2 & 0xFF00) / 0x00000100;
+		ADC_array[ADC_in] = (char)a;
+		ADC_in++;
+		ADC_array[ADC_in] = (char)temp2 & 0xFF;
+		ADC_in++;
+	}
+}
+
 
 /********************** GetGPSDateTime *********************************
 *  Each time the UART interrupt receives a 10 or 13 (end of line - pick one)r
