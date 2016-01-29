@@ -4,6 +4,8 @@ Archive member included to satisfy reference by file (symbol)
                               ../lib/sd_raw.o (memcpy)
 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memset.o)
                               ../lib/sd_raw.o (memset)
+/opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-sprintf.o)
+                              main.o (sprintf)
 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strchr.o)
                               ../lib/fat.o (strchr)
 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcmp.o)
@@ -18,6 +20,34 @@ Archive member included to satisfy reference by file (symbol)
                               ../lib/fat.o (strncpy)
 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strrchr.o)
                               ../lib/fat.o (strrchr)
+/opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfprintf.o)
+                              /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-sprintf.o) (_svfprintf_r)
+/opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
+                              /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfprintf.o) (_dtoa_r)
+/opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-impure.o)
+                              /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-sprintf.o) (_impure_ptr)
+/opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-locale.o)
+                              /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfprintf.o) (_localeconv_r)
+/opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mallocr.o)
+                              /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfprintf.o) (_malloc_r)
+/opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memchr-stub.o)
+                              /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfprintf.o) (memchr)
+/opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mlock.o)
+                              /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mallocr.o) (__malloc_lock)
+/opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
+                              /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o) (_Balloc)
+/opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-s_fpclassify.o)
+                              /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfprintf.o) (__fpclassifyd)
+/opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfiprintf.o)
+                              /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfprintf.o) (__ssprint_r)
+/opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-callocr.o)
+                              /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o) (_calloc_r)
+/opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-freer.o)
+                              /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mallocr.o) (_free_r)
+/opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memmove.o)
+                              /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfiprintf.o) (memmove)
+/opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-reallocr.o)
+                              /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfiprintf.o) (_realloc_r)
 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_udivsi3.o)
                               ../lib/rprintf.o (__udivsi3)
 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_divsi3.o)
@@ -28,6 +58,14 @@ Archive member included to satisfy reference by file (symbol)
                               ../lib/itoa.o (__modsi3)
 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_dvmd_tls.o)
                               /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_udivsi3.o) (__div0)
+/opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_addsubdf3.o)
+                              /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o) (__subdf3)
+/opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_muldivdf3.o)
+                              /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o) (__muldf3)
+/opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_cmpdf2.o)
+                              /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o) (__gtdf2)
+/opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_fixdfsi.o)
+                              /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o) (__fixdfsi)
 
 Allocating common symbols
 Common symbol       size              file
@@ -38,13 +76,17 @@ stringBuf           0x100             main.o
 fs                  0x4               ../lib/rootdir.o
 ADCStringSize       0x4               main.o
 RX_array1           0x200             main.o
+time_buffer         0x8               main.o
 dir_entry           0x34              ../lib/rootdir.o
 fd                  0x4               main.o
 partition           0x4               ../lib/rootdir.o
 dd                  0x4               ../lib/rootdir.o
 handle              0x4               main.o
+seconds             0x4               main.o
 stringSize          0x4               main.o
 ADC_array           0x200             main.o
+minutes             0x4               main.o
+hours               0x4               main.o
 
 Memory Configuration
 
@@ -79,7 +121,7 @@ LOAD /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libg.a
 LOAD /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a
 END GROUP
 
-.text           0x0000000000010000     0x66a8
+.text           0x0000000000010000     0xc91c
  *(.vectorg)
  .vectorg       0x0000000000010000       0x98 Startup.o
                 0x0000000000010050                __IRQ_Wrapper
@@ -95,7 +137,7 @@ END GROUP
                 0x00000000000101b8                init_VIC
                 0x0000000000010200                install_irq
                 0x0000000000010268                uninstall_irq
- .text          0x00000000000102dc     0x2004 main.o
+ .text          0x00000000000102dc     0x21a0 main.o
                 0x00000000000110ec                Initialize
                 0x0000000000011154                feed
                 0x0000000000011170                FIQ_Routine
@@ -109,185 +151,309 @@ END GROUP
                 0x000000000001146c                test
                 0x0000000000011570                Log_init
                 0x0000000000011afc                GetADCValue
-                0x0000000000011e58                LogADC
-                0x0000000000011fd4                mode_action
-                0x00000000000121d0                mode_2
-                0x0000000000012268                mode_1
-                0x00000000000122a4                mode_0
-                0x00000000000122dc                GetGPSDateTime
- .text.startup  0x00000000000122e0      0x204 main.o
-                0x00000000000122e0                main
- .text          0x00000000000124e4       0x64 ../lib/syscalls.o
-                0x00000000000124e4                _read_r
-                0x00000000000124ec                _write_r
-                0x00000000000124f4                _close_r
-                0x00000000000124fc                _lseek_r
-                0x0000000000012504                _fstat_r
-                0x0000000000012514                isatty
-                0x000000000001251c                _sbrk_r
- .text          0x0000000000012548      0x28c ../lib/rprintf.o
-                0x0000000000012584                rprintf_devopen
-                0x0000000000012594                rprintf
- .text          0x00000000000127d4      0x2a4 ../lib/string_printf.o
-                0x00000000000127d4                string_printf_devopen
-                0x00000000000127e4                string_myputchar
-                0x0000000000012804                string_printf
- .text          0x0000000000012a78      0x188 ../lib/serial.o
-                0x0000000000012a78                init_serial0
-                0x0000000000012acc                init_serial1
-                0x0000000000012b24                putchar_serial0
-                0x0000000000012b64                putc_serial0
-                0x0000000000012b84                putc_serial1
-                0x0000000000012ba4                putstring_serial0
-                0x0000000000012bc8                getkey_serial0
-                0x0000000000012be0                getc0
- .text          0x0000000000012c00      0x49c ../lib/rootdir.o
-                0x0000000000012c00                openroot
-                0x0000000000012cf0                root_file_exists
-                0x0000000000012d24                root_open_new
-                0x0000000000012d6c                root_open
-                0x0000000000012d98                print_disk_info
-                0x0000000000012eb0                root_disk_info
-                0x0000000000012ec0                rootDirectory_files_stream
-                0x0000000000012f50                rootDirectory_files
-                0x0000000000012ff4                root_format
-                0x0000000000013048                root_delete
- .text          0x000000000001309c      0xb10 ../lib/sd_raw.o
-                0x0000000000013170                sd_raw_available
-                0x0000000000013178                sd_raw_locked
-                0x0000000000013180                sd_raw_sync
-                0x00000000000131c0                sd_raw_read
-                0x0000000000013350                sd_raw_read_interval
-                0x0000000000013400                sd_raw_init
-                0x000000000001365c                sd_raw_write
-                0x0000000000013830                sd_raw_write_interval
-                0x00000000000138f4                sd_raw_get_info
- .text          0x0000000000013bac     0x1ef0 ../lib/fat.o
-                0x000000000001483c                fat_open
-                0x0000000000014ab4                fat_close
-                0x0000000000014ac4                fat_open_file
-                0x0000000000014b4c                fat_close_file
-                0x0000000000014b5c                fat_read_file
-                0x0000000000014cec                fat_write_file
-                0x0000000000014f18                fat_resize_file
-                0x0000000000015090                fat_seek_file
-                0x000000000001513c                fat_open_dir
-                0x00000000000151d0                fat_close_dir
-                0x00000000000151e0                fat_reset_dir
-                0x0000000000015200                fat_read_dir
-                0x000000000001538c                fat_get_dir_entry_of_path
-                0x00000000000154bc                fat_create_file
-                0x000000000001559c                fat_delete_file
-                0x0000000000015674                fat_move_file
-                0x0000000000015770                fat_create_dir
-                0x0000000000015900                fat_get_fs_size
-                0x0000000000015944                fat_get_fs_free
-                0x0000000000015a18                find_file_in_dir
-                0x0000000000015a6c                open_file_in_dir
- .text          0x0000000000015a9c      0x104 ../lib/partition.o
-                0x0000000000015a9c                partition_open
-                0x0000000000015b8c                partition_close
- .text          0x0000000000015ba0       0x7c ../lib/itoa.o
-                0x0000000000015ba0                convert
-                0x0000000000015bfc                itoa
- .text          0x0000000000015c1c       0x6c ../lib/byteordering.o
-                0x0000000000015c1c                read16
-                0x0000000000015c2c                read32
-                0x0000000000015c50                write16
-                0x0000000000015c68                write32
- .text          0x0000000000015c88       0x78 ../LPCUSB/armVIC.o
-                0x0000000000015c88                disableIRQ
-                0x0000000000015c98                restoreIRQ
-                0x0000000000015cb4                enableIRQ
-                0x0000000000015cc4                disableFIQ
-                0x0000000000015cd4                restoreFIQ
-                0x0000000000015cf0                enableFIQ
- .text          0x0000000000015d00       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memcpy-stub.o)
-                0x0000000000015d00                memcpy
- .text          0x0000000000015d20       0x1c /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memset.o)
-                0x0000000000015d20                memset
- .text          0x0000000000015d3c       0x30 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strchr.o)
-                0x0000000000015d3c                strchr
- .text          0x0000000000015d6c       0x1c /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcmp.o)
-                0x0000000000015d6c                strcmp
- .text          0x0000000000015d88       0x18 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcpy.o)
-                0x0000000000015d88                strcpy
- .text          0x0000000000015da0       0x1c /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strlen.o)
-                0x0000000000015da0                strlen
- .text          0x0000000000015dbc       0x64 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncmp.o)
-                0x0000000000015dbc                strncmp
- .text          0x0000000000015e20       0x54 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncpy.o)
-                0x0000000000015e20                strncpy
- .text          0x0000000000015e74       0x4c /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strrchr.o)
-                0x0000000000015e74                strrchr
- .text          0x0000000000015ec0      0x118 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_udivsi3.o)
-                0x0000000000015ec0                __udivsi3
-                0x0000000000015ec0                __aeabi_uidiv
-                0x0000000000015fb8                __aeabi_uidivmod
- .text          0x0000000000015fd8      0x148 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_divsi3.o)
-                0x0000000000015fd8                __aeabi_idiv
-                0x0000000000015fd8                __divsi3
-                0x0000000000016100                __aeabi_idivmod
- .text          0x0000000000016120       0xcc /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_umodsi3.o)
-                0x0000000000016120                __umodsi3
- .text          0x00000000000161ec       0xe4 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_modsi3.o)
-                0x00000000000161ec                __modsi3
- .text          0x00000000000162d0        0x4 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_dvmd_tls.o)
-                0x00000000000162d0                __div0
+                0x0000000000011e64                InitializeTime
+                0x0000000000011e90                GetTime
+                0x0000000000011ef8                LogADC
+                0x000000000001211c                mode_action
+                0x0000000000012320                mode_3
+                0x000000000001236c                mode_2
+                0x0000000000012404                mode_1
+                0x0000000000012440                mode_0
+                0x0000000000012478                GetGPSDateTime
+ .text.startup  0x000000000001247c      0x250 main.o
+                0x000000000001247c                main
+ .text          0x00000000000126cc       0x64 ../lib/syscalls.o
+                0x00000000000126cc                _read_r
+                0x00000000000126d4                _write_r
+                0x00000000000126dc                _close_r
+                0x00000000000126e4                _lseek_r
+                0x00000000000126ec                _fstat_r
+                0x00000000000126fc                isatty
+                0x0000000000012704                _sbrk_r
+ .text          0x0000000000012730      0x28c ../lib/rprintf.o
+                0x000000000001276c                rprintf_devopen
+                0x000000000001277c                rprintf
+ .text          0x00000000000129bc      0x2a4 ../lib/string_printf.o
+                0x00000000000129bc                string_printf_devopen
+                0x00000000000129cc                string_myputchar
+                0x00000000000129ec                string_printf
+ .text          0x0000000000012c60      0x188 ../lib/serial.o
+                0x0000000000012c60                init_serial0
+                0x0000000000012cb4                init_serial1
+                0x0000000000012d0c                putchar_serial0
+                0x0000000000012d4c                putc_serial0
+                0x0000000000012d6c                putc_serial1
+                0x0000000000012d8c                putstring_serial0
+                0x0000000000012db0                getkey_serial0
+                0x0000000000012dc8                getc0
+ .text          0x0000000000012de8      0x49c ../lib/rootdir.o
+                0x0000000000012de8                openroot
+                0x0000000000012ed8                root_file_exists
+                0x0000000000012f0c                root_open_new
+                0x0000000000012f54                root_open
+                0x0000000000012f80                print_disk_info
+                0x0000000000013098                root_disk_info
+                0x00000000000130a8                rootDirectory_files_stream
+                0x0000000000013138                rootDirectory_files
+                0x00000000000131dc                root_format
+                0x0000000000013230                root_delete
+ .text          0x0000000000013284      0xb10 ../lib/sd_raw.o
+                0x0000000000013358                sd_raw_available
+                0x0000000000013360                sd_raw_locked
+                0x0000000000013368                sd_raw_sync
+                0x00000000000133a8                sd_raw_read
+                0x0000000000013538                sd_raw_read_interval
+                0x00000000000135e8                sd_raw_init
+                0x0000000000013844                sd_raw_write
+                0x0000000000013a18                sd_raw_write_interval
+                0x0000000000013adc                sd_raw_get_info
+ .text          0x0000000000013d94     0x1ef0 ../lib/fat.o
+                0x0000000000014a24                fat_open
+                0x0000000000014c9c                fat_close
+                0x0000000000014cac                fat_open_file
+                0x0000000000014d34                fat_close_file
+                0x0000000000014d44                fat_read_file
+                0x0000000000014ed4                fat_write_file
+                0x0000000000015100                fat_resize_file
+                0x0000000000015278                fat_seek_file
+                0x0000000000015324                fat_open_dir
+                0x00000000000153b8                fat_close_dir
+                0x00000000000153c8                fat_reset_dir
+                0x00000000000153e8                fat_read_dir
+                0x0000000000015574                fat_get_dir_entry_of_path
+                0x00000000000156a4                fat_create_file
+                0x0000000000015784                fat_delete_file
+                0x000000000001585c                fat_move_file
+                0x0000000000015958                fat_create_dir
+                0x0000000000015ae8                fat_get_fs_size
+                0x0000000000015b2c                fat_get_fs_free
+                0x0000000000015c00                find_file_in_dir
+                0x0000000000015c54                open_file_in_dir
+ .text          0x0000000000015c84      0x104 ../lib/partition.o
+                0x0000000000015c84                partition_open
+                0x0000000000015d74                partition_close
+ .text          0x0000000000015d88       0x7c ../lib/itoa.o
+                0x0000000000015d88                convert
+                0x0000000000015de4                itoa
+ .text          0x0000000000015e04       0x6c ../lib/byteordering.o
+                0x0000000000015e04                read16
+                0x0000000000015e14                read32
+                0x0000000000015e38                write16
+                0x0000000000015e50                write32
+ .text          0x0000000000015e70       0x78 ../LPCUSB/armVIC.o
+                0x0000000000015e70                disableIRQ
+                0x0000000000015e80                restoreIRQ
+                0x0000000000015e9c                enableIRQ
+                0x0000000000015eac                disableFIQ
+                0x0000000000015ebc                restoreFIQ
+                0x0000000000015ed8                enableFIQ
+ .text          0x0000000000015ee8       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memcpy-stub.o)
+                0x0000000000015ee8                memcpy
+ .text          0x0000000000015f08       0x1c /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memset.o)
+                0x0000000000015f08                memset
+ .text          0x0000000000015f24       0xcc /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-sprintf.o)
+                0x0000000000015f24                _sprintf_r
+                0x0000000000015f84                sprintf
+ .text          0x0000000000015ff0       0x30 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strchr.o)
+                0x0000000000015ff0                strchr
+ .text          0x0000000000016020       0x1c /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcmp.o)
+                0x0000000000016020                strcmp
+ .text          0x000000000001603c       0x18 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcpy.o)
+                0x000000000001603c                strcpy
+ .text          0x0000000000016054       0x1c /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strlen.o)
+                0x0000000000016054                strlen
+ .text          0x0000000000016070       0x64 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncmp.o)
+                0x0000000000016070                strncmp
+ .text          0x00000000000160d4       0x54 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncpy.o)
+                0x00000000000160d4                strncpy
+ .text          0x0000000000016128       0x4c /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strrchr.o)
+                0x0000000000016128                strrchr
+ .text          0x0000000000016174     0x1760 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfprintf.o)
+                0x0000000000016174                _svfprintf_r
+ .text          0x00000000000178d4     0x1434 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
+                0x0000000000017a84                _dtoa_r
+ .text          0x0000000000018d08        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-impure.o)
+ .text          0x0000000000018d08       0xcc /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-locale.o)
+                0x0000000000018d08                _setlocale_r
+                0x0000000000018d70                __locale_charset
+                0x0000000000018d7c                __locale_mb_cur_max
+                0x0000000000018d8c                __locale_msgcharset
+                0x0000000000018d98                __locale_cjk_lang
+                0x0000000000018da0                _localeconv_r
+                0x0000000000018dac                setlocale
+                0x0000000000018dc8                localeconv
+ .text          0x0000000000018dd4      0x614 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mallocr.o)
+                0x0000000000018dd4                _malloc_r
+ .text          0x00000000000193e8       0x34 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memchr-stub.o)
+                0x00000000000193e8                memchr
+ .text          0x000000000001941c        0x8 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mlock.o)
+                0x000000000001941c                __malloc_lock
+                0x0000000000019420                __malloc_unlock
+ .text          0x0000000000019424      0xbc4 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
+                0x0000000000019424                _Balloc
+                0x00000000000194ac                _Bfree
+                0x00000000000194c8                __multadd
+                0x0000000000019580                __s2b
+                0x0000000000019654                __hi0bits
+                0x00000000000196ac                __lo0bits
+                0x0000000000019740                __i2b
+                0x0000000000019760                __multiply
+                0x0000000000019910                __pow5mult
+                0x00000000000199e8                __lshift
+                0x0000000000019ad4                __mcmp
+                0x0000000000019b30                __mdiff
+                0x0000000000019c54                __ulp
+                0x0000000000019cb0                __b2d
+                0x0000000000019d70                __d2b
+                0x0000000000019e68                __ratio
+                0x0000000000019ed0                _mprec_log10
+                0x0000000000019f20                __copybits
+                0x0000000000019f70                __any_on
+ .text          0x0000000000019fe8       0x70 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-s_fpclassify.o)
+                0x0000000000019fe8                __fpclassifyd
+ .text          0x000000000001a058      0xca8 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfiprintf.o)
+                0x000000000001a058                __ssprint_r
+                0x000000000001a1e0                _svfiprintf_r
+ .text          0x000000000001ad00       0x8c /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-callocr.o)
+                0x000000000001ad00                _calloc_r
+ .text          0x000000000001ad8c      0x334 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-freer.o)
+                0x000000000001ad8c                _malloc_trim_r
+                0x000000000001ae84                _free_r
+ .text          0x000000000001b0c0       0x5c /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memmove.o)
+                0x000000000001b0c0                memmove
+ .text          0x000000000001b11c      0x44c /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-reallocr.o)
+                0x000000000001b11c                _realloc_r
+ .text          0x000000000001b568      0x118 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_udivsi3.o)
+                0x000000000001b568                __udivsi3
+                0x000000000001b568                __aeabi_uidiv
+                0x000000000001b660                __aeabi_uidivmod
+ .text          0x000000000001b680      0x148 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_divsi3.o)
+                0x000000000001b680                __aeabi_idiv
+                0x000000000001b680                __divsi3
+                0x000000000001b7a8                __aeabi_idivmod
+ .text          0x000000000001b7c8       0xcc /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_umodsi3.o)
+                0x000000000001b7c8                __umodsi3
+ .text          0x000000000001b894       0xe4 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_modsi3.o)
+                0x000000000001b894                __modsi3
+ .text          0x000000000001b978        0x4 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_dvmd_tls.o)
+                0x000000000001b978                __div0
+ .text          0x000000000001b97c      0x400 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_addsubdf3.o)
+                0x000000000001b97c                __aeabi_drsub
+                0x000000000001b984                __subdf3
+                0x000000000001b984                __aeabi_dsub
+                0x000000000001b988                __aeabi_dadd
+                0x000000000001b988                __adddf3
+                0x000000000001bc68                __aeabi_ui2d
+                0x000000000001bc68                __floatunsidf
+                0x000000000001bc90                __floatsidf
+                0x000000000001bc90                __aeabi_i2d
+                0x000000000001bcbc                __extendsfdf2
+                0x000000000001bcbc                __aeabi_f2d
+                0x000000000001bcfc                __aeabi_ul2d
+                0x000000000001bcfc                __floatundidf
+                0x000000000001bd10                __aeabi_l2d
+                0x000000000001bd10                __floatdidf
+ .text          0x000000000001bd7c      0x470 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_muldivdf3.o)
+                0x000000000001bd7c                __aeabi_dmul
+                0x000000000001bd7c                __muldf3
+                0x000000000001bfe8                __aeabi_ddiv
+                0x000000000001bfe8                __divdf3
+ .text          0x000000000001c1ec      0x12c /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_cmpdf2.o)
+                0x000000000001c1ec                __gtdf2
+                0x000000000001c1ec                __gedf2
+                0x000000000001c1f4                __ltdf2
+                0x000000000001c1f4                __ledf2
+                0x000000000001c1fc                __eqdf2
+                0x000000000001c1fc                __nedf2
+                0x000000000001c1fc                __cmpdf2
+                0x000000000001c284                __aeabi_cdrcmple
+                0x000000000001c2a0                __aeabi_cdcmple
+                0x000000000001c2a0                __aeabi_cdcmpeq
+                0x000000000001c2b4                __aeabi_dcmpeq
+                0x000000000001c2c8                __aeabi_dcmplt
+                0x000000000001c2dc                __aeabi_dcmple
+                0x000000000001c2f0                __aeabi_dcmpge
+                0x000000000001c304                __aeabi_dcmpgt
+ .text          0x000000000001c318       0x5c /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_fixdfsi.o)
+                0x000000000001c318                __fixdfsi
+                0x000000000001c318                __aeabi_d2iz
  *(.gnu.linkonce.t.*)
  *(.glue_7)
- .glue_7        0x00000000000162d4        0x0 linker stubs
+ .glue_7        0x000000000001c374        0x0 linker stubs
  *(.glue_7t)
- .glue_7t       0x00000000000162d4        0x0 linker stubs
+ .glue_7t       0x000000000001c374        0x0 linker stubs
  *(.gcc_except_table)
  *(.rodata)
- .rodata        0x00000000000162d4        0xd ../lib/fat.o
+ .rodata        0x000000000001c374        0xd ../lib/fat.o
+ .rodata        0x000000000001c381       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfprintf.o)
+ *fill*         0x000000000001c3a1        0x3 
+ .rodata        0x000000000001c3a4        0x4 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-impure.o)
+                0x000000000001c3a4                _global_impure_ptr
+ .rodata        0x000000000001c3a8      0x124 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
+                0x000000000001c3b4                __mprec_tens
+                0x000000000001c47c                __mprec_tinytens
+                0x000000000001c4a4                __mprec_bigtens
+ .rodata        0x000000000001c4cc       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfiprintf.o)
  *(.rodata*)
  .rodata.str1.1
-                0x00000000000162e1       0x12 ../lib/irq.o
+                0x000000000001c4ec       0x12 ../lib/irq.o
  .rodata.str1.1
-                0x00000000000162f3      0x2a1 main.o
-                                        0x2a4 (size before relaxing)
+                0x000000000001c4fe      0x2ce main.o
+                                        0x2d1 (size before relaxing)
  .rodata.str1.1
-                0x0000000000016594      0x103 ../lib/rootdir.o
+                0x000000000001c7cc      0x103 ../lib/rootdir.o
  .rodata.str1.1
-                0x0000000000016697       0x11 ../lib/itoa.o
+                0x000000000001c8cf       0x11 ../lib/itoa.o
+ .rodata.str1.1
+                0x000000000001c8e0       0x23 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfprintf.o)
+                                         0x34 (size before relaxing)
+ .rodata.str1.1
+                0x000000000001c903        0xd /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
+                                          0xf (size before relaxing)
+ .rodata.str1.1
+                0x000000000001c910        0x2 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-impure.o)
+ .rodata.str1.1
+                0x000000000001c912        0x8 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-locale.o)
+                                          0xb (size before relaxing)
+ .rodata.str1.1
+                0x000000000001c91a       0x22 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfiprintf.o)
  *(.gnu.linkonce.r.*)
-                0x00000000000166a8                . = ALIGN (0x4)
+                0x000000000001c93c                . = ALIGN (0x4)
+ *fill*         0x000000000001c91a        0x2 
 
-.vfp11_veneer   0x00000000000166a8        0x0
- .vfp11_veneer  0x00000000000166a8        0x0 linker stubs
+.vfp11_veneer   0x000000000001c91c        0x0
+ .vfp11_veneer  0x000000000001c91c        0x0 linker stubs
 
-.v4_bx          0x00000000000166a8        0x0
- .v4_bx         0x00000000000166a8        0x0 linker stubs
+.v4_bx          0x000000000001c91c        0x0
+ .v4_bx         0x000000000001c91c        0x0 linker stubs
 
-.iplt           0x00000000000166a8        0x0
- .iplt          0x00000000000166a8        0x0 Startup.o
+.iplt           0x000000000001c91c        0x0
+ .iplt          0x000000000001c91c        0x0 Startup.o
 
-.rel.dyn        0x00000000000166a8        0x0
- .rel.iplt      0x00000000000166a8        0x0 Startup.o
-                0x00000000000166a8                . = ALIGN (0x4)
+.rel.dyn        0x000000000001c91c        0x0
+ .rel.iplt      0x000000000001c91c        0x0 Startup.o
+                0x000000000001c91c                . = ALIGN (0x4)
 
-.ctors          0x00000000000166a8        0x0
-                0x00000000000166a8                PROVIDE (__ctors_start__, .)
+.ctors          0x000000000001c91c        0x0
+                0x000000000001c91c                PROVIDE (__ctors_start__, .)
  *(SORT(.ctors.*))
  *(.ctors)
-                0x00000000000166a8                . = ALIGN (0x4)
-                0x00000000000166a8                PROVIDE (__ctors_end__, .)
-                0x00000000000166a8                . = ALIGN (0x4)
+                0x000000000001c91c                . = ALIGN (0x4)
+                0x000000000001c91c                PROVIDE (__ctors_end__, .)
+                0x000000000001c91c                . = ALIGN (0x4)
 
-.dtors          0x00000000000166a8        0x0
-                0x00000000000166a8                PROVIDE (__dtors_start__, .)
+.dtors          0x000000000001c91c        0x0
+                0x000000000001c91c                PROVIDE (__dtors_start__, .)
  *(SORT(.dtors.*))
  *(.dtors)
-                0x00000000000166a8                . = ALIGN (0x4)
-                0x00000000000166a8                PROVIDE (__dtors_end__, .)
-                0x00000000000166a8                . = ALIGN (0x4)
-                0x00000000000166a8                . = ALIGN (0x4)
-                0x00000000000166a8                _etext = .
-                0x00000000000166a8                PROVIDE (etext, .)
+                0x000000000001c91c                . = ALIGN (0x4)
+                0x000000000001c91c                PROVIDE (__dtors_end__, .)
+                0x000000000001c91c                . = ALIGN (0x4)
+                0x000000000001c91c                . = ALIGN (0x4)
+                0x000000000001c91c                _etext = .
+                0x000000000001c91c                PROVIDE (etext, .)
 
-.data           0x0000000040000000       0x18 load address 0x00000000000166a8
+.data           0x0000000040000000      0x8cc load address 0x000000000001c91c
                 0x0000000040000000                _data = .
  *(.vectmapped)
                 0x0000000040000000                . = ALIGN (0x4)
@@ -311,6 +477,7 @@ END GROUP
  .data          0x0000000040000018        0x0 ../LPCUSB/armVIC.o
  .data          0x0000000040000018        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memcpy-stub.o)
  .data          0x0000000040000018        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memset.o)
+ .data          0x0000000040000018        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-sprintf.o)
  .data          0x0000000040000018        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strchr.o)
  .data          0x0000000040000018        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcmp.o)
  .data          0x0000000040000018        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcpy.o)
@@ -318,92 +485,146 @@ END GROUP
  .data          0x0000000040000018        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncmp.o)
  .data          0x0000000040000018        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncpy.o)
  .data          0x0000000040000018        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strrchr.o)
- .data          0x0000000040000018        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_udivsi3.o)
- .data          0x0000000040000018        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_divsi3.o)
- .data          0x0000000040000018        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_umodsi3.o)
- .data          0x0000000040000018        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_modsi3.o)
- .data          0x0000000040000018        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_dvmd_tls.o)
+ .data          0x0000000040000018        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfprintf.o)
+ .data          0x0000000040000018        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
+ .data          0x0000000040000018      0x428 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-impure.o)
+                0x0000000040000018                _impure_ptr
+ .data          0x0000000040000440       0x7c /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-locale.o)
+                0x0000000040000460                __mb_cur_max
+ .data          0x00000000400004bc      0x410 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mallocr.o)
+                0x00000000400004bc                __malloc_av_
+                0x00000000400008c4                __malloc_sbrk_base
+                0x00000000400008c8                __malloc_trim_threshold
+ .data          0x00000000400008cc        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memchr-stub.o)
+ .data          0x00000000400008cc        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mlock.o)
+ .data          0x00000000400008cc        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
+ .data          0x00000000400008cc        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-s_fpclassify.o)
+ .data          0x00000000400008cc        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfiprintf.o)
+ .data          0x00000000400008cc        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-callocr.o)
+ .data          0x00000000400008cc        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-freer.o)
+ .data          0x00000000400008cc        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memmove.o)
+ .data          0x00000000400008cc        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-reallocr.o)
+ .data          0x00000000400008cc        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_udivsi3.o)
+ .data          0x00000000400008cc        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_divsi3.o)
+ .data          0x00000000400008cc        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_umodsi3.o)
+ .data          0x00000000400008cc        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_modsi3.o)
+ .data          0x00000000400008cc        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_dvmd_tls.o)
+ .data          0x00000000400008cc        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_addsubdf3.o)
+ .data          0x00000000400008cc        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_muldivdf3.o)
+ .data          0x00000000400008cc        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_cmpdf2.o)
+ .data          0x00000000400008cc        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_fixdfsi.o)
  *(.data.*)
  *(.gnu.linkonce.d*)
-                0x0000000040000018                . = ALIGN (0x4)
+                0x00000000400008cc                . = ALIGN (0x4)
 
-.igot.plt       0x0000000040000018        0x0 load address 0x00000000000166c0
- .igot.plt      0x0000000040000018        0x0 Startup.o
-                0x0000000040000018                . = ALIGN (0x4)
-                0x0000000040000018                _edata = .
-                0x0000000040000018                PROVIDE (edata, .)
+.igot.plt       0x00000000400008cc        0x0 load address 0x000000000001d1e8
+ .igot.plt      0x00000000400008cc        0x0 Startup.o
+                0x00000000400008cc                . = ALIGN (0x4)
+                0x00000000400008cc                _edata = .
+                0x00000000400008cc                PROVIDE (edata, .)
 
-.bss            0x0000000040000018      0xa9c load address 0x00000000000166c0
-                0x0000000040000018                __bss_start = .
-                0x0000000040000018                __bss_start__ = .
+.bss            0x00000000400008cc      0xaf4 load address 0x000000000001d1e8
+                0x00000000400008cc                __bss_start = .
+                0x00000000400008cc                __bss_start__ = .
  *(.bss)
- .bss           0x0000000040000018        0x0 Startup.o
- .bss           0x0000000040000018        0x0 ../lib/irq.o
- .bss           0x0000000040000018       0x14 main.o
-                0x0000000040000018                RX_in
-                0x000000004000001a                log_array1
-                0x000000004000001b                log_array2
-                0x000000004000001c                get_frame
-                0x000000004000001e                ADC_in
-                0x0000000040000020                log_adc
-                0x0000000040000024                log_gps
-                0x0000000040000028                gps_valid
- .bss           0x000000004000002c        0x4 ../lib/syscalls.o
- .bss           0x0000000040000030        0x4 ../lib/rprintf.o
- .bss           0x0000000040000034        0x4 ../lib/string_printf.o
- .bss           0x0000000040000038        0x0 ../lib/serial.o
- .bss           0x0000000040000038        0x4 ../lib/rootdir.o
- .bss           0x000000004000003c      0x210 ../lib/sd_raw.o
- .bss           0x000000004000024c       0xf8 ../lib/fat.o
- .bss           0x0000000040000344       0x1c ../lib/partition.o
- .bss           0x0000000040000360        0x0 ../lib/itoa.o
- .bss           0x0000000040000360        0x0 ../lib/byteordering.o
- .bss           0x0000000040000360        0x0 ../LPCUSB/armVIC.o
- .bss           0x0000000040000360        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memcpy-stub.o)
- .bss           0x0000000040000360        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memset.o)
- .bss           0x0000000040000360        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strchr.o)
- .bss           0x0000000040000360        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcmp.o)
- .bss           0x0000000040000360        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcpy.o)
- .bss           0x0000000040000360        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strlen.o)
- .bss           0x0000000040000360        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncmp.o)
- .bss           0x0000000040000360        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncpy.o)
- .bss           0x0000000040000360        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strrchr.o)
- .bss           0x0000000040000360        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_udivsi3.o)
- .bss           0x0000000040000360        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_divsi3.o)
- .bss           0x0000000040000360        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_umodsi3.o)
- .bss           0x0000000040000360        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_modsi3.o)
- .bss           0x0000000040000360        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_dvmd_tls.o)
+ .bss           0x00000000400008cc        0x0 Startup.o
+ .bss           0x00000000400008cc        0x0 ../lib/irq.o
+ .bss           0x00000000400008cc       0x18 main.o
+                0x00000000400008cc                RX_in
+                0x00000000400008ce                log_array1
+                0x00000000400008cf                log_array2
+                0x00000000400008d0                get_frame
+                0x00000000400008d2                ADC_in
+                0x00000000400008d4                log_adc
+                0x00000000400008d8                use_adc
+                0x00000000400008dc                log_gps
+                0x00000000400008e0                gps_valid
+ .bss           0x00000000400008e4        0x4 ../lib/syscalls.o
+ .bss           0x00000000400008e8        0x4 ../lib/rprintf.o
+ .bss           0x00000000400008ec        0x4 ../lib/string_printf.o
+ .bss           0x00000000400008f0        0x0 ../lib/serial.o
+ .bss           0x00000000400008f0        0x4 ../lib/rootdir.o
+ .bss           0x00000000400008f4      0x210 ../lib/sd_raw.o
+ .bss           0x0000000040000b04       0xf8 ../lib/fat.o
+ .bss           0x0000000040000bfc       0x1c ../lib/partition.o
+ .bss           0x0000000040000c18        0x0 ../lib/itoa.o
+ .bss           0x0000000040000c18        0x0 ../lib/byteordering.o
+ .bss           0x0000000040000c18        0x0 ../LPCUSB/armVIC.o
+ .bss           0x0000000040000c18        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memcpy-stub.o)
+ .bss           0x0000000040000c18        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memset.o)
+ .bss           0x0000000040000c18        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-sprintf.o)
+ .bss           0x0000000040000c18        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strchr.o)
+ .bss           0x0000000040000c18        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcmp.o)
+ .bss           0x0000000040000c18        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcpy.o)
+ .bss           0x0000000040000c18        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strlen.o)
+ .bss           0x0000000040000c18        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncmp.o)
+ .bss           0x0000000040000c18        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncpy.o)
+ .bss           0x0000000040000c18        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strrchr.o)
+ .bss           0x0000000040000c18        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfprintf.o)
+ .bss           0x0000000040000c18        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
+ .bss           0x0000000040000c18        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-impure.o)
+ .bss           0x0000000040000c18        0xc /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-locale.o)
+                0x0000000040000c18                _PathLocale
+                0x0000000040000c1c                __mlocale_changed
+                0x0000000040000c20                __nlocale_changed
+ .bss           0x0000000040000c24       0x34 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mallocr.o)
+                0x0000000040000c24                __malloc_top_pad
+                0x0000000040000c28                __malloc_current_mallinfo
+                0x0000000040000c50                __malloc_max_sbrked_mem
+                0x0000000040000c54                __malloc_max_total_mem
+ .bss           0x0000000040000c58        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memchr-stub.o)
+ .bss           0x0000000040000c58        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mlock.o)
+ .bss           0x0000000040000c58        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
+ .bss           0x0000000040000c58        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-s_fpclassify.o)
+ .bss           0x0000000040000c58        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfiprintf.o)
+ .bss           0x0000000040000c58        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-callocr.o)
+ .bss           0x0000000040000c58        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-freer.o)
+ .bss           0x0000000040000c58        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memmove.o)
+ .bss           0x0000000040000c58        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-reallocr.o)
+ .bss           0x0000000040000c58        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_udivsi3.o)
+ .bss           0x0000000040000c58        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_divsi3.o)
+ .bss           0x0000000040000c58        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_umodsi3.o)
+ .bss           0x0000000040000c58        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_modsi3.o)
+ .bss           0x0000000040000c58        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_dvmd_tls.o)
+ .bss           0x0000000040000c58        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_addsubdf3.o)
+ .bss           0x0000000040000c58        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_muldivdf3.o)
+ .bss           0x0000000040000c58        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_cmpdf2.o)
+ .bss           0x0000000040000c58        0x0 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_fixdfsi.o)
  *(.gnu.linkonce.b*)
  *(COMMON)
- COMMON         0x0000000040000360      0x710 main.o
-                0x0000000040000360                RX_array2
-                0x0000000040000560                stringBuf
-                0x0000000040000660                ADCStringSize
-                0x0000000040000664                RX_array1
-                0x0000000040000864                fd
-                0x0000000040000868                handle
-                0x000000004000086c                stringSize
-                0x0000000040000870                ADC_array
- COMMON         0x0000000040000a70        0x1 ../lib/string_printf.o
-                0x0000000040000a70                buffer_ptr
- *fill*         0x0000000040000a71        0x3 
- COMMON         0x0000000040000a74       0x40 ../lib/rootdir.o
-                0x0000000040000a74                fs
-                0x0000000040000a78                dir_entry
-                0x0000000040000aac                partition
-                0x0000000040000ab0                dd
-                0x0000000040000ab4                . = ALIGN (0x4)
-                0x0000000040000ab4                . = ALIGN (0x4)
-                0x0000000040000ab4                __bss_end__ = .
-                0x0000000040000ab4                PROVIDE (__bss_end, .)
+ COMMON         0x0000000040000c58      0x724 main.o
+                0x0000000040000c58                RX_array2
+                0x0000000040000e58                stringBuf
+                0x0000000040000f58                ADCStringSize
+                0x0000000040000f5c                RX_array1
+                0x000000004000115c                time_buffer
+                0x0000000040001164                fd
+                0x0000000040001168                handle
+                0x000000004000116c                seconds
+                0x0000000040001170                stringSize
+                0x0000000040001174                ADC_array
+                0x0000000040001374                minutes
+                0x0000000040001378                hours
+ COMMON         0x000000004000137c        0x1 ../lib/string_printf.o
+                0x000000004000137c                buffer_ptr
+ *fill*         0x000000004000137d        0x3 
+ COMMON         0x0000000040001380       0x40 ../lib/rootdir.o
+                0x0000000040001380                fs
+                0x0000000040001384                dir_entry
+                0x00000000400013b8                partition
+                0x00000000400013bc                dd
+                0x00000000400013c0                . = ALIGN (0x4)
+                0x00000000400013c0                . = ALIGN (0x4)
+                0x00000000400013c0                __bss_end__ = .
+                0x00000000400013c0                PROVIDE (__bss_end, .)
 
-.stack          0x0000000040000b00      0xc00
+.stack          0x0000000040001400      0xc00
  *(.stack)
- .stack         0x0000000040000b00      0xc00 Startup.o
-                0x0000000040001700                PROVIDE (_stack, .)
-                0x0000000040001700                . = ALIGN (0x4)
-                0x0000000040001700                _end = .
-                0x0000000040001700                PROVIDE (end, .)
+ .stack         0x0000000040001400      0xc00 Startup.o
+                0x0000000040002000                PROVIDE (_stack, .)
+                0x0000000040002000                . = ALIGN (0x4)
+                0x0000000040002000                _end = .
+                0x0000000040002000                PROVIDE (end, .)
 
 .stab
  *(.stab)
@@ -441,6 +662,7 @@ END GROUP
  .comment       0x0000000000000011       0x12 ../LPCUSB/armVIC.o
  .comment       0x0000000000000011       0x12 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memcpy-stub.o)
  .comment       0x0000000000000011       0x12 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memset.o)
+ .comment       0x0000000000000011       0x12 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-sprintf.o)
  .comment       0x0000000000000011       0x12 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strchr.o)
  .comment       0x0000000000000011       0x12 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcmp.o)
  .comment       0x0000000000000011       0x12 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcpy.o)
@@ -448,6 +670,20 @@ END GROUP
  .comment       0x0000000000000011       0x12 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncmp.o)
  .comment       0x0000000000000011       0x12 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncpy.o)
  .comment       0x0000000000000011       0x12 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strrchr.o)
+ .comment       0x0000000000000011       0x12 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfprintf.o)
+ .comment       0x0000000000000011       0x12 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
+ .comment       0x0000000000000011       0x12 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-impure.o)
+ .comment       0x0000000000000011       0x12 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-locale.o)
+ .comment       0x0000000000000011       0x12 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mallocr.o)
+ .comment       0x0000000000000011       0x12 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memchr-stub.o)
+ .comment       0x0000000000000011       0x12 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mlock.o)
+ .comment       0x0000000000000011       0x12 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
+ .comment       0x0000000000000011       0x12 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-s_fpclassify.o)
+ .comment       0x0000000000000011       0x12 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfiprintf.o)
+ .comment       0x0000000000000011       0x12 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-callocr.o)
+ .comment       0x0000000000000011       0x12 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-freer.o)
+ .comment       0x0000000000000011       0x12 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memmove.o)
+ .comment       0x0000000000000011       0x12 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-reallocr.o)
 
 .ARM.attributes
                 0x0000000000000000       0x10
@@ -484,29 +720,67 @@ END GROUP
  .ARM.attributes
                 0x00000000000000f0       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memset.o)
  .ARM.attributes
-                0x0000000000000100       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strchr.o)
+                0x0000000000000100       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-sprintf.o)
  .ARM.attributes
-                0x0000000000000110       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcmp.o)
+                0x0000000000000110       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strchr.o)
  .ARM.attributes
-                0x0000000000000120       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcpy.o)
+                0x0000000000000120       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcmp.o)
  .ARM.attributes
-                0x0000000000000130       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strlen.o)
+                0x0000000000000130       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcpy.o)
  .ARM.attributes
-                0x0000000000000140       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncmp.o)
+                0x0000000000000140       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strlen.o)
  .ARM.attributes
-                0x0000000000000150       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncpy.o)
+                0x0000000000000150       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncmp.o)
  .ARM.attributes
-                0x0000000000000160       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strrchr.o)
+                0x0000000000000160       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncpy.o)
  .ARM.attributes
-                0x0000000000000170       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_udivsi3.o)
+                0x0000000000000170       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strrchr.o)
  .ARM.attributes
-                0x0000000000000180       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_divsi3.o)
+                0x0000000000000180       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfprintf.o)
  .ARM.attributes
-                0x0000000000000190       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_umodsi3.o)
+                0x0000000000000190       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
  .ARM.attributes
-                0x00000000000001a0       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_modsi3.o)
+                0x00000000000001a0       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-impure.o)
  .ARM.attributes
-                0x00000000000001b0       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_dvmd_tls.o)
+                0x00000000000001b0       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-locale.o)
+ .ARM.attributes
+                0x00000000000001c0       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mallocr.o)
+ .ARM.attributes
+                0x00000000000001d0       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memchr-stub.o)
+ .ARM.attributes
+                0x00000000000001e0       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mlock.o)
+ .ARM.attributes
+                0x00000000000001f0       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
+ .ARM.attributes
+                0x0000000000000200       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-s_fpclassify.o)
+ .ARM.attributes
+                0x0000000000000210       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfiprintf.o)
+ .ARM.attributes
+                0x0000000000000220       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-callocr.o)
+ .ARM.attributes
+                0x0000000000000230       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-freer.o)
+ .ARM.attributes
+                0x0000000000000240       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memmove.o)
+ .ARM.attributes
+                0x0000000000000250       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-reallocr.o)
+ .ARM.attributes
+                0x0000000000000260       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_udivsi3.o)
+ .ARM.attributes
+                0x0000000000000270       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_divsi3.o)
+ .ARM.attributes
+                0x0000000000000280       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_umodsi3.o)
+ .ARM.attributes
+                0x0000000000000290       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_modsi3.o)
+ .ARM.attributes
+                0x00000000000002a0       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_dvmd_tls.o)
+ .ARM.attributes
+                0x00000000000002b0       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_addsubdf3.o)
+ .ARM.attributes
+                0x00000000000002c0       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_muldivdf3.o)
+ .ARM.attributes
+                0x00000000000002d0       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_cmpdf2.o)
+ .ARM.attributes
+                0x00000000000002e0       0x10 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_fixdfsi.o)
 
 .debug
  *(.debug)
@@ -520,7 +794,7 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x0000000000000000      0x390
+.debug_aranges  0x0000000000000000      0x5e8
  *(.debug_aranges)
  .debug_aranges
                 0x0000000000000000       0x28 Startup.o
@@ -555,226 +829,378 @@ END GROUP
  .debug_aranges
                 0x00000000000001f0       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memset.o)
  .debug_aranges
-                0x0000000000000210       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strchr.o)
+                0x0000000000000210       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-sprintf.o)
  .debug_aranges
-                0x0000000000000230       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcmp.o)
+                0x0000000000000230       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strchr.o)
  .debug_aranges
-                0x0000000000000250       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcpy.o)
+                0x0000000000000250       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcmp.o)
  .debug_aranges
-                0x0000000000000270       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strlen.o)
+                0x0000000000000270       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcpy.o)
  .debug_aranges
-                0x0000000000000290       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncmp.o)
+                0x0000000000000290       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strlen.o)
  .debug_aranges
-                0x00000000000002b0       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncpy.o)
+                0x00000000000002b0       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncmp.o)
  .debug_aranges
-                0x00000000000002d0       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strrchr.o)
+                0x00000000000002d0       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncpy.o)
  .debug_aranges
-                0x00000000000002f0       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_udivsi3.o)
+                0x00000000000002f0       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strrchr.o)
  .debug_aranges
-                0x0000000000000310       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_divsi3.o)
+                0x0000000000000310       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfprintf.o)
  .debug_aranges
-                0x0000000000000330       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_umodsi3.o)
+                0x0000000000000330       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
  .debug_aranges
-                0x0000000000000350       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_modsi3.o)
+                0x0000000000000350       0x18 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-impure.o)
  .debug_aranges
-                0x0000000000000370       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_dvmd_tls.o)
+                0x0000000000000368       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-locale.o)
+ .debug_aranges
+                0x0000000000000388       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mallocr.o)
+ .debug_aranges
+                0x00000000000003a8       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memchr-stub.o)
+ .debug_aranges
+                0x00000000000003c8       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mlock.o)
+ .debug_aranges
+                0x00000000000003e8       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
+ .debug_aranges
+                0x0000000000000408       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-s_fpclassify.o)
+ .debug_aranges
+                0x0000000000000428       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfiprintf.o)
+ .debug_aranges
+                0x0000000000000448       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-callocr.o)
+ .debug_aranges
+                0x0000000000000468       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-freer.o)
+ .debug_aranges
+                0x0000000000000488       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memmove.o)
+ .debug_aranges
+                0x00000000000004a8       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-reallocr.o)
+ .debug_aranges
+                0x00000000000004c8       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_udivsi3.o)
+ .debug_aranges
+                0x00000000000004e8       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_divsi3.o)
+ .debug_aranges
+                0x0000000000000508       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_umodsi3.o)
+ .debug_aranges
+                0x0000000000000528       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_modsi3.o)
+ .debug_aranges
+                0x0000000000000548       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_dvmd_tls.o)
+ .debug_aranges
+                0x0000000000000568       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_addsubdf3.o)
+ .debug_aranges
+                0x0000000000000588       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_muldivdf3.o)
+ .debug_aranges
+                0x00000000000005a8       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_cmpdf2.o)
+ .debug_aranges
+                0x00000000000005c8       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_fixdfsi.o)
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x0000000000000000     0x848a
+.debug_info     0x0000000000000000    0x13fc2
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x0000000000000000       0x61 Startup.o
  .debug_info    0x0000000000000061      0x19e ../lib/irq.o
- .debug_info    0x00000000000001ff     0x193f main.o
- .debug_info    0x0000000000001b3e      0xcfe ../lib/syscalls.o
- .debug_info    0x000000000000283c      0x2ab ../lib/rprintf.o
- .debug_info    0x0000000000002ae7      0x2b1 ../lib/string_printf.o
- .debug_info    0x0000000000002d98      0x1a9 ../lib/serial.o
- .debug_info    0x0000000000002f41      0xa7f ../lib/rootdir.o
- .debug_info    0x00000000000039c0      0xb49 ../lib/sd_raw.o
- .debug_info    0x0000000000004509     0x2927 ../lib/fat.o
- .debug_info    0x0000000000006e30      0x3d7 ../lib/partition.o
- .debug_info    0x0000000000007207      0x11d ../lib/itoa.o
- .debug_info    0x0000000000007324      0x152 ../lib/byteordering.o
- .debug_info    0x0000000000007476      0x2f7 ../LPCUSB/armVIC.o
- .debug_info    0x000000000000776d      0x102 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memcpy-stub.o)
- .debug_info    0x000000000000786f       0xd3 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memset.o)
- .debug_info    0x0000000000007942       0xe3 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strchr.o)
- .debug_info    0x0000000000007a25       0xb5 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcmp.o)
- .debug_info    0x0000000000007ada       0xbd /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcpy.o)
- .debug_info    0x0000000000007b97       0xcd /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strlen.o)
- .debug_info    0x0000000000007c64       0xd0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncmp.o)
- .debug_info    0x0000000000007d34       0xf6 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncpy.o)
- .debug_info    0x0000000000007e2a      0x106 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strrchr.o)
- .debug_info    0x0000000000007f30      0x112 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_udivsi3.o)
- .debug_info    0x0000000000008042      0x112 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_divsi3.o)
- .debug_info    0x0000000000008154      0x112 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_umodsi3.o)
- .debug_info    0x0000000000008266      0x112 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_modsi3.o)
- .debug_info    0x0000000000008378      0x112 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_dvmd_tls.o)
+ .debug_info    0x00000000000001ff     0x1b88 main.o
+ .debug_info    0x0000000000001d87      0xcfe ../lib/syscalls.o
+ .debug_info    0x0000000000002a85      0x2ab ../lib/rprintf.o
+ .debug_info    0x0000000000002d30      0x2b1 ../lib/string_printf.o
+ .debug_info    0x0000000000002fe1      0x1a9 ../lib/serial.o
+ .debug_info    0x000000000000318a      0xa7f ../lib/rootdir.o
+ .debug_info    0x0000000000003c09      0xb49 ../lib/sd_raw.o
+ .debug_info    0x0000000000004752     0x2927 ../lib/fat.o
+ .debug_info    0x0000000000007079      0x3d7 ../lib/partition.o
+ .debug_info    0x0000000000007450      0x11d ../lib/itoa.o
+ .debug_info    0x000000000000756d      0x152 ../lib/byteordering.o
+ .debug_info    0x00000000000076bf      0x2f7 ../LPCUSB/armVIC.o
+ .debug_info    0x00000000000079b6      0x102 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memcpy-stub.o)
+ .debug_info    0x0000000000007ab8       0xd3 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memset.o)
+ .debug_info    0x0000000000007b8b      0xab6 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-sprintf.o)
+ .debug_info    0x0000000000008641       0xe3 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strchr.o)
+ .debug_info    0x0000000000008724       0xb5 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcmp.o)
+ .debug_info    0x00000000000087d9       0xbd /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcpy.o)
+ .debug_info    0x0000000000008896       0xcd /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strlen.o)
+ .debug_info    0x0000000000008963       0xd0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncmp.o)
+ .debug_info    0x0000000000008a33       0xf6 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncpy.o)
+ .debug_info    0x0000000000008b29      0x106 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strrchr.o)
+ .debug_info    0x0000000000008c2f     0x1743 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfprintf.o)
+ .debug_info    0x000000000000a372     0x13da /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
+ .debug_info    0x000000000000b74c      0x960 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-impure.o)
+ .debug_info    0x000000000000c0ac      0xd0a /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-locale.o)
+ .debug_info    0x000000000000cdb6      0xe20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mallocr.o)
+ .debug_info    0x000000000000dbd6       0xf8 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memchr-stub.o)
+ .debug_info    0x000000000000dcce      0x984 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mlock.o)
+ .debug_info    0x000000000000e652     0x173d /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
+ .debug_info    0x000000000000fd8f      0x145 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-s_fpclassify.o)
+ .debug_info    0x000000000000fed4     0x10f7 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfiprintf.o)
+ .debug_info    0x0000000000010fcb      0xac5 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-callocr.o)
+ .debug_info    0x0000000000011a90      0xd0a /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-freer.o)
+ .debug_info    0x000000000001279a      0x102 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memmove.o)
+ .debug_info    0x000000000001289c      0xd80 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-reallocr.o)
+ .debug_info    0x000000000001361c      0x112 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_udivsi3.o)
+ .debug_info    0x000000000001372e      0x112 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_divsi3.o)
+ .debug_info    0x0000000000013840      0x112 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_umodsi3.o)
+ .debug_info    0x0000000000013952      0x112 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_modsi3.o)
+ .debug_info    0x0000000000013a64      0x112 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_dvmd_tls.o)
+ .debug_info    0x0000000000013b76      0x113 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_addsubdf3.o)
+ .debug_info    0x0000000000013c89      0x113 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_muldivdf3.o)
+ .debug_info    0x0000000000013d9c      0x113 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_cmpdf2.o)
+ .debug_info    0x0000000000013eaf      0x113 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_fixdfsi.o)
 
-.debug_abbrev   0x0000000000000000     0x1bdf
+.debug_abbrev   0x0000000000000000     0x3aca
  *(.debug_abbrev)
  .debug_abbrev  0x0000000000000000       0x12 Startup.o
  .debug_abbrev  0x0000000000000012      0x110 ../lib/irq.o
- .debug_abbrev  0x0000000000000122      0x3ae main.o
- .debug_abbrev  0x00000000000004d0      0x1c8 ../lib/syscalls.o
- .debug_abbrev  0x0000000000000698      0x1a7 ../lib/rprintf.o
- .debug_abbrev  0x000000000000083f      0x15f ../lib/string_printf.o
- .debug_abbrev  0x000000000000099e       0xeb ../lib/serial.o
- .debug_abbrev  0x0000000000000a89      0x1ef ../lib/rootdir.o
- .debug_abbrev  0x0000000000000c78      0x2ac ../lib/sd_raw.o
- .debug_abbrev  0x0000000000000f24      0x3f0 ../lib/fat.o
- .debug_abbrev  0x0000000000001314      0x168 ../lib/partition.o
- .debug_abbrev  0x000000000000147c       0x9e ../lib/itoa.o
- .debug_abbrev  0x000000000000151a       0xb3 ../lib/byteordering.o
- .debug_abbrev  0x00000000000015cd       0xe8 ../LPCUSB/armVIC.o
- .debug_abbrev  0x00000000000016b5       0xa2 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memcpy-stub.o)
- .debug_abbrev  0x0000000000001757       0x8c /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memset.o)
- .debug_abbrev  0x00000000000017e3       0x81 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strchr.o)
- .debug_abbrev  0x0000000000001864       0x70 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcmp.o)
- .debug_abbrev  0x00000000000018d4       0x70 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcpy.o)
- .debug_abbrev  0x0000000000001944       0x8a /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strlen.o)
- .debug_abbrev  0x00000000000019ce       0x6e /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncmp.o)
- .debug_abbrev  0x0000000000001a3c       0x8c /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncpy.o)
- .debug_abbrev  0x0000000000001ac8       0xb3 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strrchr.o)
- .debug_abbrev  0x0000000000001b7b       0x14 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_udivsi3.o)
- .debug_abbrev  0x0000000000001b8f       0x14 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_divsi3.o)
- .debug_abbrev  0x0000000000001ba3       0x14 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_umodsi3.o)
- .debug_abbrev  0x0000000000001bb7       0x14 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_modsi3.o)
- .debug_abbrev  0x0000000000001bcb       0x14 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_dvmd_tls.o)
+ .debug_abbrev  0x0000000000000122      0x394 main.o
+ .debug_abbrev  0x00000000000004b6      0x1c8 ../lib/syscalls.o
+ .debug_abbrev  0x000000000000067e      0x1a7 ../lib/rprintf.o
+ .debug_abbrev  0x0000000000000825      0x15f ../lib/string_printf.o
+ .debug_abbrev  0x0000000000000984       0xeb ../lib/serial.o
+ .debug_abbrev  0x0000000000000a6f      0x1ef ../lib/rootdir.o
+ .debug_abbrev  0x0000000000000c5e      0x2ac ../lib/sd_raw.o
+ .debug_abbrev  0x0000000000000f0a      0x3f0 ../lib/fat.o
+ .debug_abbrev  0x00000000000012fa      0x168 ../lib/partition.o
+ .debug_abbrev  0x0000000000001462       0x9e ../lib/itoa.o
+ .debug_abbrev  0x0000000000001500       0xb3 ../lib/byteordering.o
+ .debug_abbrev  0x00000000000015b3       0xe8 ../LPCUSB/armVIC.o
+ .debug_abbrev  0x000000000000169b       0xa2 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memcpy-stub.o)
+ .debug_abbrev  0x000000000000173d       0x8c /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memset.o)
+ .debug_abbrev  0x00000000000017c9      0x1f4 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-sprintf.o)
+ .debug_abbrev  0x00000000000019bd       0x81 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strchr.o)
+ .debug_abbrev  0x0000000000001a3e       0x70 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcmp.o)
+ .debug_abbrev  0x0000000000001aae       0x70 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcpy.o)
+ .debug_abbrev  0x0000000000001b1e       0x8a /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strlen.o)
+ .debug_abbrev  0x0000000000001ba8       0x6e /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncmp.o)
+ .debug_abbrev  0x0000000000001c16       0x8c /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncpy.o)
+ .debug_abbrev  0x0000000000001ca2       0xb3 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strrchr.o)
+ .debug_abbrev  0x0000000000001d55      0x356 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfprintf.o)
+ .debug_abbrev  0x00000000000020ab      0x2c0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
+ .debug_abbrev  0x000000000000236b      0x160 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-impure.o)
+ .debug_abbrev  0x00000000000024cb      0x29f /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-locale.o)
+ .debug_abbrev  0x000000000000276a      0x284 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mallocr.o)
+ .debug_abbrev  0x00000000000029ee       0xa9 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memchr-stub.o)
+ .debug_abbrev  0x0000000000002a97      0x17a /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mlock.o)
+ .debug_abbrev  0x0000000000002c11      0x328 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
+ .debug_abbrev  0x0000000000002f39       0xc6 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-s_fpclassify.o)
+ .debug_abbrev  0x0000000000002fff      0x2e8 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfiprintf.o)
+ .debug_abbrev  0x00000000000032e7      0x1f5 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-callocr.o)
+ .debug_abbrev  0x00000000000034dc      0x246 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-freer.o)
+ .debug_abbrev  0x0000000000003722       0x9a /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memmove.o)
+ .debug_abbrev  0x00000000000037bc      0x25a /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-reallocr.o)
+ .debug_abbrev  0x0000000000003a16       0x14 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_udivsi3.o)
+ .debug_abbrev  0x0000000000003a2a       0x14 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_divsi3.o)
+ .debug_abbrev  0x0000000000003a3e       0x14 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_umodsi3.o)
+ .debug_abbrev  0x0000000000003a52       0x14 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_modsi3.o)
+ .debug_abbrev  0x0000000000003a66       0x14 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_dvmd_tls.o)
+ .debug_abbrev  0x0000000000003a7a       0x14 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_addsubdf3.o)
+ .debug_abbrev  0x0000000000003a8e       0x14 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_muldivdf3.o)
+ .debug_abbrev  0x0000000000003aa2       0x14 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_cmpdf2.o)
+ .debug_abbrev  0x0000000000003ab6       0x14 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_fixdfsi.o)
 
-.debug_line     0x0000000000000000     0x2c9d
+.debug_line     0x0000000000000000     0x6862
  *(.debug_line)
  .debug_line    0x0000000000000000       0xbc Startup.o
  .debug_line    0x00000000000000bc       0xa2 ../lib/irq.o
- .debug_line    0x000000000000015e      0x823 main.o
- .debug_line    0x0000000000000981      0x14d ../lib/syscalls.o
- .debug_line    0x0000000000000ace      0x129 ../lib/rprintf.o
- .debug_line    0x0000000000000bf7      0x118 ../lib/string_printf.o
- .debug_line    0x0000000000000d0f       0x98 ../lib/serial.o
- .debug_line    0x0000000000000da7      0x178 ../lib/rootdir.o
- .debug_line    0x0000000000000f1f      0x2bc ../lib/sd_raw.o
- .debug_line    0x00000000000011db      0x70c ../lib/fat.o
- .debug_line    0x00000000000018e7       0xeb ../lib/partition.o
- .debug_line    0x00000000000019d2       0x48 ../lib/itoa.o
- .debug_line    0x0000000000001a1a       0xa8 ../lib/byteordering.o
- .debug_line    0x0000000000001ac2       0x8f ../LPCUSB/armVIC.o
- .debug_line    0x0000000000001b51      0x1b7 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memcpy-stub.o)
- .debug_line    0x0000000000001d08      0x1af /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memset.o)
- .debug_line    0x0000000000001eb7      0x138 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strchr.o)
- .debug_line    0x0000000000001fef      0x12d /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcmp.o)
- .debug_line    0x000000000000211c      0x12d /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcpy.o)
- .debug_line    0x0000000000002249      0x1a5 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strlen.o)
- .debug_line    0x00000000000023ee      0x1b9 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncmp.o)
- .debug_line    0x00000000000025a7      0x1cc /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncpy.o)
- .debug_line    0x0000000000002773      0x136 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strrchr.o)
- .debug_line    0x00000000000028a9       0xda /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_udivsi3.o)
- .debug_line    0x0000000000002983       0xe6 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_divsi3.o)
- .debug_line    0x0000000000002a69       0xc1 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_umodsi3.o)
- .debug_line    0x0000000000002b2a       0xc7 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_modsi3.o)
- .debug_line    0x0000000000002bf1       0xac /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_dvmd_tls.o)
+ .debug_line    0x000000000000015e      0x86c main.o
+ .debug_line    0x00000000000009ca      0x14d ../lib/syscalls.o
+ .debug_line    0x0000000000000b17      0x129 ../lib/rprintf.o
+ .debug_line    0x0000000000000c40      0x118 ../lib/string_printf.o
+ .debug_line    0x0000000000000d58       0x98 ../lib/serial.o
+ .debug_line    0x0000000000000df0      0x178 ../lib/rootdir.o
+ .debug_line    0x0000000000000f68      0x2bc ../lib/sd_raw.o
+ .debug_line    0x0000000000001224      0x70c ../lib/fat.o
+ .debug_line    0x0000000000001930       0xeb ../lib/partition.o
+ .debug_line    0x0000000000001a1b       0x48 ../lib/itoa.o
+ .debug_line    0x0000000000001a63       0xa8 ../lib/byteordering.o
+ .debug_line    0x0000000000001b0b       0x8f ../LPCUSB/armVIC.o
+ .debug_line    0x0000000000001b9a      0x1b7 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memcpy-stub.o)
+ .debug_line    0x0000000000001d51      0x1af /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memset.o)
+ .debug_line    0x0000000000001f00      0x26d /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-sprintf.o)
+ .debug_line    0x000000000000216d      0x138 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strchr.o)
+ .debug_line    0x00000000000022a5      0x12d /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcmp.o)
+ .debug_line    0x00000000000023d2      0x12d /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcpy.o)
+ .debug_line    0x00000000000024ff      0x1a5 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strlen.o)
+ .debug_line    0x00000000000026a4      0x1b9 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncmp.o)
+ .debug_line    0x000000000000285d      0x1cc /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncpy.o)
+ .debug_line    0x0000000000002a29      0x136 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strrchr.o)
+ .debug_line    0x0000000000002b5f      0x8c2 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfprintf.o)
+ .debug_line    0x0000000000003421      0x758 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
+ .debug_line    0x0000000000003b79      0x1a4 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-impure.o)
+ .debug_line    0x0000000000003d1d      0x275 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-locale.o)
+ .debug_line    0x0000000000003f92      0x396 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mallocr.o)
+ .debug_line    0x0000000000004328      0x1c2 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memchr-stub.o)
+ .debug_line    0x00000000000044ea      0x1b6 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mlock.o)
+ .debug_line    0x00000000000046a0      0x67f /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
+ .debug_line    0x0000000000004d1f      0x1d4 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-s_fpclassify.o)
+ .debug_line    0x0000000000004ef3      0x5dd /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfiprintf.o)
+ .debug_line    0x00000000000054d0      0x1dc /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-callocr.o)
+ .debug_line    0x00000000000056ac      0x2e1 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-freer.o)
+ .debug_line    0x000000000000598d      0x1ce /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memmove.o)
+ .debug_line    0x0000000000005b5b      0x292 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-reallocr.o)
+ .debug_line    0x0000000000005ded       0xda /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_udivsi3.o)
+ .debug_line    0x0000000000005ec7       0xe6 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_divsi3.o)
+ .debug_line    0x0000000000005fad       0xc1 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_umodsi3.o)
+ .debug_line    0x000000000000606e       0xc7 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_modsi3.o)
+ .debug_line    0x0000000000006135       0xac /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_dvmd_tls.o)
+ .debug_line    0x00000000000061e1      0x237 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_addsubdf3.o)
+ .debug_line    0x0000000000006418      0x248 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_muldivdf3.o)
+ .debug_line    0x0000000000006660      0x13f /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_cmpdf2.o)
+ .debug_line    0x000000000000679f       0xc3 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_fixdfsi.o)
 
-.debug_frame    0x0000000000000000     0x1018
+.debug_frame    0x0000000000000000     0x15dc
  *(.debug_frame)
  .debug_frame   0x0000000000000000       0x7c ../lib/irq.o
- .debug_frame   0x000000000000007c      0x288 main.o
- .debug_frame   0x0000000000000304       0x80 ../lib/syscalls.o
- .debug_frame   0x0000000000000384       0x88 ../lib/rprintf.o
- .debug_frame   0x000000000000040c       0x70 ../lib/string_printf.o
- .debug_frame   0x000000000000047c       0xb4 ../lib/serial.o
- .debug_frame   0x0000000000000530      0x124 ../lib/rootdir.o
- .debug_frame   0x0000000000000654      0x1b0 ../lib/sd_raw.o
- .debug_frame   0x0000000000000804      0x4d0 ../lib/fat.o
- .debug_frame   0x0000000000000cd4       0x54 ../lib/partition.o
- .debug_frame   0x0000000000000d28       0x50 ../lib/itoa.o
- .debug_frame   0x0000000000000d78       0x50 ../lib/byteordering.o
- .debug_frame   0x0000000000000dc8       0x70 ../LPCUSB/armVIC.o
- .debug_frame   0x0000000000000e38       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memcpy-stub.o)
- .debug_frame   0x0000000000000e58       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memset.o)
- .debug_frame   0x0000000000000e78       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strchr.o)
- .debug_frame   0x0000000000000e98       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcmp.o)
- .debug_frame   0x0000000000000eb8       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcpy.o)
- .debug_frame   0x0000000000000ed8       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strlen.o)
- .debug_frame   0x0000000000000ef8       0x2c /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncmp.o)
- .debug_frame   0x0000000000000f24       0x28 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncpy.o)
- .debug_frame   0x0000000000000f4c       0x2c /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strrchr.o)
- .debug_frame   0x0000000000000f78       0x28 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_udivsi3.o)
- .debug_frame   0x0000000000000fa0       0x28 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_divsi3.o)
- .debug_frame   0x0000000000000fc8       0x28 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_umodsi3.o)
- .debug_frame   0x0000000000000ff0       0x28 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_modsi3.o)
+ .debug_frame   0x000000000000007c      0x2d0 main.o
+ .debug_frame   0x000000000000034c       0x80 ../lib/syscalls.o
+ .debug_frame   0x00000000000003cc       0x88 ../lib/rprintf.o
+ .debug_frame   0x0000000000000454       0x70 ../lib/string_printf.o
+ .debug_frame   0x00000000000004c4       0xb4 ../lib/serial.o
+ .debug_frame   0x0000000000000578      0x124 ../lib/rootdir.o
+ .debug_frame   0x000000000000069c      0x1b0 ../lib/sd_raw.o
+ .debug_frame   0x000000000000084c      0x4d0 ../lib/fat.o
+ .debug_frame   0x0000000000000d1c       0x54 ../lib/partition.o
+ .debug_frame   0x0000000000000d70       0x50 ../lib/itoa.o
+ .debug_frame   0x0000000000000dc0       0x50 ../lib/byteordering.o
+ .debug_frame   0x0000000000000e10       0x70 ../LPCUSB/armVIC.o
+ .debug_frame   0x0000000000000e80       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memcpy-stub.o)
+ .debug_frame   0x0000000000000ea0       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memset.o)
+ .debug_frame   0x0000000000000ec0       0x54 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-sprintf.o)
+ .debug_frame   0x0000000000000f14       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strchr.o)
+ .debug_frame   0x0000000000000f34       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcmp.o)
+ .debug_frame   0x0000000000000f54       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcpy.o)
+ .debug_frame   0x0000000000000f74       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strlen.o)
+ .debug_frame   0x0000000000000f94       0x2c /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncmp.o)
+ .debug_frame   0x0000000000000fc0       0x28 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncpy.o)
+ .debug_frame   0x0000000000000fe8       0x2c /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strrchr.o)
+ .debug_frame   0x0000000000001014       0x3c /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfprintf.o)
+ .debug_frame   0x0000000000001050       0x60 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
+ .debug_frame   0x00000000000010b0       0x98 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-locale.o)
+ .debug_frame   0x0000000000001148       0x34 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mallocr.o)
+ .debug_frame   0x000000000000117c       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memchr-stub.o)
+ .debug_frame   0x000000000000119c       0x30 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mlock.o)
+ .debug_frame   0x00000000000011cc      0x21c /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
+ .debug_frame   0x00000000000013e8       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-s_fpclassify.o)
+ .debug_frame   0x0000000000001408       0x64 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfiprintf.o)
+ .debug_frame   0x000000000000146c       0x28 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-callocr.o)
+ .debug_frame   0x0000000000001494       0x50 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-freer.o)
+ .debug_frame   0x00000000000014e4       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memmove.o)
+ .debug_frame   0x0000000000001504       0x38 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-reallocr.o)
+ .debug_frame   0x000000000000153c       0x28 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_udivsi3.o)
+ .debug_frame   0x0000000000001564       0x28 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_divsi3.o)
+ .debug_frame   0x000000000000158c       0x28 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_umodsi3.o)
+ .debug_frame   0x00000000000015b4       0x28 /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_modsi3.o)
 
-.debug_str      0x0000000000000000     0x1a34
+.debug_str      0x0000000000000000     0x27bb
  *(.debug_str)
  .debug_str     0x0000000000000000       0xd0 ../lib/irq.o
                                          0xf3 (size before relaxing)
- .debug_str     0x00000000000000d0      0x308 main.o
-                                        0x3e2 (size before relaxing)
- .debug_str     0x00000000000003d8      0x4ab ../lib/syscalls.o
+ .debug_str     0x00000000000000d0      0x358 main.o
+                                        0x432 (size before relaxing)
+ .debug_str     0x0000000000000428      0x493 ../lib/syscalls.o
                                         0x5f5 (size before relaxing)
- .debug_str     0x0000000000000883       0x89 ../lib/rprintf.o
+ .debug_str     0x00000000000008bb       0x89 ../lib/rprintf.o
                                         0x19b (size before relaxing)
- .debug_str     0x000000000000090c       0x6e ../lib/string_printf.o
+ .debug_str     0x0000000000000944       0x6e ../lib/string_printf.o
                                         0x1db (size before relaxing)
- .debug_str     0x000000000000097a       0x90 ../lib/serial.o
+ .debug_str     0x00000000000009b2       0x90 ../lib/serial.o
                                          0xe8 (size before relaxing)
- .debug_str     0x0000000000000a0a      0x336 ../lib/rootdir.o
+ .debug_str     0x0000000000000a42      0x32d ../lib/rootdir.o
                                         0x4be (size before relaxing)
- .debug_str     0x0000000000000d40      0x1b4 ../lib/sd_raw.o
+ .debug_str     0x0000000000000d6f      0x1b4 ../lib/sd_raw.o
                                         0x3bb (size before relaxing)
- .debug_str     0x0000000000000ef4      0x5e1 ../lib/fat.o
+ .debug_str     0x0000000000000f23      0x5e1 ../lib/fat.o
                                         0x9db (size before relaxing)
- .debug_str     0x00000000000014d5       0x49 ../lib/partition.o
+ .debug_str     0x0000000000001504       0x43 ../lib/partition.o
                                         0x261 (size before relaxing)
- .debug_str     0x000000000000151e       0x16 ../lib/itoa.o
+ .debug_str     0x0000000000001547       0x16 ../lib/itoa.o
                                          0x61 (size before relaxing)
- .debug_str     0x0000000000001534       0x16 ../lib/byteordering.o
+ .debug_str     0x000000000000155d       0x16 ../lib/byteordering.o
                                         0x113 (size before relaxing)
- .debug_str     0x000000000000154a       0x64 ../LPCUSB/armVIC.o
+ .debug_str     0x0000000000001573       0x64 ../LPCUSB/armVIC.o
                                          0xff (size before relaxing)
- .debug_str     0x00000000000015ae       0x98 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memcpy-stub.o)
+ .debug_str     0x00000000000015d7       0x98 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memcpy-stub.o)
                                         0x144 (size before relaxing)
- .debug_str     0x0000000000001646       0x7a /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memset.o)
+ .debug_str     0x000000000000166f       0x7a /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memset.o)
                                         0x126 (size before relaxing)
- .debug_str     0x00000000000016c0       0x7a /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strchr.o)
+ .debug_str     0x00000000000016e9       0x92 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-sprintf.o)
+                                        0x521 (size before relaxing)
+ .debug_str     0x000000000000177b       0x7a /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strchr.o)
                                         0x11f (size before relaxing)
- .debug_str     0x000000000000173a       0x7f /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcmp.o)
+ .debug_str     0x00000000000017f5       0x7f /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcmp.o)
                                         0x124 (size before relaxing)
- .debug_str     0x00000000000017b9       0x7f /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcpy.o)
+ .debug_str     0x0000000000001874       0x7f /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcpy.o)
                                         0x124 (size before relaxing)
- .debug_str     0x0000000000001838       0x7f /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strlen.o)
+ .debug_str     0x00000000000018f3       0x7f /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strlen.o)
                                         0x133 (size before relaxing)
- .debug_str     0x00000000000018b7       0x7b /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncmp.o)
+ .debug_str     0x0000000000001972       0x7b /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncmp.o)
                                         0x128 (size before relaxing)
- .debug_str     0x0000000000001932       0x87 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncpy.o)
+ .debug_str     0x00000000000019ed       0x87 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncpy.o)
                                         0x144 (size before relaxing)
- .debug_str     0x00000000000019b9       0x7b /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strrchr.o)
+ .debug_str     0x0000000000001a74       0x7b /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strrchr.o)
                                         0x12d (size before relaxing)
+ .debug_str     0x0000000000001aef      0x301 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfprintf.o)
+                                        0x869 (size before relaxing)
+ .debug_str     0x0000000000001df0      0x196 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
+                                        0x642 (size before relaxing)
+ .debug_str     0x0000000000001f86       0x98 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-impure.o)
+                                        0x4f1 (size before relaxing)
+ .debug_str     0x000000000000201e      0x15a /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-locale.o)
+                                        0x74d (size before relaxing)
+ .debug_str     0x0000000000002178      0x25d /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mallocr.o)
+                                        0x6ff (size before relaxing)
+ .debug_str     0x00000000000023d5       0x8d /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memchr-stub.o)
+                                        0x140 (size before relaxing)
+ .debug_str     0x0000000000002462       0x8e /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mlock.o)
+                                        0x4f9 (size before relaxing)
+ .debug_str     0x00000000000024f0       0xe4 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
+                                        0x5fc (size before relaxing)
+ .debug_str     0x00000000000025d4       0xa2 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-s_fpclassify.o)
+                                        0x178 (size before relaxing)
+ .debug_str     0x0000000000002676       0x30 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfiprintf.o)
+                                        0x66c (size before relaxing)
+ .debug_str     0x00000000000026a6        0xf /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-callocr.o)
+                                        0x529 (size before relaxing)
+ .debug_str     0x00000000000026b5       0x34 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-freer.o)
+                                        0x649 (size before relaxing)
+ .debug_str     0x00000000000026e9       0x84 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memmove.o)
+                                        0x141 (size before relaxing)
+ .debug_str     0x000000000000276d       0x4e /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-reallocr.o)
+                                        0x5d1 (size before relaxing)
 
-.debug_loc      0x0000000000000000     0x53c5
+.debug_loc      0x0000000000000000     0xc164
  *(.debug_loc)
  .debug_loc     0x0000000000000000      0x1e4 ../lib/irq.o
- .debug_loc     0x00000000000001e4      0xebc main.o
- .debug_loc     0x00000000000010a0      0x108 ../lib/syscalls.o
- .debug_loc     0x00000000000011a8      0x381 ../lib/rprintf.o
- .debug_loc     0x0000000000001529      0x39f ../lib/string_printf.o
- .debug_loc     0x00000000000018c8      0x111 ../lib/serial.o
- .debug_loc     0x00000000000019d9      0x317 ../lib/rootdir.o
- .debug_loc     0x0000000000001cf0      0x7f1 ../lib/sd_raw.o
- .debug_loc     0x00000000000024e1     0x2751 ../lib/fat.o
- .debug_loc     0x0000000000004c32      0x1d5 ../lib/partition.o
- .debug_loc     0x0000000000004e07      0x123 ../lib/itoa.o
- .debug_loc     0x0000000000004f2a       0x63 ../lib/byteordering.o
- .debug_loc     0x0000000000004f8d       0x42 ../LPCUSB/armVIC.o
- .debug_loc     0x0000000000004fcf       0x39 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memcpy-stub.o)
- .debug_loc     0x0000000000005008       0x3f /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memset.o)
- .debug_loc     0x0000000000005047       0x78 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strchr.o)
- .debug_loc     0x00000000000050bf       0x21 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcmp.o)
- .debug_loc     0x00000000000050e0       0x21 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcpy.o)
- .debug_loc     0x0000000000005101       0x21 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strlen.o)
- .debug_loc     0x0000000000005122       0xd5 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncmp.o)
- .debug_loc     0x00000000000051f7      0x102 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncpy.o)
- .debug_loc     0x00000000000052f9       0xcc /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strrchr.o)
+ .debug_loc     0x00000000000001e4      0xf68 main.o
+ .debug_loc     0x000000000000114c      0x108 ../lib/syscalls.o
+ .debug_loc     0x0000000000001254      0x381 ../lib/rprintf.o
+ .debug_loc     0x00000000000015d5      0x39f ../lib/string_printf.o
+ .debug_loc     0x0000000000001974      0x111 ../lib/serial.o
+ .debug_loc     0x0000000000001a85      0x317 ../lib/rootdir.o
+ .debug_loc     0x0000000000001d9c      0x7f1 ../lib/sd_raw.o
+ .debug_loc     0x000000000000258d     0x2751 ../lib/fat.o
+ .debug_loc     0x0000000000004cde      0x1d5 ../lib/partition.o
+ .debug_loc     0x0000000000004eb3      0x123 ../lib/itoa.o
+ .debug_loc     0x0000000000004fd6       0x63 ../lib/byteordering.o
+ .debug_loc     0x0000000000005039       0x42 ../LPCUSB/armVIC.o
+ .debug_loc     0x000000000000507b       0x39 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memcpy-stub.o)
+ .debug_loc     0x00000000000050b4       0x3f /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memset.o)
+ .debug_loc     0x00000000000050f3       0xfa /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-sprintf.o)
+ .debug_loc     0x00000000000051ed       0x78 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strchr.o)
+ .debug_loc     0x0000000000005265       0x21 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcmp.o)
+ .debug_loc     0x0000000000005286       0x21 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcpy.o)
+ .debug_loc     0x00000000000052a7       0x21 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strlen.o)
+ .debug_loc     0x00000000000052c8       0xd5 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncmp.o)
+ .debug_loc     0x000000000000539d      0x102 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncpy.o)
+ .debug_loc     0x000000000000549f       0xcc /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strrchr.o)
+ .debug_loc     0x000000000000556b     0x12e6 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfprintf.o)
+ .debug_loc     0x0000000000006851     0x12c4 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
+ .debug_loc     0x0000000000007b15      0x141 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-locale.o)
+ .debug_loc     0x0000000000007c56      0x7fa /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mallocr.o)
+ .debug_loc     0x0000000000008450       0x81 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memchr-stub.o)
+ .debug_loc     0x00000000000084d1     0x1e5b /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
+ .debug_loc     0x000000000000a32c       0x8f /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-s_fpclassify.o)
+ .debug_loc     0x000000000000a3bb      0xc26 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfiprintf.o)
+ .debug_loc     0x000000000000afe1      0x1e4 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-callocr.o)
+ .debug_loc     0x000000000000b1c5      0x3cc /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-freer.o)
+ .debug_loc     0x000000000000b591       0xd2 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memmove.o)
+ .debug_loc     0x000000000000b663      0xb01 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-reallocr.o)
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -792,13 +1218,15 @@ END GROUP
  *(.debug_varnames)
 OUTPUT(main.elf elf32-littlearm)
 
-.debug_ranges   0x0000000000000000      0x6d8
+.debug_ranges   0x0000000000000000      0x848
  .debug_ranges  0x0000000000000000       0x20 Startup.o
- .debug_ranges  0x0000000000000020      0x2e0 main.o
- .debug_ranges  0x0000000000000300       0x18 ../lib/rprintf.o
- .debug_ranges  0x0000000000000318       0x18 ../lib/string_printf.o
- .debug_ranges  0x0000000000000330       0xa8 ../lib/sd_raw.o
- .debug_ranges  0x00000000000003d8      0x300 ../lib/fat.o
+ .debug_ranges  0x0000000000000020      0x340 main.o
+ .debug_ranges  0x0000000000000360       0x18 ../lib/rprintf.o
+ .debug_ranges  0x0000000000000378       0x18 ../lib/string_printf.o
+ .debug_ranges  0x0000000000000390       0xa8 ../lib/sd_raw.o
+ .debug_ranges  0x0000000000000438      0x300 ../lib/fat.o
+ .debug_ranges  0x0000000000000738       0xf0 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfprintf.o)
+ .debug_ranges  0x0000000000000828       0x20 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfiprintf.o)
 
 Cross Reference Table
 
@@ -810,7 +1238,9 @@ AD_conversion                                     main.o
 FIQ_Routine                                       main.o
 GetADCValue                                       main.o
 GetGPSDateTime                                    main.o
+GetTime                                           main.o
 Initialize                                        main.o
+InitializeTime                                    main.o
 LogADC                                            main.o
 Log_init                                          main.o
 RX_array1                                         main.o
@@ -818,45 +1248,203 @@ RX_array2                                         main.o
 RX_in                                             main.o
 SWI_Routine                                       main.o
 UNDEF_Routine                                     main.o
+_Balloc                                           /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
+_Bfree                                            /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
+_PathLocale                                       /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-locale.o)
 __IRQ_Wrapper                                     Startup.o
+__adddf3                                          /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_addsubdf3.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
+__aeabi_cdcmpeq                                   /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_cmpdf2.o)
+__aeabi_cdcmple                                   /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_cmpdf2.o)
+__aeabi_cdrcmple                                  /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_cmpdf2.o)
+__aeabi_d2iz                                      /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_fixdfsi.o)
+__aeabi_dadd                                      /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_addsubdf3.o)
+__aeabi_dcmpeq                                    /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_cmpdf2.o)
+__aeabi_dcmpge                                    /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_cmpdf2.o)
+__aeabi_dcmpgt                                    /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_cmpdf2.o)
+__aeabi_dcmple                                    /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_cmpdf2.o)
+__aeabi_dcmplt                                    /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_cmpdf2.o)
+__aeabi_ddiv                                      /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_muldivdf3.o)
+__aeabi_dmul                                      /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_muldivdf3.o)
+__aeabi_drsub                                     /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_addsubdf3.o)
+__aeabi_dsub                                      /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_addsubdf3.o)
+__aeabi_f2d                                       /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_addsubdf3.o)
+__aeabi_i2d                                       /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_addsubdf3.o)
 __aeabi_idiv                                      /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_divsi3.o)
 __aeabi_idivmod                                   /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_divsi3.o)
+__aeabi_l2d                                       /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_addsubdf3.o)
+__aeabi_ui2d                                      /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_addsubdf3.o)
 __aeabi_uidiv                                     /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_udivsi3.o)
 __aeabi_uidivmod                                  /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_udivsi3.o)
+__aeabi_ul2d                                      /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_addsubdf3.o)
+__any_on                                          /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
+__b2d                                             /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
 __bss_end__                                       Startup.o
 __bss_start__                                     Startup.o
+__cmpdf2                                          /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_cmpdf2.o)
+__copybits                                        /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
 __ctors_end__                                     Startup.o
 __ctors_start__                                   Startup.o
+__d2b                                             /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
 __div0                                            /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_dvmd_tls.o)
                                                   /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_modsi3.o)
                                                   /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_umodsi3.o)
                                                   /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_divsi3.o)
                                                   /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_udivsi3.o)
+__divdf3                                          /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_muldivdf3.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
 __divsi3                                          /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_divsi3.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfprintf.o)
                                                   ../lib/itoa.o
                                                   ../lib/fat.o
                                                   main.o
+__eqdf2                                           /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_cmpdf2.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfprintf.o)
 __exit_ARM                                        Startup.o
 __exit_THUMB                                      Startup.o
+__extendsfdf2                                     /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_addsubdf3.o)
+__fixdfsi                                         /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_fixdfsi.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
+__floatdidf                                       /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_addsubdf3.o)
+__floatsidf                                       /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_addsubdf3.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
+__floatundidf                                     /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_addsubdf3.o)
+__floatunsidf                                     /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_addsubdf3.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
+__fpclassifyd                                     /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-s_fpclassify.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfprintf.o)
+__gedf2                                           /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_cmpdf2.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
+__gtdf2                                           /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_cmpdf2.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
+__hi0bits                                         /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
+__i2b                                             /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
+__ledf2                                           /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_cmpdf2.o)
+__lo0bits                                         /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
+__locale_charset                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-locale.o)
+__locale_cjk_lang                                 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-locale.o)
+__locale_mb_cur_max                               /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-locale.o)
+__locale_msgcharset                               /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-locale.o)
+__lshift                                          /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
+__ltdf2                                           /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_cmpdf2.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfprintf.o)
+__malloc_av_                                      /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mallocr.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-reallocr.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-freer.o)
+__malloc_current_mallinfo                         /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mallocr.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-freer.o)
+__malloc_lock                                     /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mlock.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-reallocr.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-freer.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mallocr.o)
+__malloc_max_sbrked_mem                           /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mallocr.o)
+__malloc_max_total_mem                            /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mallocr.o)
+__malloc_sbrk_base                                /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mallocr.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-freer.o)
+__malloc_top_pad                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mallocr.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-freer.o)
+__malloc_trim_threshold                           /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mallocr.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-freer.o)
+__malloc_unlock                                   /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mlock.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-reallocr.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-freer.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mallocr.o)
+__mb_cur_max                                      /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-locale.o)
+__mcmp                                            /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
+__mdiff                                           /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
+__mlocale_changed                                 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-locale.o)
 __modsi3                                          /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_modsi3.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfprintf.o)
                                                   ../lib/itoa.o
+__mprec_bigtens                                   /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
+__mprec_tens                                      /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
+__mprec_tinytens                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
+__muldf3                                          /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_muldivdf3.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
+__multadd                                         /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
+__multiply                                        /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
+__nedf2                                           /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_cmpdf2.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfprintf.o)
+__nlocale_changed                                 /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-locale.o)
+__pow5mult                                        /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
+__ratio                                           /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
+__s2b                                             /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
+__ssprint_r                                       /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfiprintf.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfprintf.o)
 __startup                                         Startup.o
+__subdf3                                          /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_arm_addsubdf3.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
 __udivsi3                                         /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_udivsi3.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfiprintf.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfprintf.o)
                                                   ../lib/fat.o
                                                   ../lib/serial.o
                                                   ../lib/string_printf.o
                                                   ../lib/rprintf.o
+__ulp                                             /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
 __umodsi3                                         /opt/local/lib/gcc/arm-elf/4.7.3/libgcc.a(_umodsi3.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfiprintf.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfprintf.o)
                                                   ../lib/string_printf.o
                                                   ../lib/rprintf.o
+_calloc_r                                         /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-callocr.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
 _close_r                                          ../lib/syscalls.o
 _data                                             Startup.o
+_dtoa_r                                           /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfprintf.o)
 _edata                                            Startup.o
 _etext                                            Startup.o
+_free_r                                           /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-freer.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-reallocr.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfiprintf.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mallocr.o)
 _fstat_r                                          ../lib/syscalls.o
+_global_impure_ptr                                /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-impure.o)
+_impure_ptr                                       /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-impure.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-locale.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-sprintf.o)
+_localeconv_r                                     /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-locale.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfprintf.o)
 _lseek_r                                          ../lib/syscalls.o
+_malloc_r                                         /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mallocr.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-reallocr.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-callocr.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfiprintf.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfprintf.o)
+_malloc_trim_r                                    /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-freer.o)
+_mprec_log10                                      /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
 _read_r                                           ../lib/syscalls.o
+_realloc_r                                        /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-reallocr.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfiprintf.o)
 _sbrk_r                                           ../lib/syscalls.o
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-freer.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mallocr.o)
+_setlocale_r                                      /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-locale.o)
+_sprintf_r                                        /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-sprintf.o)
+_svfiprintf_r                                     /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfiprintf.o)
+_svfprintf_r                                      /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfprintf.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-sprintf.o)
 _write_r                                          ../lib/syscalls.o
 buffer_ptr                                        ../lib/string_printf.o
 convert                                           ../lib/itoa.o
@@ -914,6 +1502,7 @@ getc0                                             ../lib/serial.o
 getkey_serial0                                    ../lib/serial.o
 gps_valid                                         main.o
 handle                                            main.o
+hours                                             main.o
 init_VIC                                          ../lib/irq.o
 init_serial0                                      ../lib/serial.o
 init_serial1                                      ../lib/serial.o
@@ -921,22 +1510,35 @@ install_irq                                       ../lib/irq.o
 isatty                                            ../lib/syscalls.o
 itoa                                              ../lib/itoa.o
                                                   main.o
+localeconv                                        /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-locale.o)
 log_adc                                           main.o
 log_array1                                        main.o
 log_array2                                        main.o
 log_gps                                           main.o
 main                                              main.o
                                                   Startup.o
+memchr                                            /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memchr-stub.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfiprintf.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfprintf.o)
 memcpy                                            /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memcpy-stub.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfiprintf.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-mprec.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-dtoa.o)
                                                   ../lib/fat.o
                                                   ../lib/sd_raw.o
+memmove                                           /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memmove.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-reallocr.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfiprintf.o)
 memset                                            /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-memset.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-callocr.o)
                                                   ../lib/partition.o
                                                   ../lib/fat.o
                                                   ../lib/sd_raw.o
+minutes                                           main.o
 mode_0                                            main.o
 mode_1                                            main.o
 mode_2                                            main.o
+mode_3                                            main.o
 mode_action                                       main.o
 open_file_in_dir                                  ../lib/fat.o
                                                   ../lib/rootdir.o
@@ -992,12 +1594,17 @@ sd_raw_write                                      ../lib/sd_raw.o
                                                   ../lib/rootdir.o
 sd_raw_write_interval                             ../lib/sd_raw.o
                                                   ../lib/rootdir.o
+seconds                                           main.o
+setlocale                                         /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-locale.o)
 setup_uart0                                       main.o
+sprintf                                           /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-sprintf.o)
+                                                  main.o
 stat                                              main.o
 strchr                                            /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strchr.o)
                                                   /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strrchr.o)
                                                   ../lib/fat.o
 strcmp                                            /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcmp.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-locale.o)
                                                   ../lib/fat.o
 strcpy                                            /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strcpy.o)
                                                   main.o
@@ -1008,6 +1615,8 @@ string_printf                                     ../lib/string_printf.o
                                                   main.o
 string_printf_devopen                             ../lib/string_printf.o
 strlen                                            /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strlen.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfiprintf.o)
+                                                  /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-svfprintf.o)
                                                   ../lib/fat.o
                                                   main.o
 strncmp                                           /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strncmp.o)
@@ -1017,7 +1626,9 @@ strncpy                                           /opt/local/lib/gcc/arm-elf/4.7
 strrchr                                           /opt/local/lib/gcc/arm-elf/4.7.3/../../../../arm-elf/lib/libc.a(lib_a-strrchr.o)
                                                   ../lib/fat.o
 test                                              main.o
+time_buffer                                       main.o
 uninstall_irq                                     ../lib/irq.o
+use_adc                                           main.o
 write16                                           ../lib/byteordering.o
                                                   ../lib/fat.o
 write32                                           ../lib/byteordering.o

@@ -81,7 +81,13 @@ struct fat_file_struct * fd;
 char stringBuf[256];
 unsigned int gps_valid = FALSE;
 unsigned int log_gps = FALSE;
+unsigned int use_adc = FALSE;
 
+// RTC testing
+unsigned int hours, minutes, seconds;
+void InitializeTime(void);
+void GetTime(void);
+char time_buffer[8]; // HH:MM:SS
 
 // Default Settings
 static char mode = 0;
@@ -111,6 +117,7 @@ void setup_uart0(int newbaud, char want_ints);
 void mode_0(void);
 void mode_1(void);
 void mode_2(void);
+void mode_3(void);
 void mode_action(void);
 
 void Log_init(void);
@@ -152,6 +159,8 @@ int main (void)
 	enableFIQ();
 	
 	Initialize();
+	
+	InitializeTime();
 	
 	setup_uart0(9600, 0);
 
@@ -197,19 +206,19 @@ int main (void)
 		
 
 	sd_raw_sync();	
-	
-	// if mode = 2 (ADC) then write out the ADC pins in use
-	if(mode == 2)
+		
+	// if mode = 2 or 3 (ADC used) then write out the ADC pins in use
+	if(mode == 2 || mode == 3)
 	{
 		char mybuf[10];	// eight pins + CR/LF
-		mybuf[0] = ad1_3;
-		mybuf[1] = ad0_3;
-		mybuf[2] = ad0_2;
-		mybuf[3] = ad0_1;
-		mybuf[4] = ad1_2;
-		mybuf[5] = ad0_4;
-		mybuf[6] = ad1_7;
-		mybuf[7] = ad1_6;
+		mybuf[0] = ad0_3;
+		mybuf[1] = ad0_2;
+		mybuf[2] = ad0_1;
+		mybuf[3] = ad0_4;
+		mybuf[4] = ad1_7;
+		mybuf[5] = ad1_6;
+		mybuf[6] = ad1_2;
+		mybuf[7] = ad1_3;
 		mybuf[8] = 13;
 		mybuf[9] = 10;	
 	
@@ -232,11 +241,41 @@ int main (void)
 		stat(0,OFF);
 	}	
 	
-	if(mode == 0){ mode_0(); }
-	else if(mode == 1){ mode_1(); }
-	else if(mode == 2){ mode_2(); }
-
-    	return 0;
+	
+	
+	switch(mode)
+	{
+		case 0:
+			mode_0();
+		break;
+		
+		case 1:
+			mode_1();
+		break;
+		
+		case 2:
+			mode_2();
+		break;
+		
+		case 3:
+			mode_3();
+		break;
+		
+		default:
+			rprintf("Mode %d not valid.\n\r",mode);
+		break;
+	}
+	
+	while(1)
+	{
+		stat(0,ON);
+		stat(1,ON);
+		delay_ms(1000);
+		stat(0,OFF);
+		stat(1,OFF);
+		delay_ms(1000);
+	}
+   	return 0;
 }
 
 
@@ -363,73 +402,7 @@ static void MODE2ISR(void)
 		q[j] = 0;
 	}
 
-
-	// Get AD1.3
-	if(ad1_3 == 'Y')
-	{
-		AD1CR = 0x00020FF08; // AD1.3
-		AD1CR |= 0x01000000; // start conversion
-		while((temp & 0x80000000) == 0)
-		{
-			temp = AD1DR;
-		}
-		temp &= 0x0000FFC0;
-		temp2 = temp / 0x00000040;
-
-		AD1CR = 0x00000000;
-
-		if(asc == 'Y' || asc == ',')
-		{
-			itoa(temp2, 10, temp_buff);
-			if(temp_buff[0] >= 48 && temp_buff[0] <= 57)
-			{
-				q[ind] = temp_buff[0];
-				ind++;
-			}
-			if(temp_buff[1] >= 48 && temp_buff[1] <= 57)
-			{
-				q[ind] = temp_buff[1];
-				ind++;
-			}
-			if(temp_buff[2] >= 48 && temp_buff[2] <= 57)
-			{
-				q[ind] = temp_buff[2];
-				ind++;
-			}
-			if(temp_buff[3] >= 48 && temp_buff[3] <= 57)
-			{
-				q[ind] = temp_buff[3];
-				ind++;
-			}
-	
-			if(asc == ',')
-			{
-				q[ind] = ',';
-			}
-			else
-			{
-				q[ind] = 0;
-			}
-			ind++;
-			temp = 0; 
-			temp2 = 0;
-			temp_buff[0] = 0;
-			temp_buff[1] = 0;
-			temp_buff[2] = 0;
-			temp_buff[3] = 0;
-
-		}
-
-		else if(asc == 'N')
-		{
-			a = ((short)temp2 & 0xFF00) / 0x00000100;
-			q[ind] = (char)a;
-			
-			q[ind+1]  = (char)temp2 & 0xFF;
-			ind += 2;
-			temp = 0;
-		}
-	}
+	// ADC_1
 	// Get AD0.3
 	if(ad0_3 == 'Y')
 	{
@@ -496,6 +469,7 @@ static void MODE2ISR(void)
 			temp = 0;
 		}
 	}
+	// ADC_2
 	// Get AD0.2
 	if(ad0_2 == 'Y')
 	{
@@ -562,6 +536,7 @@ static void MODE2ISR(void)
 			temp = 0;
 		}
 	}
+	// ADC_3
 	// Get AD0.1
 	if(ad0_1 == 'Y')
 	{
@@ -628,72 +603,8 @@ static void MODE2ISR(void)
 			temp = 0;
 		}
 	}
-	// Get AD1.2
-	if(ad1_2 == 'Y')
-	{
-		AD1CR = 0x00020FF04; // AD1.2
-		AD1CR |= 0x01000000; // start conversion
-		while((temp & 0x80000000) == 0)
-		{
-			temp = AD1DR;
-		}
-		temp &= 0x0000FFC0;
-		temp2 = temp / 0x00000040;
 
-		AD1CR = 0x00000000;
-
-		if(asc == 'Y' || asc == ',')
-		{
-			itoa(temp2, 10, temp_buff);
-			if(temp_buff[0] >= 48 && temp_buff[0] <= 57)
-			{
-				q[ind] = temp_buff[0];
-				ind++;
-			}
-			if(temp_buff[1] >= 48 && temp_buff[1] <= 57)
-			{
-				q[ind] = temp_buff[1];
-				ind++;
-			}
-			if(temp_buff[2] >= 48 && temp_buff[2] <= 57)
-			{
-				q[ind] = temp_buff[2];
-				ind++;
-			}
-			if(temp_buff[3] >= 48 && temp_buff[3] <= 57)
-			{
-				q[ind] = temp_buff[3];
-				ind++;
-			}
-
-			if(asc == ',')
-			{
-				q[ind] = ',';
-			}
-			else
-			{
-				q[ind] = 0;
-			}
-			ind++;
-			temp = 0; 
-			temp2 = 0;
-			temp_buff[0] = 0;
-			temp_buff[1] = 0;
-			temp_buff[2] = 0;
-			temp_buff[3] = 0;
-
-		}
-
-		else if(asc == 'N')
-		{
-			a = ((short)temp2 & 0xFF00) / 0x00000100;
-			q[ind] = (char)a;
-			
-			q[ind+1]  = (char)temp2 & 0xFF;
-			ind += 2;
-			temp = 0;
-		}
-	}
+	// ADC_4
 	// Get AD0.4
 	if(ad0_4 == 'Y')
 	{
@@ -760,6 +671,7 @@ static void MODE2ISR(void)
 			temp = 0;
 		}
 	}
+	// ADC_5
 	// Get AD1.7
 	if(ad1_7 == 'Y')
 	{
@@ -826,6 +738,7 @@ static void MODE2ISR(void)
 			temp = 0;
 		}
 	}
+	// ADC_6
 	// Get AD1.6
 	if(ad1_6 == 'Y')
 	{
@@ -892,7 +805,140 @@ static void MODE2ISR(void)
 			temp = 0;
 		}
 	}
+	// ADC_7
+	// Get AD1.2
+	if(ad1_2 == 'Y')
+	{
+		AD1CR = 0x00020FF04; // AD1.2
+		AD1CR |= 0x01000000; // start conversion
+		while((temp & 0x80000000) == 0)
+		{
+			temp = AD1DR;
+		}
+		temp &= 0x0000FFC0;
+		temp2 = temp / 0x00000040;
+
+		AD1CR = 0x00000000;
+
+		if(asc == 'Y' || asc == ',')
+		{
+			itoa(temp2, 10, temp_buff);
+			if(temp_buff[0] >= 48 && temp_buff[0] <= 57)
+			{
+				q[ind] = temp_buff[0];
+				ind++;
+			}
+			if(temp_buff[1] >= 48 && temp_buff[1] <= 57)
+			{
+				q[ind] = temp_buff[1];
+				ind++;
+			}
+			if(temp_buff[2] >= 48 && temp_buff[2] <= 57)
+			{
+				q[ind] = temp_buff[2];
+				ind++;
+			}
+			if(temp_buff[3] >= 48 && temp_buff[3] <= 57)
+			{
+				q[ind] = temp_buff[3];
+				ind++;
+			}
+
+			if(asc == ',')
+			{
+				q[ind] = ',';
+			}
+			else
+			{
+				q[ind] = 0;
+			}
+			ind++;
+			temp = 0; 
+			temp2 = 0;
+			temp_buff[0] = 0;
+			temp_buff[1] = 0;
+			temp_buff[2] = 0;
+			temp_buff[3] = 0;
+
+		}
+
+		else if(asc == 'N')
+		{
+			a = ((short)temp2 & 0xFF00) / 0x00000100;
+			q[ind] = (char)a;
+			
+			q[ind+1]  = (char)temp2 & 0xFF;
+			ind += 2;
+			temp = 0;
+		}
+	}
+	// ADC_8
+	// Get AD1.3
+	if(ad1_3 == 'Y')
+	{
+		AD1CR = 0x00020FF08; // AD1.3
+		AD1CR |= 0x01000000; // start conversion
+		while((temp & 0x80000000) == 0)
+		{
+			temp = AD1DR;
+		}
+		temp &= 0x0000FFC0;
+		temp2 = temp / 0x00000040;
+
+		AD1CR = 0x00000000;
+
+		if(asc == 'Y' || asc == ',')
+		{
+			itoa(temp2, 10, temp_buff);
+			if(temp_buff[0] >= 48 && temp_buff[0] <= 57)
+			{
+				q[ind] = temp_buff[0];
+				ind++;
+			}
+			if(temp_buff[1] >= 48 && temp_buff[1] <= 57)
+			{
+				q[ind] = temp_buff[1];
+				ind++;
+			}
+			if(temp_buff[2] >= 48 && temp_buff[2] <= 57)
+			{
+				q[ind] = temp_buff[2];
+				ind++;
+			}
+			if(temp_buff[3] >= 48 && temp_buff[3] <= 57)
+			{
+				q[ind] = temp_buff[3];
+				ind++;
+			}
 	
+			if(asc == ',')
+			{
+				q[ind] = ',';
+			}
+			else
+			{
+				q[ind] = 0;
+			}
+			ind++;
+			temp = 0; 
+			temp2 = 0;
+			temp_buff[0] = 0;
+			temp_buff[1] = 0;
+			temp_buff[2] = 0;
+			temp_buff[3] = 0;
+
+		}
+
+		else if(asc == 'N')
+		{
+			a = ((short)temp2 & 0xFF00) / 0x00000100;
+			q[ind] = (char)a;
+			
+			q[ind+1]  = (char)temp2 & 0xFF;
+			ind += 2;
+			temp = 0;
+		}
+	}	
 	if(asc == ',')	// remove final comma, replace with zero (NULL)
 	{
 		if(ind > 0)	// sanity check, maybe no ADCs were marked to be read
@@ -1126,16 +1172,20 @@ void Log_init(void)
 			ind++;
 			if(ind == 1)
 			{
-				mode = stringBuf[mark-2]-48; // 0 = auto uart, 1 = trigger uart, 2 = adc
+				// 0 = auto uart, 1 = triggered uart, 2 = adc, 3 = triggered uart + adc
+				// default = 0 (auto uart)
+				mode = stringBuf[mark-2]-48;
 				rprintf("mode = %d\n\r",mode);
 			}
 			else if(ind == 2)
 			{
+				// N = NO, Y = YES, ',' = YES with comma delimiters
 				asc = stringBuf[mark-2]; // default is 'N'
 				rprintf("asc = %c\n\r",asc);
 			}
 			else if(ind == 3)
 			{
+				// default is 9600
 				if(stringBuf[mark-2] == '1'){ baud = 1200; }
 				else if(stringBuf[mark-2] == '2'){ baud = 2400; }
 				else if(stringBuf[mark-2] == '3'){ baud = 4800; }
@@ -1169,53 +1219,53 @@ void Log_init(void)
 				if(frame > 510){ frame = 510; } // up to 510 characters
 				rprintf("frame = %d\n\r",frame);
 			}
-			else if(ind == 7)
-			{
-				ad1_3 = stringBuf[mark-2]; // default is 'N'
-				if(ad1_3 == 'Y'){ temp2++; }
-				rprintf("ad1_3 = %c\n\r",ad1_3);
-			}
-			else if(ind == 8)
+			else if(ind == 7)	// AD1 - 0.3
 			{
 				ad0_3 = stringBuf[mark-2]; // default is 'N'
 				if(ad0_3 == 'Y'){ temp2++; }
 				rprintf("ad0_3 = %c\n\r",ad0_3);
 			}
-			else if(ind == 9)
+			else if(ind == 8)	// AD2 - 0.2
 			{
 				ad0_2 = stringBuf[mark-2]; // default is 'N'
 				if(ad0_2 == 'Y'){ temp2++; }
 				rprintf("ad0_2 = %c\n\r",ad0_2);
 			}
-			else if(ind == 10)
+			else if(ind == 9)	// AD3 - 0.1
 			{
 				ad0_1 = stringBuf[mark-2]; // default is 'N'
 				if(ad0_1 == 'Y'){ temp2++; }
 				rprintf("ad0_1 = %c\n\r",ad0_1);
 			}
-			else if(ind == 11)
-			{
-				ad1_2 = stringBuf[mark-2]; // default is 'N'
-				if(ad1_2 == 'Y'){ temp2++; }
-				rprintf("ad1_2 = %c\n\r",ad1_2);
-			}
-			else if(ind == 12)
+			else if(ind == 10)	//AD4 - 0.4
 			{
 				ad0_4 = stringBuf[mark-2]; // default is 'N'
 				if(ad0_4 == 'Y'){ temp2++; }
 				rprintf("ad0_4 = %c\n\r",ad0_4);
 			}
-			else if(ind == 13)
+			else if(ind == 11)	//AD5 - 1.7
 			{
 				ad1_7 = stringBuf[mark-2]; // default is 'N'
 				if(ad1_7 == 'Y'){ temp2++; }
 				rprintf("ad1_7 = %c\n\r",ad1_7);
 			}
-			else if(ind == 14)
+			else if(ind == 12)	// AD6 - 1.6
 			{
 				ad1_6 = stringBuf[mark-2]; // default is 'N'
 				if(ad1_6 == 'Y'){ temp2++; }
 				rprintf("ad1_6 = %c\n\r",ad1_6);
+			}
+			else if(ind == 13)	//AD7 - 1.2
+			{
+				ad1_2 = stringBuf[mark-2]; // default is 'N'
+				if(ad1_2 == 'Y'){ temp2++; }
+				rprintf("ad1_2 = %c\n\r",ad1_2);
+			}
+			else if(ind == 14)	//AD8 - 1.3
+			{
+				ad1_3 = stringBuf[mark-2]; // default is 'N'
+				if(ad1_3 == 'Y'){ temp2++; }
+				rprintf("ad1_3 = %c\n\r",ad1_3);
 			}
 			else if(ind == 15)
 			{
@@ -1306,6 +1356,22 @@ void mode_2(void)
 	mode_action();
 }
 
+/**********************************************
+* Triggered UART with ADC mode
+* Trigger is '$'
+* Logs '$' and next 99 characters or until CR/LF
+* Each secondary buffer write triggers an ADC read
+***********************************************/
+void mode_3(void)
+{
+	rprintf("MODE 3\n\r");	
+
+	setup_uart0(baud,2);
+	stringSize = frame + 2;
+	use_adc = TRUE;
+	mode_action();
+}
+
 /********************************************************
 * All of the non-Interrupt driven work, after initial
 * configuration, going on here.
@@ -1368,7 +1434,8 @@ void mode_action(void)
 			sd_raw_sync();
 			stat(1,OFF);
 			log_array2 = 0;
-			LogADC();
+			if(use_adc == TRUE)
+				LogADC();
 		}
 		
 		// see if ADC data needs to be logged
@@ -1543,6 +1610,27 @@ void LogADC(void)
 	
 	// reset ADC log buffer pointer to beginning
 	ADC_in = 0;
+	
+	// get the time
+	GetTime();
+	ADC_array[ADC_in] = time_buffer[0];
+	ADC_in++; //1
+	ADC_array[ADC_in] = time_buffer[1];
+	ADC_in++; //2
+	ADC_array[ADC_in] = time_buffer[2];
+	ADC_in++; //3
+	ADC_array[ADC_in] = time_buffer[3];
+	ADC_in++; //4
+	ADC_array[ADC_in] = time_buffer[4];
+	ADC_in++; //5
+	ADC_array[ADC_in] = time_buffer[5];
+	ADC_in++; //6
+	ADC_array[ADC_in] = time_buffer[6];
+	ADC_in++; //7
+	ADC_array[ADC_in] = time_buffer[7];
+	ADC_in++; //8
+	ADC_array[ADC_in] = ',';
+	ADC_in++; //9
 
 	//ADC_1 - ad0_3
 	if(ad0_3 == 'Y')
@@ -1579,7 +1667,7 @@ void LogADC(void)
 	// if no ADC pins were chosen then write that
 	// if ADC pins were chosen there is a trailing ',' that should be
 	// removed
-	if(ADC_in == 0)	// no ADC pins were selected for reading
+	if(ADC_in == 9)	// no ADC pins were selected for reading
 	{
 		// write a warning message (ADC + GPS was chosen but not used)
 		ADC_array[ADC_in] = 'N';
@@ -1592,7 +1680,7 @@ void LogADC(void)
 		ADC_in++;
 		ADC_array[ADC_in] = 'D';
 		ADC_in++;
-		ADC_array[ADC_in] = 'C ';
+		ADC_array[ADC_in] = 'C';
 		ADC_in++;
 	}
 	else
@@ -1604,8 +1692,6 @@ void LogADC(void)
 	ADC_array[ADC_in] = 13;
 	ADC_in++;
 	ADC_array[ADC_in] = 10;
-	ADC_in++;
-	ADC_array[ADC_in] = 0;
 	ADC_in++;
 			
 	VICVectAddr= 0;
@@ -1626,11 +1712,36 @@ void GetADCValue(int adc)
 	char temp_buff[4];	// holds ascii ADC value - needed for int -> char conversion
 	short a;	// used to convert ADC value for writing as text if NOT using ASCII
 	
+	/************************ ADxCR & ADxDR *******************************
+	*   ADxCR is the ADC control register, LPC2148 has two ADxCRs
+	*   AD0CR and AD1CR
+	*   ADxDR is the ADC global data register
+	*	ADxCR bits 0 to 7 are the pin select bits (zero based, so ADx.0
+	*   would be 0000 0001 NOT 0000 0000)
+	*   ADxCR bits 8 to 15 is the clock divisor (+1) and must produce
+	*   a value <= 4.5Mhz
+	*   ADxCR bit 16 is for burst (repeated conversions = 1, controlled
+	*   conversions = 0)
+	*   ADxCR bits 17 to 19 sets the number of 'clocks' used for ADC
+	*   conversion 000 = 11 clocks = 10 bit ADC down to 111 =
+	*   4 clocks = 3 bit ADC
+	*   ADxCR bit 21 powers up the ADC (1 = power up, 0 = power down)
+	*   ADxCR bits 24 to 27 are used in burst mode
+	*   ADxCR all other bits are reserved
+	*   ADxDR bits 6 to 15 are the ADC results
+	*   ADxDR bits 24 to 26 are the channel the results came from
+	*   ADxDR bit 30 indicates an overrun (a data value was overwritten by
+	*     this ADC conversion)
+	*   ADxDR bit 31 indicates that the ADC conversion is done
+	*********************************************************************/
+	
+	temp = 0;	// initialize to zero so MSB can't possibly be set (breaks ADC read)
+	
 	switch (adc)
 	{
 		// AD0.3
 		case ADC_1:
-			AD0CR = 0x00020FF08; // AD0.3
+			AD0CR = 0x00020FF08; // AD0.3 (0x00020FF00 = 
 			AD0CR |= 0x01000000; // start conversion
 			while((temp & 0x80000000) == 0)	// wait for ADC to finish conversion
 			{
@@ -1685,7 +1796,7 @@ void GetADCValue(int adc)
 		
 		// AD1.6
 		case ADC_6:
-			AD1CR = 0x00020FF40; // AD1.3
+			AD1CR = 0x00020FF40; // AD1.6
 			AD1CR |= 0x01000000; // start conversion
 			while((temp & 0x80000000) == 0)
 			{
@@ -1780,6 +1891,22 @@ void GetADCValue(int adc)
 	}
 }
 
+void InitializeTime(void)
+{
+	CCR = 0x02;	// set current time
+	SEC = 0;
+	MIN = 0;
+	HOUR = 0;
+	CCR = 0x11;
+}
+
+void GetTime(void)
+{
+	hours = HOUR;
+	minutes = MIN;
+	seconds = SEC;
+	sprintf(time_buffer,"%02d:%02d:%02d", hours, minutes, seconds);
+}
 
 /********************** GetGPSDateTime *********************************
 *  Each time the UART interrupt receives a 10 or 13 (end of line - pick one)r
